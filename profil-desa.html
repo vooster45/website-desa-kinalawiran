@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil Desa – Desa Kinalawiran</title>
+  <link rel="icon" type="image/png" href="img/logominsel.png" />
+  <link rel="shortcut icon" type="image/png" href="img/logominsel.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #ab0c0b; --red-dark: #870908; --red-light: #d41312;
+      --white: #ffffff; --off-white: #faf9f8;
+      --gray-50: #f7f6f5; --gray-100: #ede9e6; --gray-300: #b8afa9;
+      --gray-500: #7a716b; --gray-700: #3d3530; --gray-900: #1a1410;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --shadow-sm: 0 1px 4px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 20px rgba(0,0,0,.09);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,.13);
+      --radius: 16px; --transition: .35s cubic-bezier(.4,0,.2,1);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--white); color: var(--gray-700); line-height: 1.65; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 68px;
+      background: rgba(255,255,255,.92); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--gray-100);
+      transition: box-shadow var(--transition);
+      overflow: visible;
+    }
+    .navbar.scrolled { box-shadow: var(--shadow-md); }
+    .nav-brand { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+    .nav-logo { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+    .nav-logo img { width: 36px; height: 36px; object-fit: contain; }
+    .nav-brand-text { line-height: 1.15; min-width: 0; overflow: hidden; }
+    .nav-brand-text strong { display: block; font-family: var(--font-display); font-size: .95rem; color: var(--gray-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .nav-brand-text span { display: block; font-size: .65rem; color: var(--gray-500); font-weight: 500; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; flex-shrink: 0; }
+    .nav-links a { font-size: .875rem; font-weight: 500; color: var(--gray-700); padding: 7px 14px; border-radius: 8px; transition: background var(--transition), color var(--transition); }
+    .nav-links a:hover, .nav-links a.active { background: var(--gray-50); color: var(--red); }
+    .nav-links .nav-cta a { background: var(--red); color: #fff; padding: 7px 18px; }
+    .nav-links .nav-cta a:hover { background: var(--red-dark); color: #fff; }
+    .nav-toggle {
+      display: none;
+      flex-direction: column; justify-content: center; gap: 5px;
+      cursor: pointer; padding: 8px 6px;
+      border: none; background: none;
+      flex-shrink: 0; margin-left: 8px;
+      -webkit-tap-highlight-color: transparent;
+      z-index: 1000;
+    }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--gray-700); border-radius: 2px; transition: transform var(--transition), opacity var(--transition); pointer-events: none; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      position: relative; min-height: 48vh; display: flex; align-items: flex-end;
+      overflow: hidden; background: var(--gray-900);
+      padding-top: 68px; padding-bottom: 60px;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(26,20,16,.88) 0%, rgba(171,12,11,.72) 100%),
+        url('img/banner1.jpeg') center/cover no-repeat;
+      animation: heroZoom 20s ease-in-out infinite alternate;
+    }
+    @keyframes heroZoom { from{transform:scale(1)} to{transform:scale(1.06)} }
+    .page-hero-shape { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 440px; height: 440px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.06); pointer-events: none; }
+    .page-hero-content { position: relative; z-index: 2; padding: 0 5%; max-width: 900px; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; animation: fadeUp .7s .1s both; }
+    .breadcrumb a { font-size: .78rem; color: rgba(255,255,255,.55); font-weight: 500; transition: color var(--transition); }
+    .breadcrumb a:hover { color: #fff; }
+    .breadcrumb span { color: rgba(255,255,255,.3); font-size: .78rem; }
+    .breadcrumb strong { font-size: .78rem; color: rgba(255,255,255,.85); font-weight: 500; }
+    .page-hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); backdrop-filter: blur(8px);
+      color: #fff; font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      padding: 6px 16px; border-radius: 100px; margin-bottom: 20px;
+      animation: fadeUp .7s .2s both;
+    }
+    .page-hero-badge::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--red-light); box-shadow:0 0 0 3px rgba(212,19,18,.3); animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{box-shadow:0 0 0 3px rgba(212,19,18,.3)} 50%{box-shadow:0 0 0 6px rgba(212,19,18,.1)} }
+    .page-hero h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; color: #fff; line-height: 1.08; letter-spacing: -.02em; margin-bottom: 14px; animation: fadeUp .7s .3s both; }
+    .page-hero h1 em { font-style: italic; color: rgba(255,255,255,.5); }
+    .page-hero p { font-size: 1rem; color: rgba(255,255,255,.65); font-weight: 300; max-width: 560px; animation: fadeUp .7s .45s both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+
+    /* PAGE NAV (tab) */
+    .page-tabs {
+      position: sticky; top: 68px; z-index: 99;
+      background: var(--white); border-bottom: 1px solid var(--gray-100);
+      box-shadow: var(--shadow-sm);
+    }
+    .page-tabs-inner { max-width: 1200px; margin: 0 auto; padding: 0 5%; display: flex; gap: 0; overflow-x: auto; }
+    .page-tabs-inner::-webkit-scrollbar { display: none; }
+    .tab-link { flex-shrink: 0; font-size: .84rem; font-weight: 600; color: var(--gray-500); padding: 16px 20px; border-bottom: 2.5px solid transparent; transition: all var(--transition); white-space: nowrap; }
+    .tab-link:hover { color: var(--red); }
+    .tab-link.active { color: var(--red); border-bottom-color: var(--red); }
+
+    /* SECTIONS */
+    section { padding: 90px 5%; }
+    .inner { max-width: 1200px; margin: 0 auto; }
+    .section-tag { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.7rem, 3.5vw, 2.6rem); font-weight: 700; color: var(--gray-900); line-height: 1.15; letter-spacing: -.02em; margin-bottom: 16px; }
+    .section-desc { font-size: 1rem; color: var(--gray-500); line-height: 1.8; }
+    .prose p { font-size: .97rem; color: var(--gray-500); line-height: 1.85; margin-bottom: 16px; }
+    .prose p:last-child { margin-bottom: 0; }
+
+    /* WILAYAH SECTION */
+    .wilayah { background: var(--off-white); }
+    .wilayah-inner { display: grid; grid-template-columns: 1.1fr 1fr; gap: 72px; align-items: start; }
+    .wilayah-map {
+      border-radius: 20px; overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      aspect-ratio: 4/3;
+      background: var(--gray-100);
+      position: relative;
+    }
+    .wilayah-map iframe { width: 100%; height: 100%; border: none; }
+    .map-label { position: absolute; top: 14px; left: 14px; background: var(--red); color: #fff; font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 5px 12px; border-radius: 8px; }
+
+    .wilayah-text { padding-top: 8px; }
+    .wilayah-text .section-desc { max-width: 100%; margin-bottom: 28px; }
+
+    /* batas wilayah table */
+    .batas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+    .batas-item { background: var(--white); border: 1px solid var(--gray-100); border-radius: 12px; padding: 16px 18px; display: flex; gap: 12px; align-items: flex-start; transition: box-shadow var(--transition); }
+    .batas-item:hover { box-shadow: var(--shadow-md); }
+    .batas-dir { width: 36px; height: 36px; flex-shrink: 0; background: rgba(171,12,11,.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: .85rem; font-weight: 700; color: var(--red); }
+    .batas-text { }
+    .batas-label { font-size: .68rem; color: var(--gray-300); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 3px; }
+    .batas-value { font-size: .875rem; font-weight: 600; color: var(--gray-900); line-height: 1.4; }
+
+    /* LAHAN stats strip */
+    .lahan-strip { background: var(--red); padding: 48px 5%; }
+    .lahan-strip-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2px; }
+    .lahan-stat { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); padding: 28px 24px; text-align: center; border-radius: 0; transition: background var(--transition); }
+    .lahan-stat:first-child { border-radius: 14px 0 0 14px; }
+    .lahan-stat:last-child  { border-radius: 0 14px 14px 0; }
+    .lahan-stat:hover { background: rgba(255,255,255,.18); }
+    .lahan-number { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 6px; }
+    .lahan-desc { font-size: .75rem; color: rgba(255,255,255,.75); letter-spacing: .05em; text-transform: uppercase; }
+
+    /* SEJARAH SECTION */
+    .sejarah { background: var(--white); }
+    .sejarah-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+    .sejarah-text { }
+
+    /* Timeline */
+    .timeline { margin-top: 40px; position: relative; padding-left: 28px; }
+    .timeline::before { content:''; position:absolute; left:0; top:8px; bottom:8px; width:2px; background: linear-gradient(to bottom, var(--red), rgba(171,12,11,.1)); border-radius: 2px; }
+    .timeline-item { position: relative; margin-bottom: 36px; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot { position: absolute; left: -34px; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--red); border: 3px solid var(--white); box-shadow: 0 0 0 2px var(--red); }
+    .timeline-year { font-size: .72rem; font-weight: 700; color: var(--red); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+    .timeline-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; line-height: 1.3; }
+    .timeline-body { font-size: .875rem; color: var(--gray-500); line-height: 1.8; }
+
+    .sejarah-img-wrap { position: relative; }
+    .sejarah-img { width: 100%; height: 360px; object-fit: cover; border-radius: 20px; box-shadow: var(--shadow-lg); }
+    .sejarah-img-2 { width: 70%; height: 220px; object-fit: cover; border-radius: 14px; box-shadow: var(--shadow-lg); position: absolute; bottom: -36px; right: -20px; border: 4px solid var(--white); }
+    .sejarah-quote {
+      margin-top: 80px;
+      background: var(--off-white); border-left: 3px solid var(--red);
+      padding: 22px 24px; border-radius: 0 12px 12px 0;
+    }
+    .sejarah-quote p { font-family: var(--font-display); font-size: 1.05rem; font-style: italic; color: var(--gray-700); line-height: 1.6; margin: 0; }
+    .sejarah-quote span { display: block; font-family: var(--font-body); font-size: .75rem; color: var(--gray-300); font-style: normal; margin-top: 10px; letter-spacing: .04em; }
+
+    /* KEPENDUDUKAN */
+    .kependudukan { background: var(--off-white); }
+    .kependudukan-inner { }
+    .kddk-head { margin-bottom: 56px; }
+    .kddk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 56px; }
+    .kddk-card { background: var(--white); border: 1px solid var(--gray-100); border-radius: var(--radius); padding: 28px 24px; position: relative; overflow: hidden; transition: all var(--transition); }
+    .kddk-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--red); transform:scaleX(0); transform-origin:left; transition:transform var(--transition); }
+    .kddk-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .kddk-card:hover::before { transform: scaleX(1); }
+    .kddk-icon { width: 44px; height: 44px; background: rgba(171,12,11,.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; transition: background var(--transition); }
+    .kddk-card:hover .kddk-icon { background: var(--red); }
+    .kddk-icon svg { width: 22px; height: 22px; fill: var(--red); transition: fill var(--transition); }
+    .kddk-card:hover .kddk-icon svg { fill: #fff; }
+    .kddk-number { font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: var(--gray-900); line-height: 1; margin-bottom: 6px; }
+    .kddk-label { font-size: .78rem; color: var(--gray-500); font-weight: 500; }
+
+    /* agama & pekerjaan table */
+    .kddk-tables { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .kddk-table-card { background: var(--white); border: 1px solid var(--gray-100); border-radius: var(--radius); overflow: hidden; }
+    .kddk-table-head { padding: 20px 24px 16px; border-bottom: 1px solid var(--gray-100); }
+    .kddk-table-head h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--gray-900); }
+    .kddk-table table { width: 100%; border-collapse: collapse; }
+    .kddk-table td { padding: 13px 24px; font-size: .875rem; border-bottom: 1px solid var(--gray-50); }
+    .kddk-table tr:last-child td { border-bottom: none; }
+    .kddk-table td:first-child { color: var(--gray-700); font-weight: 500; }
+    .kddk-table td:last-child { color: var(--gray-500); text-align: right; }
+    .kddk-table tr:hover td { background: var(--gray-50); }
+
+    /* KEAGAMAAN */
+    .keagamaan { background: var(--white); }
+    .agama-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+    .agama-card { background: var(--off-white); border: 1px solid var(--gray-100); border-radius: var(--radius); padding: 24px 20px; text-align: center; transition: all var(--transition); }
+    .agama-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); background: var(--white); }
+    .agama-icon { font-size: 2rem; margin-bottom: 10px; }
+    .agama-name { font-weight: 700; font-size: .9rem; color: var(--gray-900); margin-bottom: 8px; }
+    .agama-num { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--red); line-height: 1; }
+    .agama-sub { font-size: .75rem; color: var(--gray-500); margin-top: 4px; }
+    .ternak-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 24px; }
+    .ternak-card { background: var(--off-white); border: 1px solid var(--gray-100); border-radius: var(--radius); padding: 24px 22px; display: flex; align-items: center; gap: 16px; transition: all var(--transition); }
+    .ternak-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); background: var(--white); }
+    .ternak-icon { font-size: 1.6rem; flex-shrink: 0; width: 48px; height: 48px; background: rgba(171,12,11,.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .ternak-info { min-width: 0; }
+    .ternak-name { font-weight: 700; font-size: .88rem; color: var(--gray-900); margin-bottom: 3px; }
+    .ternak-owner { font-size: .75rem; color: var(--gray-500); line-height: 1.4; }
+
+    /* AKOMODASI / FOTO GALLERY */
+    .akomodasi { background: var(--off-white); }
+    .akomodasi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .akomodasi-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      background: var(--white);
+      transition: all var(--transition);
+      cursor: default;
+    }
+    .akomodasi-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-6px);
+    }
+    .akomodasi-img-wrap {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--gray-100);
+      position: relative;
+    }
+    .akomodasi-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .6s cubic-bezier(.4,0,.2,1);
+    }
+    .akomodasi-card:hover .akomodasi-img-wrap img {
+      transform: scale(1.07);
+    }
+    .akomodasi-caption {
+      padding: 14px 16px 16px;
+      text-align: center;
+    }
+    .akomodasi-caption h4 {
+      font-family: var(--font-display);
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      line-height: 1.3;
+    }
+
+    @media (max-width: 900px) {
+      .akomodasi-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    }
+    @media (max-width: 480px) {
+      .akomodasi-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    }
+
+    /* FOOTER */
+    footer { background: var(--gray-900); color: rgba(255,255,255,.6); padding: 72px 5% 36px; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 48px; max-width: 1200px; margin: 0 auto 56px; }
+    .footer-brand .nav-logo { width: 46px; height: 46px; margin-bottom: 16px; border-radius: 12px; }
+    .footer-brand h3 { font-family: var(--font-display); font-size: 1.1rem; color: #fff; margin-bottom: 10px; }
+    .footer-brand p { font-size: .84rem; line-height: 1.75; max-width: 280px; }
+    .footer-col h4 { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 18px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: .875rem; color: rgba(255,255,255,.55); transition: color var(--transition); }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-contact-item { display: flex; gap: 10px; align-items: flex-start; font-size: .84rem; margin-bottom: 12px; }
+    .footer-contact-item svg { width: 16px; height: 16px; fill: var(--red-light); flex-shrink: 0; margin-top: 3px; }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,.08); padding-top: 28px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; font-size: .8rem; }
+
+    /* MOBILE & TABLET */
+    @media (max-width: 900px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        position: fixed;
+        top: 68px; left: 0; right: 0;
+        background: var(--white);
+        border-top: 2px solid var(--red);
+        flex-direction: column; align-items: stretch;
+        gap: 0; padding: 4px 0 16px;
+        transform: translateY(-8px);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform var(--transition), opacity var(--transition);
+        box-shadow: 0 8px 32px rgba(0,0,0,.12);
+        z-index: 998;
+        max-height: calc(100vh - 68px);
+        overflow-y: auto;
+      }
+      .nav-links.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .nav-links li { margin: 0; }
+      .nav-links li + li { border-top: 1px solid var(--gray-50); }
+      .nav-links a {
+        display: block; padding: 15px 6%; border-radius: 0;
+        font-size: .95rem; color: var(--gray-700); font-weight: 500;
+      }
+      .nav-links a:hover, .nav-links a.active { background: var(--gray-50); color: var(--red); }
+      .nav-links .nav-cta { padding: 12px 6% 4px; border-top: none !important; }
+      .nav-links .nav-cta a {
+        background: var(--red); color: #fff !important;
+        border-radius: 10px; text-align: center; padding: 13px 6%;
+        font-weight: 600;
+      }
+      .nav-links .nav-cta a:hover { background: var(--red-dark); }
+
+      /* page hero */
+      .page-hero { min-height: 48vh; padding-bottom: 48px; }
+      .page-hero h1 { font-size: clamp(2rem, 8vw, 2.8rem); }
+
+      /* sections */
+      section { padding: 64px 5%; }
+
+      /* wilayah */
+      .wilayah-inner { grid-template-columns: 1fr; gap: 36px; }
+      .wilayah-map { aspect-ratio: 16/9; }
+
+      /* batas */
+      .batas-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+
+      /* lahan strip */
+      .lahan-strip { padding: 36px 5%; }
+      .lahan-strip-inner { grid-template-columns: 1fr 1fr; gap: 2px; }
+      .lahan-stat { padding: 22px 16px; }
+      .lahan-stat:first-child  { border-radius: 14px 0 0 0; }
+      .lahan-stat:nth-child(2) { border-radius: 0 14px 0 0; }
+      .lahan-stat:nth-child(3) { border-radius: 0 0 0 14px; }
+      .lahan-stat:last-child   { border-radius: 0 0 14px 0; }
+      .lahan-number { font-size: 1.6rem; }
+
+      /* sejarah */
+      .sejarah-inner { grid-template-columns: 1fr; gap: 0; }
+      .sejarah-img-wrap { order: -1; margin-bottom: 40px; }
+      .sejarah-img { height: 260px; }
+      .sejarah-img-2 { display: none; }
+      .sejarah-quote { margin-top: 28px; }
+
+      /* kependudukan */
+      .kddk-head { margin-bottom: 36px; }
+      .kddk-grid { grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 36px; }
+      .kddk-tables { grid-template-columns: 1fr; gap: 16px; }
+
+      /* keagamaan */
+      .agama-grid { grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+      .ternak-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+      /* footer */
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .footer-brand { grid-column: span 2; }
+    }
+    @media (max-width: 480px) {
+      .page-hero { min-height: 55vh; }
+      .batas-grid { grid-template-columns: 1fr; }
+      .kddk-grid { grid-template-columns: 1fr 1fr; }
+      .lahan-strip-inner { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: span 1; }
+    }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+
+    /* LIGHTBOX */
+    .lightbox-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,.92); backdrop-filter: blur(8px);
+      align-items: center; justify-content: center;
+    }
+    .lightbox-overlay.active { display: flex; animation: lbFadeIn .25s ease; }
+    @keyframes lbFadeIn { from{opacity:0} to{opacity:1} }
+    .lightbox-img-wrap {
+      position: relative; max-width: 92vw; max-height: 88vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-img-wrap img {
+      max-width: 92vw; max-height: 88vh;
+      border-radius: 14px; box-shadow: 0 24px 80px rgba(0,0,0,.6);
+      object-fit: contain;
+      animation: lbZoomIn .3s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes lbZoomIn { from{transform:scale(.88);opacity:0} to{transform:scale(1);opacity:1} }
+    .lightbox-close {
+      position: fixed; top: 20px; right: 24px;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,.15); border: 1.5px solid rgba(255,255,255,.25);
+      color: #fff; font-size: 1.4rem; line-height: 1;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition), transform var(--transition);
+      z-index: 10001;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,.28); transform: scale(1.1); }
+    .lightbox-nav {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,.15); border: 1.5px solid rgba(255,255,255,.25);
+      color: #fff; font-size: 1.5rem; line-height: 1;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition);
+      z-index: 10001; user-select: none;
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,.28); }
+    .lightbox-nav.lb-prev { left: 16px; }
+    .lightbox-nav.lb-next { right: 16px; }
+    .lightbox-caption {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,.55); backdrop-filter: blur(8px);
+      color: rgba(255,255,255,.85); font-size: .8rem; font-weight: 500;
+      padding: 7px 20px; border-radius: 100px; letter-spacing: .04em;
+      white-space: nowrap; z-index: 10001;
+    }
+    /* Cursor zoom on clickable images */
+    .sejarah-img, .sejarah-img-2, .akomodasi-img-wrap img { cursor: zoom-in; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a class="nav-brand" href="index.html">
+      <div class="nav-logo">
+        <img src="img/logominsel.png" alt="Logo">
+      </div>
+      <div class="nav-brand-text">
+        <strong>Desa Kinalawiran</strong>
+        <span>Tompaso Baru · Minahasa Selatan</span>
+      </div>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Beranda</a></li>
+      <li><a href="profil-desa.html" class="active">Profil Desa</a></li>
+      <li><a href="pemerintahan.html">Pemerintahan</a></li>
+      <li><a href="potensi-desa.html">Potensi Desa</a></li>
+      <li class="nav-cta"><a href="galeri.html">Galeri</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-shape"></div>
+    <div class="page-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html">Beranda</a>
+        <span>›</span>
+        <strong>Profil Desa</strong>
+      </div>
+      <h1>Mengenal<br/><em>Kinalawiran</em></h1>
+      <p>Informasi lengkap mengenai wilayah, sejarah, dan kondisi demografis Desa Kinalawiran, Kecamatan Tompasobaru, Minahasa Selatan.</p>
+    </div>
+  </div>
+
+  <!-- TAB NAVIGATION -->
+  <div class="page-tabs">
+    <div class="page-tabs-inner">
+      <a href="#wilayah" class="tab-link active">Wilayah</a>
+      <a href="#sejarah" class="tab-link">Sejarah</a>
+      <a href="#kependudukan" class="tab-link">Kependudukan</a>
+      <a href="#akomodasi" class="tab-link">Akomodasi</a>
+    </div>
+  </div>
+
+  <!-- WILAYAH -->
+  <section class="wilayah" id="wilayah">
+    <div class="inner">
+      <div class="wilayah-inner">
+        <div class="reveal">
+          <div class="wilayah-map">
+            <div class="map-label">Peta Desa</div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15957.223033006689!2d124.46645824725104!3d0.9184149851631122!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x327e0247b6727729%3A0x9caa4e32840055f9!2sKinalawiran%2C%20Kec.%20Tompaso%20Baru%2C%20Kabupaten%20Minahasa%20Selatan%2C%20Sulawesi%20Utara!5e0!3m2!1sid!2sid!4v1773301448806!5m2!1sid!2sid"
+              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+
+        <div class="wilayah-text">
+          <span class="section-tag reveal">Wilayah</span>
+          <h2 class="section-title reveal reveal-delay-1">Letak &amp;<br/>Batas Wilayah</h2>
+          <div class="prose reveal reveal-delay-2">
+            <p>Desa Kinalawiran merupakan salah satu desa yang berada di Kecamatan Tompasobaru, Kabupaten Minahasa Selatan, Provinsi Sulawesi Utara. Desa ini juga berbatasan langsung dengan provinsi lain dan kabupaten lain, serta dilalui oleh DAS/bantaran sungai seluas ±12 Ha. Secara geografis, desa ini memiliki wilayah yang cukup luas dan sebagian besar dimanfaatkan untuk kegiatan pertanian, perkebunan, serta kawasan hutan yang menjadi sumber penghidupan masyarakat.</p>
+            <p>Luas wilayah Desa Kinalawiran sekitar <strong>435 hektare</strong>, dengan pemanfaatan utama meliputi permukiman ±12 Ha, persawahan ±126 Ha, perkebunan ±282 Ha, pekarangan ±2 Ha, kuburan ±2 Ha, dan prasarana umum lainnya ±11 Ha. Di luar wilayah desa, terdapat pula kawasan hutan yang mencapai <strong>±1.378 Ha</strong>, terdiri dari hutan produksi tetap (336 Ha), hutan produksi terbatas (300 Ha), hutan adat (542 Ha), dan hutan asli (200 Ha). Jarak ke ibu kota kecamatan sejauh 2 km (±10 menit berkendaraan), ke ibu kota kabupaten 75 km (±1,5 jam), dan ke ibu kota provinsi 235 km (±3 jam).</p>
+          </div>
+
+          <div class="batas-grid reveal reveal-delay-3">
+            <div class="batas-item">
+              <div class="batas-dir">U</div>
+              <div class="batas-text">
+                <div class="batas-label">Sebelah Utara</div>
+                <div class="batas-value">Desa Torout &amp; Tompasobaru Satu</div>
+              </div>
+            </div>
+            <div class="batas-item">
+              <div class="batas-dir">S</div>
+              <div class="batas-text">
+                <div class="batas-label">Sebelah Selatan</div>
+                <div class="batas-value">Kabupaten Bolaang Mongondow</div>
+              </div>
+            </div>
+            <div class="batas-item">
+              <div class="batas-dir">T</div>
+              <div class="batas-text">
+                <div class="batas-label">Sebelah Timur</div>
+                <div class="batas-value">Desa Liandok, Kec. Tompasobaru</div>
+              </div>
+            </div>
+            <div class="batas-item">
+              <div class="batas-dir">B</div>
+              <div class="batas-text">
+                <div class="batas-label">Sebelah Barat</div>
+                <div class="batas-value">Desa Tompasobaru Satu, Tompasobaru Dua Kinaweruan, Kec. Maesaan/Tompasobaru</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAHAN STATS STRIP -->
+  <div class="lahan-strip">
+    <div class="lahan-strip-inner">
+      <div class="lahan-stat">
+        <div class="lahan-number">435</div>
+        <div class="lahan-desc">Total Luas (Ha)</div>
+      </div>
+      <div class="lahan-stat">
+        <div class="lahan-number">282</div>
+        <div class="lahan-desc">Perkebunan (Ha)</div>
+      </div>
+      <div class="lahan-stat">
+        <div class="lahan-number">126</div>
+        <div class="lahan-desc">Persawahan (Ha)</div>
+      </div>
+      <div class="lahan-stat">
+        <div class="lahan-number">5</div>
+        <div class="lahan-desc">Jaga / Dusun</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEJARAH -->
+  <section class="sejarah" id="sejarah">
+    <div class="inner">
+      <div class="sejarah-inner">
+        <div class="sejarah-text">
+          <span class="section-tag reveal">Sejarah</span>
+          <h2 class="section-title reveal reveal-delay-1">Sejarah Singkat<br/>Desa Kinalawiran</h2>
+          <p class="section-desc reveal reveal-delay-2">Dari kampung Vooster hingga menjadi Kinalawiran, sebuah perjalanan panjang penuh semangat gotong royong dan ketahanan masyarakat.</p>
+
+          <div class="timeline reveal reveal-delay-3">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-year">1927</div>
+              <div class="timeline-title">Berdirinya Pemukiman Awal</div>
+              <div class="timeline-body">Sekitar 30 kepala keluarga dari Desa Eris, Tondano, yang seluruhnya beragama Kristen, membuka kampung baru di bawah pimpinan Tonaas Dewa Eduart Liogu dengan semangat gotong royong.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-year">30 April 1930</div>
+              <div class="timeline-title">Peresmian oleh Pemerintah Belanda</div>
+              <div class="timeline-body">Pemerintah kolonial Belanda mengunjungi dan meresmikan kampung tersebut dengan nama, Vooster, berasal dari istilah <em>Vooster Minasaart</em> yang bermakna "terdepan" atau "bintang di bagian depan".</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-year">~1942</div>
+              <div class="timeline-title">Masa Pendudukan Jepang</div>
+              <div class="timeline-body">Pasukan Jepang membakar Vooster karena masyarakat menolak pemerintahan Jepang. Hukum Tua Jan R. Liogu mendapat mandat untuk berunding, dan masyarakat bersama-sama membangun kembali kampung mereka.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-year">1942 – Kini</div>
+              <div class="timeline-title">Lahirnya Nama Kinalawiran</div>
+              <div class="timeline-body">Sebagai ungkapan syukur atas kesempatan membangun kembali kehidupan, nama kampung diganti menjadi <strong>Kinalawiran</strong>, yang berarti <em>"umur panjang"</em>.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sejarah-img-wrap reveal reveal-delay-2">
+          <img class="sejarah-img"
+            src="img/mengenal1.jpeg"
+            alt="Alam sekitar Desa Kinalawiran" />
+          <img class="sejarah-img-2"
+            src="img/mengenal2.jpeg"
+            alt="Desa Kinalawiran" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEPENDUDUKAN -->
+  <section class="kependudukan" id="kependudukan">
+    <div class="inner">
+      <div class="kddk-head">
+        <span class="section-tag reveal">Kependudukan</span>
+        <h2 class="section-title reveal reveal-delay-1">Data Kependudukan<br/>Desa Kinalawiran</h2>
+        <p class="section-desc reveal reveal-delay-2">Gambaran umum kondisi demografis masyarakat Desa Kinalawiran. Total <strong>1.103 jiwa</strong> yang terdiri dari 564 laki-laki dan 539 perempuan, dengan mayoritas penduduk beragama Kristen Protestan.</p>
+      </div>
+
+      <div class="kddk-grid">
+        <div class="kddk-card reveal reveal-delay-1">
+          <div class="kddk-icon">
+            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 3-1.34 3-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 3-1.34 3-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5C15 14.17 10.33 13 8 13zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+          </div>
+          <div class="kddk-number">1.103</div>
+          <div class="kddk-label">Total Penduduk</div>
+        </div>
+        <div class="kddk-card reveal reveal-delay-2">
+          <div class="kddk-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          </div>
+          <div class="kddk-number">564</div>
+          <div class="kddk-label">Laki-laki</div>
+        </div>
+        <div class="kddk-card reveal reveal-delay-3">
+          <div class="kddk-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          </div>
+          <div class="kddk-number">539</div>
+          <div class="kddk-label">Perempuan</div>
+        </div>
+        <div class="kddk-card reveal reveal-delay-4">
+          <div class="kddk-icon">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          </div>
+          <div class="kddk-number">~321</div>
+          <div class="kddk-label">Kepala Keluarga</div>
+        </div>
+      </div>
+
+      <div class="kddk-tables reveal reveal-delay-2">
+        <div class="kddk-table-card">
+          <div class="kddk-table-head">
+            <h3>Agama</h3>
+          </div>
+          <div class="kddk-table">
+            <table>
+              <tr><td>Kristen Protestan</td><td>1.080 jiwa</td></tr>
+              <tr><td>Kristen Katolik</td><td>11 jiwa</td></tr>
+              <tr><td>Islam</td><td>12 jiwa</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="kddk-table-card">
+          <div class="kddk-table-head">
+            <h3>Mata Pencaharian</h3>
+          </div>
+          <div class="kddk-table">
+            <table>
+              <tr><td>Petani</td><td>381 orang</td></tr>
+              <tr><td>Buruh Tani</td><td>20 orang</td></tr>
+              <tr><td>Wiraswasta</td><td>42 orang</td></tr>
+              <tr><td>Pedagang</td><td>31 orang</td></tr>
+              <tr><td>PNS</td><td>19 orang</td></tr>
+              <tr><td>POLRI</td><td>3 orang</td></tr>
+              <tr><td>Peternak</td><td>19 orang</td></tr>
+              <tr><td>Ibu Rumah Tangga</td><td>213 orang</td></tr>
+              <tr><td>Pelajar</td><td>109 orang</td></tr>
+              <tr><td>Belum Bekerja</td><td>92 orang</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEAGAMAAN -->
+  <section class="keagamaan" id="keagamaan">
+    <div class="inner">
+      <span class="section-tag reveal">Keagamaan</span>
+      <h2 class="section-title reveal reveal-delay-1">Agama &amp; Prasarana<br/>Peribadatan</h2>
+      <p class="section-desc reveal reveal-delay-2">Mayoritas warga Desa Kinalawiran memeluk agama Kristen Protestan. Kehidupan beragama berjalan harmonis, ditopang oleh 4 gereja aktif yang melayani jemaat di desa.</p>
+
+      <div class="agama-grid">
+        <div class="agama-card reveal reveal-delay-1">
+          <div class="agama-icon">&#x271D;&#xFE0F;</div>
+          <div class="agama-name">Kristen Protestan</div>
+          <div class="agama-num">1.080</div>
+          <div class="agama-sub">553 L &middot; 527 P</div>
+        </div>
+        <div class="agama-card reveal reveal-delay-2">
+          <div class="agama-icon">&#x2626;&#xFE0F;</div>
+          <div class="agama-name">Kristen Katolik</div>
+          <div class="agama-num">11</div>
+          <div class="agama-sub">5 L &middot; 6 P</div>
+        </div>
+        <div class="agama-card reveal reveal-delay-3">
+          <div class="agama-icon">&#x262A;&#xFE0F;</div>
+          <div class="agama-name">Islam</div>
+          <div class="agama-num">12</div>
+          <div class="agama-sub">6 L &middot; 6 P</div>
+        </div>
+      </div>
+
+      <div style="margin-top:56px;" class="reveal">
+        <span class="section-tag">Gereja di Desa</span>
+        <h3 class="section-title reveal reveal-delay-1" style="font-size:1.5rem;margin-bottom:24px;">4 Gereja Aktif</h3>
+        <div class="ternak-grid" style="grid-template-columns:repeat(2,1fr);">
+          <div class="ternak-card reveal reveal-delay-1">
+            <div class="ternak-icon">&#x26EA;</div>
+            <div class="ternak-info">
+              <div class="ternak-name">Gereja GMIM Imanuel</div>
+              <div class="ternak-owner">Gereja Masehi Injili di Minahasa</div>
+            </div>
+          </div>
+          <div class="ternak-card reveal reveal-delay-2">
+            <div class="ternak-icon">&#x26EA;</div>
+            <div class="ternak-info">
+              <div class="ternak-name">Gereja GPDI Eben Haezer</div>
+              <div class="ternak-owner">Gereja Pentakosta di Indonesia</div>
+            </div>
+          </div>
+          <div class="ternak-card reveal reveal-delay-3">
+            <div class="ternak-icon">&#x26EA;</div>
+            <div class="ternak-info">
+              <div class="ternak-name">Gereja Advent</div>
+              <div class="ternak-owner">Gereja Masehi Advent Hari Ketujuh</div>
+            </div>
+          </div>
+          <div class="ternak-card reveal reveal-delay-5">
+            <div class="ternak-icon">&#x26EA;</div>
+            <div class="ternak-info">
+              <div class="ternak-name">Gereja GPDI Elroi</div>
+              <div class="ternak-owner">Gereja Pentakosta di Indonesia</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AKOMODASI DESA -->
+  <section class="akomodasi" id="akomodasi">
+    <div class="inner">
+      <span class="section-tag reveal">Fasilitas &amp; Akomodasi</span>
+      <h2 class="section-title reveal reveal-delay-1">Akomodasi Desa</h2>
+      <p class="section-desc reveal reveal-delay-2">Berbagai sarana ibadah dan fasilitas umum yang ada di Desa Kinalawiran.</p>
+
+      <div class="akomodasi-grid">
+
+        <div class="akomodasi-card reveal reveal-delay-1">
+          <div class="akomodasi-img-wrap">
+            <img src="img/elroi.jpeg" alt="GPDI Elroi" loading="lazy" />
+          </div>
+          <div class="akomodasi-caption">
+            <h4>GPDI Elroi</h4>
+          </div>
+        </div>
+
+        <div class="akomodasi-card reveal reveal-delay-2">
+          <div class="akomodasi-img-wrap">
+            <img src="img/ebenhaezer.jpeg" alt="GPDI Eben Haezer" loading="lazy" />
+          </div>
+          <div class="akomodasi-caption">
+            <h4>GPDI Eben Haezer</h4>
+          </div>
+        </div>
+
+        <div class="akomodasi-card reveal reveal-delay-3">
+          <div class="akomodasi-img-wrap">
+            <img src="img/advent.jpeg" alt="Gereja Advent" loading="lazy" />
+          </div>
+          <div class="akomodasi-caption">
+            <h4>Gereja Advent</h4>
+          </div>
+        </div>
+
+        <div class="akomodasi-card reveal reveal-delay-4">
+          <div class="akomodasi-img-wrap">
+            <img src="img/gmim.jpeg" alt="GMIM Imanuel" loading="lazy" />
+          </div>
+          <div class="akomodasi-caption">
+            <h4>GMIM Imanuel</h4>
+          </div>
+        </div>
+
+        <div class="akomodasi-card reveal reveal-delay-1">
+          <div class="akomodasi-img-wrap">
+            <img src="img/balaidesa.jpeg" alt="Balai Desa" loading="lazy" />
+          </div>
+          <div class="akomodasi-caption">
+            <h4>Balai Desa</h4>
+          </div>
+        </div>
+
+        <div class="akomodasi-card reveal reveal-delay-2">
+          <div class="akomodasi-img-wrap">
+            <img src="img/pam.jpeg" alt="PAM Air" loading="lazy" />
+          </div>
+          <div class="akomodasi-caption">
+            <h4>PAM Air</h4>
+          </div>
+        </div>
+
+        <div class="akomodasi-card reveal reveal-delay-3">
+          <div class="akomodasi-img-wrap">
+            <img src="img/lapangan.jpeg" alt="Lapangan Desa" loading="lazy" />
+          </div>
+          <div class="akomodasi-caption">
+            <h4>Lapangan Desa</h4>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo"><img src="img/logominsel.png" alt="Logo" style="width:46px;height:46px;object-fit:contain;"></div>
+        <h3>Desa Kinalawiran</h3>
+        <p>Portal informasi Desa Kinalawiran, Kecamatan Tompasobaru, Kabupaten Minahasa Selatan, Provinsi Sulawesi Utara.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="profil-desa.html">Profil Desa</a></li>
+          <li><a href="pemerintahan.html">Pemerintahan</a></li>
+          <li><a href="potensi-desa.html">Potensi Desa</a></li>
+          <li><a href="galeri.html">Galeri</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontak</h4>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+          <span>Desa Kinalawiran, Kec. Tompasobaru, Kab. Minahasa Selatan, Sulawesi Utara</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <span>Kantor Desa Kinalawiran</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Desa Kinalawiran. KKT 146 All Rights Reserved.</span>
+      <span>Tompasobaru · Minahasa Selatan · Sulawesi Utara</span>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightboxOverlay" role="dialog" aria-modal="true">
+    <div class="lightbox-img-wrap">
+      <img src="" alt="" id="lightboxImg" />
+    </div>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Tutup">&#x2715;</button>
+    <button class="lightbox-nav lb-prev" id="lbPrev" aria-label="Sebelumnya">&#8249;</button>
+    <button class="lightbox-nav lb-next" id="lbNext" aria-label="Berikutnya">&#8250;</button>
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+
+  <script>
+    // Navbar scroll shadow
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 20); });
+
+    // Mobile toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks  = document.getElementById('navLinks');
+
+    function openMenu() {
+      navToggle.classList.add('open');
+      navLinks.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      navToggle.classList.remove('open');
+      navLinks.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    navToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      navLinks.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    // Close when a link is tapped
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+    // Close when tapping outside
+    document.addEventListener('click', function(e) {
+      if (navLinks.classList.contains('open') && !navbar.contains(e.target)) closeMenu();
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // Active tab on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const tabLinks = document.querySelectorAll('.tab-link');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
+      tabLinks.forEach(t => { t.classList.toggle('active', t.getAttribute('href') === '#' + current); });
+    });
+
+    // LIGHTBOX
+    (function() {
+      const overlay   = document.getElementById('lightboxOverlay');
+      const lbImg     = document.getElementById('lightboxImg');
+      const lbCaption = document.getElementById('lightboxCaption');
+      const lbClose   = document.getElementById('lightboxClose');
+      const lbPrev    = document.getElementById('lbPrev');
+      const lbNext    = document.getElementById('lbNext');
+
+      // Collect all lightbox-able images: sejarah + akomodasi
+      const selectors = '.sejarah-img, .sejarah-img-2, .akomodasi-img-wrap img';
+      const imgEls = Array.from(document.querySelectorAll(selectors));
+      const allImgs = imgEls.map(el => ({ src: el.src, alt: el.alt }));
+
+      let currentIdx = 0;
+
+      function openLightbox(idx) {
+        currentIdx = (idx + allImgs.length) % allImgs.length;
+        lbImg.src = allImgs[currentIdx].src;
+        lbImg.alt = allImgs[currentIdx].alt;
+        lbCaption.textContent = allImgs[currentIdx].alt || '';
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+        lbImg.src = '';
+      }
+
+      imgEls.forEach((el, i) => el.addEventListener('click', () => openLightbox(i)));
+
+      lbClose.addEventListener('click', closeLightbox);
+      overlay.addEventListener('click', e => { if (e.target === overlay) closeLightbox(); });
+      lbPrev.addEventListener('click', e => { e.stopPropagation(); openLightbox(currentIdx - 1); });
+      lbNext.addEventListener('click', e => { e.stopPropagation(); openLightbox(currentIdx + 1); });
+
+      document.addEventListener('keydown', e => {
+        if (!overlay.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') openLightbox(currentIdx - 1);
+        if (e.key === 'ArrowRight') openLightbox(currentIdx + 1);
+      });
+
+      // Touch swipe
+      let touchStartX = 0;
+      overlay.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      overlay.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) openLightbox(diff > 0 ? currentIdx + 1 : currentIdx - 1);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desa Kinalawiran – Tompaso Baru, Minahasa Selatan</title>
+  <link rel="icon" type="image/png" href="img/logominsel.png" />
+  <link rel="shortcut icon" type="image/png" href="img/logominsel.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #ab0c0b; --red-dark: #870908; --red-light: #d41312;
+      --white: #ffffff; --off-white: #faf9f8;
+      --gray-50: #f7f6f5; --gray-100: #ede9e6; --gray-300: #b8afa9;
+      --gray-500: #7a716b; --gray-700: #3d3530; --gray-900: #1a1410;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --shadow-sm: 0 1px 4px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 20px rgba(0,0,0,.09);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,.13);
+      --radius: 16px; --transition: .35s cubic-bezier(.4,0,.2,1);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--white); color: var(--gray-700); line-height: 1.65; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 68px;
+      background: rgba(255,255,255,.92); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--gray-100);
+      transition: box-shadow var(--transition);
+      overflow: visible;
+    }
+    .navbar.scrolled { box-shadow: var(--shadow-md); }
+    .nav-brand { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+    .nav-logo {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden;
+    }
+    .nav-logo img { width: 36px; height: 36px; object-fit: contain; }
+    .nav-brand-text { line-height: 1.15; min-width: 0; overflow: hidden; }
+    .nav-brand-text strong { display: block; font-family: var(--font-display); font-size: .95rem; color: var(--gray-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .nav-brand-text span { display: block; font-size: .65rem; color: var(--gray-500); font-weight: 500; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; flex-shrink: 0; }
+    .nav-links a { font-size: .875rem; font-weight: 500; color: var(--gray-700); padding: 7px 14px; border-radius: 8px; transition: background var(--transition), color var(--transition); }
+    .nav-links a:hover { background: var(--gray-50); color: var(--red); }
+    .nav-links .nav-cta a { background: var(--red); color: #fff; padding: 7px 18px; }
+    .nav-links .nav-cta a:hover { background: var(--red-dark); color: #fff; }
+    .nav-toggle {
+      display: none;
+      flex-direction: column; justify-content: center; gap: 5px;
+      cursor: pointer; padding: 8px 6px;
+      border: none; background: none;
+      flex-shrink: 0; margin-left: 8px;
+      -webkit-tap-highlight-color: transparent;
+      z-index: 1000;
+    }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--gray-700); border-radius: 2px; transition: transform var(--transition), opacity var(--transition); pointer-events: none; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* HERO */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; background: var(--gray-900); }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(145deg, rgba(171,12,11,.78) 0%, rgba(26,20,16,.94) 65%),
+        url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Tondano_Lake.JPG/1280px-Tondano_Lake.JPG') center/cover no-repeat;
+      animation: heroZoom 18s ease-in-out infinite alternate;
+    }
+    @keyframes heroZoom { from{transform:scale(1)} to{transform:scale(1.07)} }
+    .hero-shape { position: absolute; right: -100px; top: 50%; transform: translateY(-50%); width: 560px; height: 560px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.07); pointer-events: none; }
+    .hero-shape::before { content:''; position:absolute; inset:60px; border-radius:50%; border:1px solid rgba(255,255,255,.05); }
+    .hero-content { position: relative; z-index: 2; max-width: 760px; padding: 120px 5% 80px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); backdrop-filter: blur(8px);
+      color: #fff; font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      padding: 6px 16px; border-radius: 100px; margin-bottom: 28px;
+      animation: fadeUp .8s .1s both;
+    }
+    .hero-badge::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--red-light); box-shadow:0 0 0 3px rgba(212,19,18,.3); animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{box-shadow:0 0 0 3px rgba(212,19,18,.3)} 50%{box-shadow:0 0 0 6px rgba(212,19,18,.1)} }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 7vw, 5.2rem); font-weight: 800; color: #fff; line-height: 1.06; letter-spacing: -.025em; margin-bottom: 8px; animation: fadeUp .8s .2s both; }
+    .hero h1 em { font-style: italic; color: rgba(255,255,255,.5); }
+    .hero-sub { font-size: clamp(1rem, 2.5vw, 1.25rem); color: rgba(255,255,255,.7); font-weight: 300; margin-bottom: 36px; max-width: 520px; animation: fadeUp .8s .35s both; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; animation: fadeUp .8s .5s both; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: .9rem; font-weight: 600; padding: 14px 28px; border-radius: 12px; transition: all var(--transition); cursor: pointer; border: none; }
+    .btn-primary { background: var(--red); color: #fff; box-shadow: 0 4px 20px rgba(171,12,11,.4); }
+    .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(171,12,11,.5); }
+    .btn-outline { background: rgba(255,255,255,.1); border: 1.5px solid rgba(255,255,255,.3); color: #fff; backdrop-filter: blur(6px); }
+    .btn-outline:hover { background: rgba(255,255,255,.2); transform: translateY(-2px); }
+    .btn svg { width: 18px; height: 18px; }
+    .hero-stats { position: absolute; bottom: 48px; right: 5%; display: flex; gap: 2px; z-index: 2; animation: fadeUp .8s .7s both; }
+    .stat-card { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); backdrop-filter: blur(12px); padding: 18px 24px; text-align: center; min-width: 110px; }
+    .stat-card:first-child { border-radius: 14px 0 0 14px; }
+    .stat-card:last-child  { border-radius: 0 14px 14px 0; }
+    .stat-number { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 4px; }
+    .stat-label { font-size: .68rem; color: rgba(255,255,255,.6); letter-spacing: .04em; text-transform: uppercase; }
+    .scroll-hint { position: absolute; bottom: 30px; left: 5%; display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,.45); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; z-index: 2; animation: fadeUp .8s .9s both; }
+    .scroll-line { width: 40px; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,.5), transparent); }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+    /* SECTIONS */
+    section { padding: 100px 5%; }
+    .section-tag { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: var(--gray-900); line-height: 1.15; letter-spacing: -.025em; margin-bottom: 16px; }
+    .section-desc { font-size: 1rem; color: var(--gray-500); max-width: 540px; line-height: 1.75; }
+
+    /* ABOUT */
+    .about { background: var(--off-white); }
+    .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; }
+    .about-image-wrap { position: relative; }
+    .about-img { width: 100%; height: 480px; object-fit: cover; border-radius: 20px; box-shadow: var(--shadow-lg); }
+    .about-img-badge { position: absolute; bottom: 28px; left: -24px; background: var(--red); color: #fff; padding: 18px 22px; border-radius: 14px; box-shadow: var(--shadow-lg); }
+    .about-img-badge strong { display: block; font-family: var(--font-display); font-size: 2rem; line-height: 1; }
+    .about-img-badge span { font-size: .72rem; opacity: .85; letter-spacing: .04em; }
+    .about-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 36px; }
+    .about-info-item { background: var(--white); border: 1px solid var(--gray-100); border-radius: 12px; padding: 16px 18px; display: flex; gap: 12px; align-items: flex-start; }
+    .info-icon { width: 38px; height: 38px; flex-shrink: 0; background: rgba(171,12,11,.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .info-icon svg { width: 18px; height: 18px; fill: var(--red); }
+    .info-label { font-size: .7rem; color: var(--gray-500); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 2px; }
+    .info-value { font-size: .9rem; font-weight: 600; color: var(--gray-900); }
+
+    /* LAYANAN */
+    .layanan { background: var(--white); }
+    .layanan-head { max-width: 1200px; margin: 0 auto 56px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px; }
+    .layanan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+    .card { background: var(--white); border: 1px solid var(--gray-100); border-radius: var(--radius); padding: 32px 28px; transition: all var(--transition); cursor: default; position: relative; overflow: hidden; }
+    .card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--red); transform:scaleX(0); transform-origin:left; transition:transform var(--transition); }
+    .card:hover { box-shadow: var(--shadow-lg); transform: translateY(-6px); }
+    .card:hover::before { transform: scaleX(1); }
+    .card-icon { width: 52px; height: 52px; background: rgba(171,12,11,.08); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 22px; transition: background var(--transition); }
+    .card:hover .card-icon { background: var(--red); }
+    .card-icon svg { width: 24px; height: 24px; fill: var(--red); transition: fill var(--transition); }
+    .card:hover .card-icon svg { fill: #fff; }
+    .card h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--gray-900); margin-bottom: 10px; }
+    .card p { font-size: .875rem; color: var(--gray-500); line-height: 1.7; }
+    .card-link { display: inline-flex; align-items: center; gap: 6px; font-size: .82rem; font-weight: 600; color: var(--red); margin-top: 20px; transition: gap var(--transition); }
+    .card:hover .card-link { gap: 10px; }
+    .card-link svg { width: 14px; height: 14px; fill: var(--red); }
+
+    /* POTENSI */
+    .potensi { background: var(--gray-900); color: #fff; position: relative; overflow: hidden; }
+    .potensi::before { content:''; position:absolute; top:-200px; right:-200px; width:600px; height:600px; border-radius:50%; background:radial-gradient(circle, rgba(171,12,11,.3) 0%, transparent 70%); pointer-events:none; }
+    .potensi-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center; }
+    .potensi .section-title { color: #fff; }
+    .potensi .section-desc { color: rgba(255,255,255,.6); max-width: 100%; }
+    .potensi-list { list-style: none; margin-top: 36px; display: flex; flex-direction: column; gap: 14px; }
+    .potensi-list li { display: flex; gap: 14px; align-items: flex-start; padding: 18px 20px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; transition: background var(--transition), border-color var(--transition); }
+    .potensi-list li:hover { background: rgba(255,255,255,.09); border-color: rgba(171,12,11,.4); }
+    .potensi-bullet { width: 36px; height: 36px; flex-shrink: 0; background: rgba(171,12,11,.25); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .potensi-bullet svg { width: 16px; height: 16px; fill: var(--red-light); }
+    .potensi-li-text strong { display: block; color: #fff; font-size: .9rem; margin-bottom: 3px; }
+    .potensi-li-text span { font-size: .8rem; color: rgba(255,255,255,.5); }
+    .potensi-images { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 14px; }
+    .potensi-img { border-radius: 14px; overflow: hidden; position: relative; }
+    .potensi-img:first-child { grid-column: span 2; }
+    .potensi-img img { width: 100%; height: 220px; object-fit: cover; transition: transform .7s ease; }
+    .potensi-img:first-child img { height: 280px; }
+    .potensi-img:hover img { transform: scale(1.05); }
+    .potensi-img-label { position: absolute; bottom: 12px; left: 12px; background: rgba(0,0,0,.55); backdrop-filter: blur(6px); color: #fff; font-size: .72rem; font-weight: 600; padding: 5px 12px; border-radius: 100px; letter-spacing: .05em; }
+
+
+    .link-all { display: inline-flex; align-items: center; gap: 7px; font-size: .875rem; font-weight: 600; color: var(--red); border: 1.5px solid rgba(171,12,11,.3); padding: 9px 18px; border-radius: 10px; transition: all var(--transition); }
+    .link-all:hover { background: rgba(171,12,11,.06); gap: 11px; }
+    .link-all svg { width: 14px; height: 14px; fill: var(--red); }
+
+    /* FOOTER */
+    footer { background: var(--gray-900); color: rgba(255,255,255,.6); padding: 72px 5% 36px; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; max-width: 1200px; margin: 0 auto 56px; }
+    .footer-brand .nav-logo { width: 46px; height: 46px; margin-bottom: 16px; border-radius: 12px; }
+    .footer-brand h3 { font-family: var(--font-display); font-size: 1.1rem; color: #fff; margin-bottom: 10px; }
+    .footer-brand p { font-size: .84rem; line-height: 1.75; max-width: 280px; }
+    .footer-col h4 { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 18px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: .875rem; color: rgba(255,255,255,.55); transition: color var(--transition); }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-contact-item { display: flex; gap: 10px; align-items: flex-start; font-size: .84rem; margin-bottom: 12px; }
+    .footer-contact-item svg { width: 16px; height: 16px; fill: var(--red-light); flex-shrink: 0; margin-top: 3px; }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,.08); padding-top: 28px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; font-size: .8rem; }
+    .footer-bottom a { color: var(--red-light); }
+
+    /* MOBILE & TABLET */
+    @media (max-width: 900px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        position: fixed;
+        top: 68px; left: 0; right: 0;
+        background: var(--white);
+        border-top: 2px solid var(--red);
+        flex-direction: column; align-items: stretch;
+        gap: 0; padding: 4px 0 16px;
+        transform: translateY(-8px);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform var(--transition), opacity var(--transition);
+        box-shadow: 0 8px 32px rgba(0,0,0,.12);
+        z-index: 998;
+        max-height: calc(100vh - 68px);
+        overflow-y: auto;
+      }
+      .nav-links.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .nav-links li { margin: 0; }
+      .nav-links li + li { border-top: 1px solid var(--gray-50); }
+      .nav-links a {
+        display: block; padding: 15px 6%; border-radius: 0;
+        font-size: .95rem; color: var(--gray-700); font-weight: 500;
+      }
+      .nav-links a:hover, .nav-links a.active { background: var(--gray-50); color: var(--red); }
+      .nav-links .nav-cta { padding: 12px 6% 4px; border-top: none !important; }
+      .nav-links .nav-cta a {
+        background: var(--red); color: #fff !important;
+        border-radius: 10px; text-align: center; padding: 13px 6%;
+        font-weight: 600;
+      }
+      .nav-links .nav-cta a:hover { background: var(--red-dark); }
+    }
+    @media (max-width: 768px) {
+      .hero-stats { flex-wrap: wrap; bottom: 80px; left: 5%; right: 5%; }
+      .stat-card { flex: 1; min-width: 80px; border-radius: 14px !important; }
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      .about-img { height: 300px; }
+      .about-img-badge { left: 16px; }
+      .about-info-grid { grid-template-columns: 1fr; }
+      .potensi-inner { grid-template-columns: 1fr; gap: 48px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .footer-brand { grid-column: span 2; }
+    }
+    @media (max-width: 480px) {
+      section { padding: 72px 5%; }
+      .hero-content { padding: 100px 5% 200px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: span 1; }
+    }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+
+    /* SLIDESHOW ABOUT */
+    .about-slideshow { position: relative; width: 100%; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); aspect-ratio: 4/3; }
+    .slideshow-track { display: flex; width: 100%; height: 100%; transition: transform .65s cubic-bezier(.4,0,.2,1); }
+    .slideshow-slide { flex: 0 0 100%; height: 100%; }
+    .slideshow-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .slideshow-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,.85); backdrop-filter: blur(6px);
+      border: none; border-radius: 50%; width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 3; transition: background var(--transition), transform var(--transition);
+      box-shadow: 0 2px 12px rgba(0,0,0,.15);
+    }
+    .slideshow-btn:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+    .slideshow-btn svg { width: 20px; height: 20px; fill: var(--gray-900); }
+    .slideshow-btn.prev { left: 12px; }
+    .slideshow-btn.next { right: 12px; }
+    .slideshow-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 7px; z-index: 3; }
+    .slideshow-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.5); border: none; cursor: pointer; transition: background var(--transition), transform var(--transition); padding: 0; }
+    .slideshow-dot.active { background: #fff; transform: scale(1.25); }
+
+    @media (max-width: 768px) {
+      .about-slideshow { aspect-ratio: 16/10; }
+      .slideshow-btn { width: 34px; height: 34px; }
+      .slideshow-btn svg { width: 16px; height: 16px; }
+    }
+    @media (max-width: 480px) {
+      .about-slideshow { aspect-ratio: 4/3; border-radius: 14px; }
+    }
+
+    /* LIGHTBOX */
+    .lightbox-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,.92); backdrop-filter: blur(8px);
+      align-items: center; justify-content: center;
+      animation: lbFadeIn .25s ease;
+    }
+    .lightbox-overlay.active { display: flex; }
+    @keyframes lbFadeIn { from{opacity:0} to{opacity:1} }
+    .lightbox-img-wrap {
+      position: relative; max-width: 92vw; max-height: 88vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-img-wrap img {
+      max-width: 92vw; max-height: 88vh;
+      border-radius: 14px; box-shadow: 0 24px 80px rgba(0,0,0,.6);
+      object-fit: contain;
+      animation: lbZoomIn .3s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes lbZoomIn { from{transform:scale(.88);opacity:0} to{transform:scale(1);opacity:1} }
+    .lightbox-close {
+      position: fixed; top: 20px; right: 24px;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,.15); border: 1.5px solid rgba(255,255,255,.25);
+      color: #fff; font-size: 1.4rem; line-height: 1;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition), transform var(--transition);
+      z-index: 10001;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,.28); transform: scale(1.1); }
+    .lightbox-nav {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,.15); border: 1.5px solid rgba(255,255,255,.25);
+      color: #fff; font-size: 1.5rem; line-height: 1;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition), transform var(--transition);
+      z-index: 10001; user-select: none;
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,.28); }
+    .lightbox-nav.lb-prev { left: 16px; }
+    .lightbox-nav.lb-next { right: 16px; }
+    .lightbox-caption {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,.55); backdrop-filter: blur(8px);
+      color: rgba(255,255,255,.85); font-size: .8rem; font-weight: 500;
+      padding: 7px 20px; border-radius: 100px; letter-spacing: .04em;
+      white-space: nowrap; z-index: 10001;
+    }
+    /* Make clickable images show pointer */
+    .slideshow-slide img, .potensi-img img {
+      cursor: zoom-in;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <a class="nav-brand" href="index.html">
+      <div class="nav-logo">
+        <img src="img/logominsel.png" alt="Logo">
+      </div>
+      <div class="nav-brand-text">
+        <strong>Desa Kinalawiran</strong>
+        <span>Tompaso Baru · Minahasa Selatan</span>
+      </div>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Beranda</a></li>
+      <li><a href="profil-desa.html">Profil Desa</a></li>
+      <li><a href="pemerintahan.html">Pemerintahan</a></li>
+      <li><a href="potensi-desa.html">Potensi Desa</a></li>
+      <li class="nav-cta"><a href="galeri.html">Galeri</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-shape"></div>
+    <div class="hero-content">
+      <div class="hero-badge">Website Desa</div>
+      <h1>Desa<br/><em>Kinalawiran</em></h1>
+      <p class="hero-sub">Selamat datang di portal Desa Kinalawiran, Kecamatan Tompaso Baru, Kabupaten Minahasa Selatan, Provinsi Sulawesi Utara.</p>
+      <div class="hero-actions">
+        <a href="profil-desa.html" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 9h-2V7h2m0 10h-2v-6h2m-1-9A10 10 0 002 12a10 10 0 0010 10 10 10 0 0010-10A10 10 0 0012 2z"/></svg>
+          Profil Desa
+        </a>
+        <a href="galeri.html" class="btn btn-outline">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.5 13.5l2.5 3 3.5-4.5 4.5 6H5m16 1V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2z"/></svg>
+          Lihat Galeri
+        </a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card"><div class="stat-number">1K+</div><div class="stat-label">Penduduk</div></div>
+      <div class="stat-card"><div class="stat-number">5</div><div class="stat-label">Dusun</div></div>
+      <div class="stat-card"><div class="stat-number">2026</div><div class="stat-label">Tahun Ini</div></div>
+    </div>
+    <div class="scroll-hint"><div class="scroll-line"></div>Scroll untuk jelajahi</div>
+  </section>
+
+  <section class="about">
+    <div class="about-inner">
+      <div class="about-image-wrap reveal">
+        <div class="about-slideshow" id="aboutSlideshow">
+          <div class="slideshow-track" id="slideshowTrack">
+            <div class="slideshow-slide"><img src="img/kinalawiran1.jpeg" alt="Desa Kinalawiran 1" /></div>
+            <div class="slideshow-slide"><img src="img/kinalawiran2.jpeg" alt="Desa Kinalawiran 2" /></div>
+            <div class="slideshow-slide"><img src="img/kinalawiran3.jpeg" alt="Desa Kinalawiran 3" /></div>
+          </div>
+          <button class="slideshow-btn prev" id="slidePrev" aria-label="Sebelumnya">
+            <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+          </button>
+          <button class="slideshow-btn next" id="slideNext" aria-label="Berikutnya">
+            <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+          </button>
+          <div class="slideshow-dots" id="slideshowDots">
+            <button class="slideshow-dot active" data-idx="0" aria-label="Slide 1"></button>
+            <button class="slideshow-dot" data-idx="1" aria-label="Slide 2"></button>
+            <button class="slideshow-dot" data-idx="2" aria-label="Slide 3"></button>
+          </div>
+        </div>
+      </div>
+      <div class="about-text">
+        <span class="section-tag reveal">Tentang Desa</span>
+        <h2 class="section-title reveal reveal-delay-1">Mengenal Desa<br/>Kinalawiran</h2>
+        <p class="section-desc reveal reveal-delay-2">Desa Kinalawiran adalah desa yang terletak di Kecamatan Tompaso Baru, Kabupaten Minahasa Selatan, Provinsi Sulawesi Utara. Desa ini kaya akan sumber daya alam dan potensi pertanian yang menjadi mata pencaharian utama warganya.</p>
+        <p class="section-desc reveal reveal-delay-2" style="margin-top:12px;">Dengan suasana pedesaan yang asri dan masyarakat yang ramah, Kinalawiran terus berkembang menjadi desa yang mandiri dan berdaya saing melalui berbagai program pemberdayaan masyarakat.</p>
+        <div class="about-info-grid">
+          <div class="about-info-item reveal reveal-delay-1">
+            <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg></div>
+            <div><div class="info-label">Kecamatan</div><div class="info-value">Tompaso Baru</div></div>
+          </div>
+          <div class="about-info-item reveal reveal-delay-2">
+            <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg></div>
+            <div><div class="info-label">Kabupaten</div><div class="info-value">Minahasa Selatan</div></div>
+          </div>
+          <div class="about-info-item reveal reveal-delay-3">
+            <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg></div>
+            <div><div class="info-label">Provinsi</div><div class="info-value">Sulawesi Utara</div></div>
+          </div>
+          <div class="about-info-item reveal reveal-delay-4">
+            <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 3-1.34 3-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 3-1.34 3-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5C15 14.17 10.33 13 8 13zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+            <div><div class="info-label">Penduduk</div><div class="info-value">Beberapa Jiwa</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="layanan">
+    <div class="layanan-head">
+      <div>
+        <span class="section-tag reveal">Halaman Website</span>
+        <h2 class="section-title reveal reveal-delay-1">Jelajahi<br/>Informasi Desa</h2>
+      </div>
+      <p class="section-desc reveal reveal-delay-2" style="max-width:340px;">Temukan informasi lengkap seputar desa melalui halaman-halaman berikut.</p>
+    </div>
+    <div class="layanan-grid">
+      <a href="profil-desa.html" class="card reveal reveal-delay-1">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 6l-1-2H5v17h2v-7h5l1 2h7V6h-6zm4 8h-4l-1-2H7V6h5l1 2h5v6z"/></svg></div>
+        <h3>Profil Desa</h3>
+        <p>Informasi wilayah, sejarah singkat, dan gambaran umum Desa Kinalawiran.</p>
+        <div class="card-link">Selengkapnya <svg viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg></div>
+      </a>
+      <a href="pemerintahan.html" class="card reveal reveal-delay-2">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg></div>
+        <h3>Pemerintahan Desa</h3>
+        <p>Struktur organisasi, perangkat desa, BPD, dan LPM Desa Kinalawiran.</p>
+        <div class="card-link">Selengkapnya <svg viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg></div>
+      </a>
+      <a href="potensi-desa.html" class="card reveal reveal-delay-3">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21h1.9C8 17 12 14 22 13M6.18 20.5c.36-1.01.76-2 1.2-2.89C9.34 15.1 12.18 13.4 17 13.4V10C11 11 7 15.5 6.18 20.5z"/></svg></div>
+        <h3>Potensi Desa</h3>
+        <p>Sektor pertanian, perkebunan, dan sumber daya alam unggulan desa.</p>
+        <div class="card-link">Selengkapnya <svg viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg></div>
+      </a>
+      <a href="galeri.html" class="card reveal reveal-delay-4">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M8.5 13.5l2.5 3 3.5-4.5 4.5 6H5m16 1V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2z"/></svg></div>
+        <h3>Galeri Desa</h3>
+        <p>Dokumentasi foto kegiatan warga dan pemandangan indah Desa Kinalawiran.</p>
+        <div class="card-link">Selengkapnya <svg viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="potensi">
+    <div class="potensi-inner">
+      <div>
+        <span class="section-tag" style="color:rgba(255,100,100,.85)">Potensi Unggulan</span>
+        <h2 class="section-title reveal">Kekayaan Alam<br/>&amp; Potensi Desa</h2>
+        <p class="section-desc reveal reveal-delay-1">Desa Kinalawiran memiliki potensi alam dan sumber daya yang beragam, menjadi fondasi kuat bagi kesejahteraan masyarakat.</p>
+        <ul class="potensi-list">
+          <li class="reveal reveal-delay-1">
+            <div class="potensi-bullet"><svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21h1.9C8 17 12 14 22 13M6.18 20.5c.36-1.01.76-2 1.2-2.89C9.34 15.1 12.18 13.4 17 13.4V10C11 11 7 15.5 6.18 20.5z"/></svg></div>
+            <div class="potensi-li-text"><strong>Pertanian &amp; Perkebunan</strong><span>Nilam, Durian, Cengkeh, dan Kelapa sebagai komoditas utama</span></div>
+          </li>
+          <li class="reveal reveal-delay-2">
+            <div class="potensi-bullet"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 017 7c0 5.25-7 13-7 13S5 14.25 5 9a7 7 0 017-7zm0 9.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"/></svg></div>
+            <div class="potensi-li-text"><strong>Sumber Daya Alam</strong><span>Lahan subur dan sumber air yang melimpah sepanjang tahun</span></div>
+          </li>
+          <li class="reveal reveal-delay-3">
+            <div class="potensi-bullet"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 3-1.34 3-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 3-1.34 3-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5C15 14.17 10.33 13 8 13zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+            <div class="potensi-li-text"><strong>Sumber Daya Manusia</strong><span>Masyarakat yang aktif, gotong royong, dan berdedikasi</span></div>
+          </li>
+        </ul>
+      </div>
+      <div class="potensi-images reveal reveal-delay-2">
+        <div class="potensi-img">
+          <img src="img/kekayaanalam1.jpeg" alt="Kekayaan Alam" />
+          <div class="potensi-img-label">Kekayaan Alam</div>
+        </div>
+        <div class="potensi-img">
+          <img src="img/pertanian1.jpeg" alt="Pertanian" />
+          <div class="potensi-img-label">Pertanian</div>
+        </div>
+        <div class="potensi-img">
+          <img src="img/perkebunan1.jpeg" alt="Perkebunan" />
+          <div class="potensi-img-label">Perkebunan</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo"><img src="img/logominsel.png" alt="Logo" style="width:46px;height:46px;object-fit:contain;"></div>
+        <h3>Desa Kinalawiran</h3>
+        <p>Portal informasi Desa Kinalawiran, Kecamatan Tompaso Baru, Kabupaten Minahasa Selatan, Provinsi Sulawesi Utara.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="profil-desa.html">Profil Desa</a></li>
+          <li><a href="pemerintahan.html">Pemerintahan</a></li>
+          <li><a href="potensi-desa.html">Potensi Desa</a></li>
+          <li><a href="galeri.html">Galeri</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontak</h4>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+          <span>Desa Kinalawiran, Kec. Tompaso Baru, Kab. Minahasa Selatan, Sulawesi Utara</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <span>Kantor Desa Kinalawiran</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Desa Kinalawiran. KKT 146 All Rights Reserved.</span>
+      <span>Tompaso Baru · Minahasa Selatan · Sulawesi Utara</span>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightboxOverlay" role="dialog" aria-modal="true">
+    <div class="lightbox-img-wrap">
+      <img src="" alt="" id="lightboxImg" />
+    </div>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Tutup">&#x2715;</button>
+    <button class="lightbox-nav lb-prev" id="lbPrev" aria-label="Sebelumnya">&#8249;</button>
+    <button class="lightbox-nav lb-next" id="lbNext" aria-label="Berikutnya">&#8250;</button>
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+
+  <script>
+    // Navbar scroll shadow
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 20); });
+
+    // Mobile toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks  = document.getElementById('navLinks');
+
+    function openMenu() {
+      navToggle.classList.add('open');
+      navLinks.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      navToggle.classList.remove('open');
+      navLinks.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    navToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      navLinks.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    // Close when a link is tapped
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+    // Close when tapping outside
+    document.addEventListener('click', function(e) {
+      if (navLinks.classList.contains('open') && !navbar.contains(e.target)) closeMenu();
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // Slideshow Kinalawiran
+    (function() {
+      const track = document.getElementById('slideshowTrack');
+      const dots  = document.querySelectorAll('#slideshowDots .slideshow-dot');
+      const total = 3;
+      let current = 0, timer;
+
+      function goTo(idx) {
+        current = (idx + total) % total;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      }
+
+      document.getElementById('slidePrev').addEventListener('click', () => { goTo(current - 1); resetTimer(); });
+      document.getElementById('slideNext').addEventListener('click', () => { goTo(current + 1); resetTimer(); });
+      dots.forEach(d => d.addEventListener('click', () => { goTo(+d.dataset.idx); resetTimer(); }));
+
+      // Touch / swipe support
+      let startX = 0;
+      track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend', e => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) { goTo(diff > 0 ? current + 1 : current - 1); resetTimer(); }
+      });
+
+      function resetTimer() { clearInterval(timer); timer = setInterval(() => goTo(current + 1), 4000); }
+      resetTimer();
+    })();
+
+    // LIGHTBOX
+    (function() {
+      const overlay   = document.getElementById('lightboxOverlay');
+      const lbImg     = document.getElementById('lightboxImg');
+      const lbCaption = document.getElementById('lightboxCaption');
+      const lbClose   = document.getElementById('lightboxClose');
+      const lbPrev    = document.getElementById('lbPrev');
+      const lbNext    = document.getElementById('lbNext');
+
+      // Collect all lightbox images: slideshow + potensi
+      const allImgs = [];
+
+      // Slideshow images
+      document.querySelectorAll('.slideshow-slide img').forEach(img => {
+        allImgs.push({ src: img.src, alt: img.alt });
+      });
+
+      // Potensi images
+      document.querySelectorAll('.potensi-img img').forEach(img => {
+        allImgs.push({ src: img.src, alt: img.alt });
+      });
+
+      let currentIdx = 0;
+
+      function openLightbox(idx) {
+        currentIdx = (idx + allImgs.length) % allImgs.length;
+        lbImg.src = allImgs[currentIdx].src;
+        lbImg.alt = allImgs[currentIdx].alt;
+        lbCaption.textContent = allImgs[currentIdx].alt || '';
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+        lbImg.src = '';
+      }
+
+      // Attach click to slideshow images
+      document.querySelectorAll('.slideshow-slide img').forEach((img, i) => {
+        img.addEventListener('click', () => openLightbox(i));
+      });
+
+      // Attach click to potensi images
+      document.querySelectorAll('.potensi-img img').forEach((img, i) => {
+        img.addEventListener('click', () => openLightbox(document.querySelectorAll('.slideshow-slide img').length + i));
+      });
+
+      lbClose.addEventListener('click', closeLightbox);
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeLightbox();
+      });
+      lbPrev.addEventListener('click', (e) => { e.stopPropagation(); openLightbox(currentIdx - 1); });
+      lbNext.addEventListener('click', (e) => { e.stopPropagation(); openLightbox(currentIdx + 1); });
+
+      // Keyboard
+      document.addEventListener('keydown', function(e) {
+        if (!overlay.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') openLightbox(currentIdx - 1);
+        if (e.key === 'ArrowRight') openLightbox(currentIdx + 1);
+      });
+
+      // Touch swipe support
+      let touchStartX = 0;
+      overlay.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      overlay.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) openLightbox(diff > 0 ? currentIdx + 1 : currentIdx - 1);
+      });
+    })();
+  </script>
+</body>
+</html>

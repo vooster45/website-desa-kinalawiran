@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pemerintahan Desa – Desa Kinalawiran</title>
+  <link rel="icon" type="image/png" href="img/logominsel.png" />
+  <link rel="shortcut icon" type="image/png" href="img/logominsel.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #ab0c0b; --red-dark: #870908; --red-light: #d41312;
+      --white: #ffffff; --off-white: #faf9f8;
+      --gray-50: #f7f6f5; --gray-100: #ede9e6; --gray-300: #b8afa9;
+      --gray-500: #7a716b; --gray-700: #3d3530; --gray-900: #1a1410;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --shadow-sm: 0 1px 4px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 20px rgba(0,0,0,.09);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,.13);
+      --radius: 16px; --transition: .35s cubic-bezier(.4,0,.2,1);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--white); color: var(--gray-700); line-height: 1.65; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 68px;
+      background: rgba(255,255,255,.92); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--gray-100);
+      transition: box-shadow var(--transition);
+      overflow: visible;
+    }
+    .navbar.scrolled { box-shadow: var(--shadow-md); }
+    .nav-brand { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+    .nav-logo { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+    .nav-logo img { width: 36px; height: 36px; object-fit: contain; }
+    .nav-brand-text { line-height: 1.15; min-width: 0; overflow: hidden; }
+    .nav-brand-text strong { display: block; font-family: var(--font-display); font-size: .95rem; color: var(--gray-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .nav-brand-text span { display: block; font-size: .65rem; color: var(--gray-500); font-weight: 500; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; flex-shrink: 0; }
+    .nav-links a { font-size: .875rem; font-weight: 500; color: var(--gray-700); padding: 7px 14px; border-radius: 8px; transition: background var(--transition), color var(--transition); }
+    .nav-links a:hover, .nav-links a.active { background: var(--gray-50); color: var(--red); }
+    .nav-links .nav-cta a { background: var(--red); color: #fff; padding: 7px 18px; }
+    .nav-links .nav-cta a:hover { background: var(--red-dark); color: #fff; }
+    .nav-toggle {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      cursor: pointer; padding: 8px 6px; border: none; background: none;
+      flex-shrink: 0; margin-left: 8px;
+      -webkit-tap-highlight-color: transparent; z-index: 1000;
+    }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--gray-700); border-radius: 2px; transition: transform var(--transition), opacity var(--transition); pointer-events: none; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      position: relative; min-height: 48vh; display: flex; align-items: flex-end;
+      overflow: hidden; background: var(--gray-900);
+      padding-top: 68px; padding-bottom: 60px;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(26,20,16,.88) 0%, rgba(171,12,11,.72) 100%),
+        url('img/banner1.jpeg') center/cover no-repeat;
+      animation: heroZoom 20s ease-in-out infinite alternate;
+    }
+    @keyframes heroZoom { from{transform:scale(1)} to{transform:scale(1.05)} }
+    .page-hero-shape { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 400px; height: 400px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.05); pointer-events: none; }
+    .page-hero-content { position: relative; z-index: 2; padding: 0 5%; max-width: 900px; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; animation: fadeUp .7s .1s both; }
+    .breadcrumb a { font-size: .78rem; color: rgba(255,255,255,.5); font-weight: 500; transition: color var(--transition); }
+    .breadcrumb a:hover { color: #fff; }
+    .breadcrumb span { color: rgba(255,255,255,.25); font-size: .78rem; }
+    .breadcrumb strong { font-size: .78rem; color: rgba(255,255,255,.8); font-weight: 500; }
+    .page-hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); backdrop-filter: blur(8px);
+      color: #fff; font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      padding: 6px 16px; border-radius: 100px; margin-bottom: 18px;
+      animation: fadeUp .7s .2s both;
+    }
+    .page-hero-badge::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--red-light); box-shadow:0 0 0 3px rgba(212,19,18,.3); animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{box-shadow:0 0 0 3px rgba(212,19,18,.3)} 50%{box-shadow:0 0 0 6px rgba(212,19,18,.1)} }
+    .page-hero h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 800; color: #fff; line-height: 1.08; letter-spacing: -.02em; margin-bottom: 12px; animation: fadeUp .7s .3s both; }
+    .page-hero h1 em { font-style: italic; color: rgba(255,255,255,.5); }
+    .page-hero p { font-size: 1rem; color: rgba(255,255,255,.62); font-weight: 300; max-width: 520px; animation: fadeUp .7s .45s both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── PAGE TABS ── */
+    .page-tabs { position: sticky; top: 68px; z-index: 99; background: var(--white); border-bottom: 1px solid var(--gray-100); box-shadow: var(--shadow-sm); }
+    .page-tabs-inner { max-width: 1200px; margin: 0 auto; padding: 0 5%; display: flex; overflow-x: auto; }
+    .page-tabs-inner::-webkit-scrollbar { display: none; }
+    .tab-link { flex-shrink: 0; font-size: .84rem; font-weight: 600; color: var(--gray-500); padding: 16px 20px; border-bottom: 2.5px solid transparent; transition: all var(--transition); white-space: nowrap; }
+    .tab-link:hover { color: var(--red); }
+    .tab-link.active { color: var(--red); border-bottom-color: var(--red); }
+
+    /* ── SECTION BASE ── */
+    section { padding: 88px 5%; }
+    .inner { max-width: 1200px; margin: 0 auto; }
+    .section-tag { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.7rem, 3.5vw, 2.5rem); font-weight: 700; color: var(--gray-900); line-height: 1.15; letter-spacing: -.02em; margin-bottom: 14px; }
+    .section-desc { font-size: .97rem; color: var(--gray-500); line-height: 1.8; max-width: 600px; }
+
+    /* ── SECTION HEADER ROW ── */
+    .sec-head { margin-bottom: 48px; }
+
+    /* ── PERANGKAT DESA ── */
+    .perangkat { background: var(--off-white); }
+
+    /* Hukum Tua (featured) */
+    .ht-card {
+      background: var(--red);
+      border-radius: 20px;
+      padding: 36px 40px;
+      display: flex; align-items: center; gap: 32px;
+      margin-bottom: 40px;
+      position: relative; overflow: hidden;
+    }
+    .ht-card::before {
+      content: '';
+      position: absolute; right: -60px; top: -60px;
+      width: 260px; height: 260px; border-radius: 50%;
+      background: rgba(255,255,255,.07);
+      pointer-events: none;
+    }
+    .ht-avatar {
+      width: 72px; height: 72px; flex-shrink: 0;
+      background: rgba(255,255,255,.2);
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      border: 2px solid rgba(255,255,255,.3);
+    }
+    .ht-avatar svg { width: 36px; height: 36px; fill: #fff; }
+    .ht-info { position: relative; z-index: 1; }
+    .ht-role { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: 6px; }
+    .ht-name { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 8px; }
+    .ht-desc { font-size: .875rem; color: rgba(255,255,255,.7); max-width: 420px; }
+
+    /* Grid jabatan */
+    .jabatan-group { margin-bottom: 40px; }
+    .jabatan-group:last-child { margin-bottom: 0; }
+    .jabatan-group-title {
+      font-size: .72rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--gray-300);
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .jabatan-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .jabatan-card {
+      background: var(--white); border: 1px solid var(--gray-100);
+      border-radius: 12px; padding: 16px 18px;
+      display: flex; align-items: center; gap: 16px;
+      transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+    }
+    .jabatan-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: rgba(171,12,11,.2); }
+    .jabatan-initials {
+      width: 42px; height: 42px; flex-shrink: 0;
+      background: rgba(171,12,11,.08); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: .9rem; font-weight: 700; color: var(--red);
+    }
+    .jabatan-info { min-width: 0; }
+    .jabatan-name { font-size: .9rem; font-weight: 600; color: var(--gray-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px; }
+    .jabatan-role { font-size: .75rem; color: var(--gray-500); line-height: 1.4; }
+
+    /* Kepala Jaga grid - 5 kolom */
+    .jaga-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+    .jaga-card {
+      background: var(--white); border: 1px solid var(--gray-100);
+      border-radius: 12px; padding: 14px 16px;
+      display: flex; align-items: center; gap: 14px;
+      transition: box-shadow var(--transition), border-color var(--transition);
+    }
+    .jaga-card:hover { box-shadow: var(--shadow-md); border-color: rgba(171,12,11,.2); }
+    .jaga-num {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: var(--red); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .78rem; font-weight: 700; color: #fff;
+      letter-spacing: .04em;
+    }
+    .jaga-info { min-width: 0; }
+    .jaga-name { font-size: .875rem; font-weight: 600; color: var(--gray-900); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .jaga-label { font-size: .72rem; color: var(--gray-500); }
+
+    /* ── BPD ── */
+    .bpd-section { background: var(--white); }
+
+    /* BPD Ketua featured */
+    .bpd-head-row {
+      display: grid; grid-template-columns: 1fr 2fr; gap: 24px;
+      margin-bottom: 24px;
+    }
+    .bpd-featured {
+      background: var(--gray-900); border-radius: 16px;
+      padding: 28px 24px; position: relative; overflow: hidden;
+    }
+    .bpd-featured::before { content:''; position:absolute; bottom:-40px; right:-40px; width:160px; height:160px; border-radius:50%; background:rgba(171,12,11,.2); pointer-events:none; }
+    .bpd-featured-role { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 8px; }
+    .bpd-featured-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: #fff; line-height: 1.2; }
+    .bpd-featured-tag { display: inline-block; margin-top: 12px; background: var(--red); color: #fff; font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; }
+
+    .bpd-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+
+    /* ── LPM ── */
+    .lpm-section { background: var(--off-white); }
+    .lpm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+
+    /* LPM Ketua featured */
+    .lpm-featured {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, var(--gray-900) 0%, #2a1a18 100%);
+      border-radius: 16px; padding: 28px 32px;
+      display: flex; align-items: center; gap: 24px;
+      margin-bottom: 4px;
+      position: relative; overflow: hidden;
+    }
+    .lpm-featured::before { content:''; position:absolute; right:-40px; top:-40px; width:200px; height:200px; border-radius:50%; background:rgba(171,12,11,.15); pointer-events:none; }
+    .lpm-feat-icon { width: 56px; height: 56px; flex-shrink: 0; background: rgba(171,12,11,.25); border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+    .lpm-feat-icon svg { width: 26px; height: 26px; fill: var(--red-light); }
+    .lpm-feat-role { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 5px; }
+    .lpm-feat-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: #fff; }
+
+    /* ── STATS STRIP ── */
+    .stats-strip { background: var(--red); padding: 44px 5%; }
+    .stats-strip-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+    .strip-stat { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); padding: 26px 20px; text-align: center; transition: background var(--transition); }
+    .strip-stat:first-child { border-radius: 14px 0 0 14px; }
+    .strip-stat:last-child  { border-radius: 0 14px 14px 0; }
+    .strip-stat:hover { background: rgba(255,255,255,.18); }
+    .strip-num { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 6px; }
+    .strip-label { font-size: .72rem; color: rgba(255,255,255,.75); letter-spacing: .06em; text-transform: uppercase; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--gray-900); color: rgba(255,255,255,.6); padding: 72px 5% 36px; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 48px; max-width: 1200px; margin: 0 auto 56px; }
+    .footer-brand .nav-logo { width: 46px; height: 46px; margin-bottom: 16px; border-radius: 12px; }
+    .footer-brand h3 { font-family: var(--font-display); font-size: 1.1rem; color: #fff; margin-bottom: 10px; }
+    .footer-brand p { font-size: .84rem; line-height: 1.75; max-width: 280px; }
+    .footer-col h4 { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 18px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: .875rem; color: rgba(255,255,255,.55); transition: color var(--transition); }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-contact-item { display: flex; gap: 10px; align-items: flex-start; font-size: .84rem; margin-bottom: 12px; }
+    .footer-contact-item svg { width: 16px; height: 16px; fill: var(--red-light); flex-shrink: 0; margin-top: 3px; }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,.08); padding-top: 28px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; font-size: .8rem; }
+
+    /* ── MOBILE & TABLET ── */
+    @media (max-width: 900px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        position: fixed; top: 68px; left: 0; right: 0;
+        background: var(--white); border-top: 2px solid var(--red);
+        flex-direction: column; align-items: stretch;
+        gap: 0; padding: 4px 0 16px;
+        transform: translateY(-8px); opacity: 0; pointer-events: none;
+        transition: transform var(--transition), opacity var(--transition);
+        box-shadow: 0 8px 32px rgba(0,0,0,.12); z-index: 998;
+        max-height: calc(100vh - 68px); overflow-y: auto;
+      }
+      .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+      .nav-links li { margin: 0; }
+      .nav-links li + li { border-top: 1px solid var(--gray-50); }
+      .nav-links a { display: block; padding: 15px 6%; border-radius: 0; font-size: .95rem; color: var(--gray-700); font-weight: 500; }
+      .nav-links a:hover, .nav-links a.active { background: var(--gray-50); color: var(--red); }
+      .nav-links .nav-cta { padding: 12px 6% 4px; border-top: none !important; }
+      .nav-links .nav-cta a { background: var(--red); color: #fff !important; border-radius: 10px; text-align: center; padding: 13px 6%; font-weight: 600; }
+      .nav-links .nav-cta a:hover { background: var(--red-dark); }
+
+      section { padding: 64px 5%; }
+      .ht-card { flex-direction: column; align-items: flex-start; gap: 20px; padding: 28px 24px; }
+      .bpd-head-row { grid-template-columns: 1fr; }
+      .stats-strip-inner { grid-template-columns: 1fr 1fr; gap: 2px; }
+      .strip-stat:first-child  { border-radius: 14px 0 0 0; }
+      .strip-stat:nth-child(2) { border-radius: 0 14px 0 0; }
+      .strip-stat:nth-child(3) { border-radius: 0 0 0 14px; }
+      .strip-stat:last-child   { border-radius: 0 0 14px 0; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-brand { grid-column: span 2; }
+      .lpm-featured { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+    @media (max-width: 480px) {
+      .page-hero { min-height: 50vh; }
+      .jabatan-grid { grid-template-columns: 1fr; }
+      .jaga-grid { grid-template-columns: 1fr; }
+      .bpd-grid, .lpm-grid { grid-template-columns: 1fr; }
+      .stats-strip-inner { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: span 1; }
+    }
+
+    /* ── FOTO PERANGKAT 1:1 ── */
+    .ht-avatar {
+      width: 130px; height: 130px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,.3);
+      flex-shrink: 0;
+    }
+    .ht-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    .jabatan-photo {
+      width: 80px; height: 80px; flex-shrink: 0;
+      border-radius: 14px; overflow: hidden;
+      border: 1.5px solid var(--gray-100);
+    }
+    .jabatan-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    .jaga-photo {
+      width: 72px; height: 72px; flex-shrink: 0;
+      border-radius: 12px; overflow: hidden;
+      border: 1.5px solid var(--gray-100);
+    }
+    .jaga-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    .bpd-feat-photo {
+      width: 120px; height: 120px; flex-shrink: 0;
+      border-radius: 18px; overflow: hidden;
+      border: 2px solid rgba(255,255,255,.2);
+      margin-bottom: 12px;
+    }
+    .bpd-feat-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    .lpm-feat-photo {
+      width: 100px; height: 100px; flex-shrink: 0;
+      border-radius: 18px; overflow: hidden;
+      border: 2px solid rgba(171,12,11,.4);
+    }
+    .lpm-feat-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,.85);
+      backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+      animation: lbFadeIn .25s ease;
+    }
+    .lightbox-overlay.active { display: flex; }
+    @keyframes lbFadeIn { from{opacity:0} to{opacity:1} }
+    .lightbox-box {
+      position: relative;
+      max-width: 480px; width: 90%;
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,.45);
+      animation: lbSlideUp .3s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes lbSlideUp { from{opacity:0;transform:translateY(30px) scale(.95)} to{opacity:1;transform:translateY(0) scale(1)} }
+    .lightbox-img {
+      width: 100%; display: block;
+      max-height: 65vh; object-fit: cover; object-position: center top;
+    }
+    .lightbox-caption {
+      padding: 16px 20px 18px;
+      text-align: center;
+    }
+    .lightbox-caption strong {
+      display: block;
+      font-family: var(--font-display); font-size: 1.1rem;
+      color: var(--gray-900); margin-bottom: 4px;
+    }
+    .lightbox-caption span {
+      font-size: .8rem; color: var(--gray-500);
+      letter-spacing: .04em; text-transform: uppercase; font-weight: 500;
+    }
+    .lightbox-close {
+      position: absolute; top: 12px; right: 12px;
+      width: 34px; height: 34px;
+      background: rgba(0,0,0,.45); border: none; border-radius: 50%;
+      color: #fff; font-size: 1.1rem; line-height: 1;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition);
+    }
+    .lightbox-close:hover { background: var(--red); }
+
+    /* Make photo containers clickable */
+    .ht-avatar img,
+    .jabatan-photo img,
+    .jaga-photo img,
+    .bpd-feat-photo img,
+    .lpm-feat-photo img {
+      cursor: zoom-in;
+      transition: transform .3s ease, filter .3s ease;
+    }
+    .ht-avatar:hover img,
+    .jabatan-photo:hover img,
+    .jaga-photo:hover img,
+    .bpd-feat-photo:hover img,
+    .lpm-feat-photo:hover img {
+      transform: scale(1.06);
+      filter: brightness(1.05);
+    }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a class="nav-brand" href="index.html">
+      <div class="nav-logo">
+        <img src="img/logominsel.png" alt="Logo">
+      </div>
+      <div class="nav-brand-text">
+        <strong>Desa Kinalawiran</strong>
+        <span>Tompaso Baru · Minahasa Selatan</span>
+      </div>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Beranda</a></li>
+      <li><a href="profil-desa.html">Profil Desa</a></li>
+      <li><a href="pemerintahan.html" class="active">Pemerintahan</a></li>
+      <li><a href="potensi-desa.html">Potensi Desa</a></li>
+      <li class="nav-cta"><a href="galeri.html">Galeri</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-shape"></div>
+    <div class="page-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html">Beranda</a>
+        <span>›</span>
+        <strong>Pemerintahan</strong>
+      </div>
+      <h1>Pemerintahan<br/><em>Desa Kinalawiran</em></h1>
+      <p>Susunan perangkat desa, Badan Permusyawaratan Desa (BPD), dan Lembaga Pemberdayaan Masyarakat (LPM) Desa Kinalawiran.</p>
+    </div>
+  </div>
+
+  <!-- TAB NAVIGATION -->
+  <div class="page-tabs">
+    <div class="page-tabs-inner">
+      <a href="#perangkat" class="tab-link active">Perangkat Desa</a>
+      <a href="#bpd" class="tab-link">BPD</a>
+      <a href="#lpm" class="tab-link">LPM</a>
+    </div>
+  </div>
+
+  <!-- STATS STRIP -->
+  <div class="stats-strip">
+    <div class="stats-strip-inner">
+      <div class="strip-stat"><div class="strip-num">18</div><div class="strip-label">Perangkat Desa</div></div>
+      <div class="strip-stat"><div class="strip-num">7</div><div class="strip-label">Anggota BPD</div></div>
+      <div class="strip-stat"><div class="strip-num">6</div><div class="strip-label">Anggota LPM</div></div>
+      <div class="strip-stat"><div class="strip-num">5</div><div class="strip-label">Jaga / Dusun</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PERANGKAT DESA
+  ════════════════════════════════════════════ -->
+  <section class="perangkat" id="perangkat">
+    <div class="inner">
+
+      <div class="sec-head">
+        <span class="section-tag reveal">Pemerintah Desa</span>
+        <h2 class="section-title reveal reveal-delay-1">Perangkat Desa<br/>Kinalawiran</h2>
+        <p class="section-desc reveal reveal-delay-2">Susunan lengkap aparatur pemerintah Desa Kinalawiran yang bertugas melayani masyarakat.</p>
+      </div>
+
+      <!-- Hukum Tua -->
+      <div class="ht-card reveal">
+        <div class="ht-avatar">
+          <img src="img/perangkatdesa/romelwalingkas.jpeg" alt="Romel Walingkas" />
+        </div>
+        <div class="ht-info">
+          <div class="ht-role">Kepala Desa</div>
+          <div class="ht-name">Romel Walingkas</div>
+          <div class="ht-desc">Hukum Tua Desa Kinalawiran — pemimpin tertinggi pemerintahan desa yang bertanggung jawab atas penyelenggaraan urusan pemerintahan, pembangunan, dan kemasyarakatan.</div>
+        </div>
+      </div>
+
+      <!-- Sekretariat -->
+      <div class="jabatan-group reveal reveal-delay-1">
+        <div class="jabatan-group-title">Sekretariat Desa</div>
+        <div class="jabatan-grid">
+          <div class="jabatan-card">
+            <div class="jabatan-photo"><img src="img/perangkatdesa/afnitatumbel.jpeg" alt="Afnita Tumbel" /></div>
+            <div class="jabatan-info">
+              <div class="jabatan-name">Afnita Tumbel</div>
+              <div class="jabatan-role">Sekretaris Desa</div>
+            </div>
+          </div>
+          <div class="jabatan-card">
+            <div class="jabatan-photo"><img src="img/perangkatdesa/romlywinokan.jpeg" alt="Romly Winokan" /></div>
+            <div class="jabatan-info">
+              <div class="jabatan-name">Romly Winokan</div>
+              <div class="jabatan-role">Kepala Urusan Perencanaan</div>
+            </div>
+          </div>
+          <div class="jabatan-card">
+            <div class="jabatan-photo"><img src="img/perangkatdesa/livnitampi.jpeg" alt="Livni Tampi" /></div>
+            <div class="jabatan-info">
+              <div class="jabatan-name">Livni Tampi</div>
+              <div class="jabatan-role">Kepala Urusan Keuangan</div>
+            </div>
+          </div>
+          <div class="jabatan-card">
+            <div class="jabatan-photo"><img src="img/perangkatdesa/patriosondakh.jpeg" alt="Patrio Sondakh" /></div>
+            <div class="jabatan-info">
+              <div class="jabatan-name">Patrio Sondakh</div>
+              <div class="jabatan-role">Kepala Urusan Tata Usaha &amp; Umum</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seksi -->
+      <div class="jabatan-group reveal reveal-delay-2">
+        <div class="jabatan-group-title">Kepala Seksi</div>
+        <div class="jabatan-grid">
+          <div class="jabatan-card">
+            <div class="jabatan-photo"><img src="img/perangkatdesa/jamessambeka.jpeg" alt="James Sambeka" /></div>
+            <div class="jabatan-info">
+              <div class="jabatan-name">James Sambeka</div>
+              <div class="jabatan-role">Kepala Seksi Pemerintahan</div>
+            </div>
+          </div>
+          <div class="jabatan-card">
+            <div class="jabatan-photo"><img src="img/perangkatdesa/jeikegumogar.jpeg" alt="Jeike Gumogar" /></div>
+            <div class="jabatan-info">
+              <div class="jabatan-name">Jeike Gumogar</div>
+              <div class="jabatan-role">Kepala Seksi Kesejahteraan</div>
+            </div>
+          </div>
+          <div class="jabatan-card">
+            <div class="jabatan-photo"><img src="img/perangkatdesa/youdytumbel.jpeg" alt="Youdy Tumbel" /></div>
+            <div class="jabatan-info">
+              <div class="jabatan-name">Youdy Tumbel</div>
+              <div class="jabatan-role">Kepala Seksi Pelayanan</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kepala Jaga -->
+      <div class="jabatan-group reveal reveal-delay-3">
+        <div class="jabatan-group-title">Kepala Jaga</div>
+        <div class="jaga-grid">
+          <div class="jaga-card">
+            <div class="jaga-photo"><img src="img/perangkatdesa/verronliogu.jpeg" alt="Verron Vicky Liogu" /></div>
+            <div class="jaga-info">
+              <div class="jaga-name">Verron Liogu</div>
+              <div class="jaga-label">Kepala Jaga 1</div>
+            </div>
+          </div>
+          <div class="jaga-card">
+            <div class="jaga-photo"><img src="img/perangkatdesa/rommysambeka.jpeg" alt="Rommy Sambeka" /></div>
+            <div class="jaga-info">
+              <div class="jaga-name">Rommy Sambeka</div>
+              <div class="jaga-label">Kepala Jaga 2</div>
+            </div>
+          </div>
+          <div class="jaga-card">
+            <div class="jaga-photo"><img src="img/perangkatdesa/cliefwalingkas.jpeg" alt="Clief Walingkas" /></div>
+            <div class="jaga-info">
+              <div class="jaga-name">Clief Walingkas</div>
+              <div class="jaga-label">Kepala Jaga 3</div>
+            </div>
+          </div>
+          <div class="jaga-card">
+            <div class="jaga-photo"><img src="img/perangkatdesa/viclysanger.jpeg" alt="Vicly Sanger" /></div>
+            <div class="jaga-info">
+              <div class="jaga-name">Vicly Sanger</div>
+              <div class="jaga-label">Kepala Jaga 4</div>
+            </div>
+          </div>
+          <div class="jaga-card">
+            <div class="jaga-photo"><img src="img/perangkatdesa/karniakewas.jpeg" alt="Karnia Kewas" /></div>
+            <div class="jaga-info">
+              <div class="jaga-name">Karnia Kewas</div>
+              <div class="jaga-label">Kepala Jaga 5</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Maweteng -->
+      <div class="jabatan-group reveal reveal-delay-4">
+        <div class="jabatan-group-title">Maweteng (Wakil Kepala Jaga)</div>
+        <div class="jaga-grid">
+          <div class="jaga-card">
+            <div class="jaga-photo"><img src="img/perangkatdesa/juflylimpele.jpeg" alt="Jufly Limpele" /></div>
+            <div class="jaga-info">
+              <div class="jaga-name">Jufly Limpele</div>
+              <div class="jaga-label">Maweteng Jaga 1</div>
+            </div>
+          </div>
+          <div class="jaga-card">
+            <div class="jaga-photo"><img src="img/perangkatdesa/ronaldmawikere.jpeg" alt="Ronald R. Mawikere" /></div>
+            <div class="jaga-info">
+              <div class="jaga-name">Ronald Mawikere</div>
+              <div class="jaga-label">Maweteng Jaga 2</div>
+            </div>
+          </div>
+          <div class="jaga-card">
+            <div class="jaga-photo"><img src="img/perangkatdesa/karlakoleangan.jpeg" alt="Karla Koleangan" /></div>
+            <div class="jaga-info">
+              <div class="jaga-name">Karla Koleangan</div>
+              <div class="jaga-label">Maweteng Jaga 3</div>
+            </div>
+          </div>
+          <div class="jaga-card">
+            <div class="jaga-photo"><img src="img/perangkatdesa/fandalomboan.jpeg" alt="Fanda Lomboan" /></div>
+            <div class="jaga-info">
+              <div class="jaga-name">Fanda Lomboan</div>
+              <div class="jaga-label">Maweteng Jaga 4</div>
+            </div>
+          </div>
+          <div class="jaga-card">
+            <div class="jaga-photo"><img src="img/perangkatdesa/megiakokong.jpeg" alt="Megia R. Kokong" /></div>
+            <div class="jaga-info">
+              <div class="jaga-name">Megia Kokong</div>
+              <div class="jaga-label">Maweteng Jaga 5</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       BPD
+  ════════════════════════════════════════════ -->
+  <section class="bpd-section" id="bpd">
+    <div class="inner">
+
+      <div class="sec-head">
+        <span class="section-tag reveal">Lembaga Legislatif Desa</span>
+        <h2 class="section-title reveal reveal-delay-1">Badan Permusyawaratan<br/>Desa (BPD)</h2>
+        <p class="section-desc reveal reveal-delay-2">BPD berperan sebagai mitra pemerintah desa dalam penyusunan dan penetapan peraturan desa serta menampung aspirasi masyarakat.</p>
+      </div>
+
+      <div class="bpd-head-row reveal">
+        <div class="bpd-featured">
+          <div class="bpd-feat-photo"><img src="img/perangkatdesa/freikeworuntu.jpeg" alt="Freike R. Woruntu" /></div>
+          <div class="bpd-featured-role">Ketua BPD</div>
+          <div class="bpd-featured-name">Alm. Freike Woruntu</div>
+          <span class="bpd-featured-tag">Ketua</span>
+        </div>
+        <div class="bpd-grid">
+          <div class="jabatan-card">
+            <div class="jabatan-photo"><img src="img/perangkatdesa/chifnypandoh.jpeg" alt="Chifny Pandoh, SE" /></div>
+            <div class="jabatan-info">
+              <div class="jabatan-name">Chifny Pandoh, SE</div>
+              <div class="jabatan-role">Sekretaris BPD</div>
+            </div>
+          </div>
+          <div class="jabatan-card">
+            <div class="jabatan-photo"><img src="img/perangkatdesa/placeholderprofile.png" alt="Sunaryo" /></div>
+            <div class="jabatan-info">
+              <div class="jabatan-name">Sunaryo</div>
+              <div class="jabatan-role">Wakil Ketua BPD</div>
+            </div>
+          </div>
+          <div class="jabatan-card">
+            <div class="jabatan-photo"><img src="img/perangkatdesa/ronnysumual.jpeg" alt="Ronny Sumual" /></div>
+            <div class="jabatan-info">
+              <div class="jabatan-name">Ronny Sumual</div>
+              <div class="jabatan-role">Anggota BPD</div>
+            </div>
+          </div>
+          <div class="jabatan-card">
+            <div class="jabatan-photo"><img src="img/perangkatdesa/placeholderprofile.png" alt="Runly Mawikere" /></div>
+            <div class="jabatan-info">
+              <div class="jabatan-name">Runly Mawikere</div>
+              <div class="jabatan-role">Anggota BPD</div>
+            </div>
+          </div>
+          <div class="jabatan-card">
+            <div class="jabatan-photo"><img src="img/perangkatdesa/roysambeka.jpeg" alt="Roy Sambeka" /></div>
+            <div class="jabatan-info">
+              <div class="jabatan-name">Roy Sambeka</div>
+              <div class="jabatan-role">Anggota BPD</div>
+            </div>
+          </div>
+          <div class="jabatan-card">
+            <div class="jabatan-photo"><img src="img/perangkatdesa/placeholderprofile.png" alt="Jemmy Walingkas" /></div>
+            <div class="jabatan-info">
+              <div class="jabatan-name">Jemmy Walingkas</div>
+              <div class="jabatan-role">Anggota BPD</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       LPM
+  ════════════════════════════════════════════ -->
+  <section class="lpm-section" id="lpm">
+    <div class="inner">
+
+      <div class="sec-head">
+        <span class="section-tag reveal">Lembaga Kemasyarakatan</span>
+        <h2 class="section-title reveal reveal-delay-1">Lembaga Pemberdayaan<br/>Masyarakat (LPM)</h2>
+        <p class="section-desc reveal reveal-delay-2">LPM bertugas membantu pemerintah desa dalam perencanaan, pelaksanaan, dan pengendalian pembangunan yang bersumber dari swadaya masyarakat.</p>
+      </div>
+
+      <div class="lpm-grid reveal reveal-delay-1">
+        <div class="lpm-featured">
+          <div class="lpm-feat-photo"><img src="img/perangkatdesa/boykewalingkas.jpeg" alt="Boyke Walingkas" /></div>
+          <div>
+            <div class="lpm-feat-role">Ketua LPM</div>
+            <div class="lpm-feat-name">Boyke Walingkas</div>
+          </div>
+        </div>
+
+        <div class="jabatan-card">
+          <div class="jabatan-photo"><img src="img/perangkatdesa/placeholderprofile.png" alt="Meini Kalangi" /></div>
+          <div class="jabatan-info">
+            <div class="jabatan-name">Meini Kalangi</div>
+            <div class="jabatan-role">Sekretaris LPM</div>
+          </div>
+        </div>
+        <div class="jabatan-card">
+          <div class="jabatan-photo"><img src="img/perangkatdesa/placeholderprofile.png" alt="Mody Sualang" /></div>
+          <div class="jabatan-info">
+            <div class="jabatan-name">Mody Sualang</div>
+            <div class="jabatan-role">Wakil Ketua LPM</div>
+          </div>
+        </div>
+        <div class="jabatan-card">
+          <div class="jabatan-photo"><img src="img/perangkatdesa/placeholderprofile.png" alt="Jendri Manopo" /></div>
+          <div class="jabatan-info">
+            <div class="jabatan-name">Jendri Manopo</div>
+            <div class="jabatan-role">Anggota LPM</div>
+          </div>
+        </div>
+        <div class="jabatan-card">
+          <div class="jabatan-photo"><img src="img/perangkatdesa/placeholderprofile.png" alt="Ade Mamangkey" /></div>
+          <div class="jabatan-info">
+            <div class="jabatan-name">Ade Mamangkey</div>
+            <div class="jabatan-role">Anggota LPM</div>
+          </div>
+        </div>
+        <div class="jabatan-card">
+          <div class="jabatan-photo"><img src="img/perangkatdesa/anekemamahani.jpeg" alt="Aneke Mamahani" /></div>
+          <div class="jabatan-info">
+            <div class="jabatan-name">Aneke Mamahani</div>
+            <div class="jabatan-role">Anggota LPM</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightboxOverlay">
+    <div class="lightbox-box" id="lightboxBox">
+      <button class="lightbox-close" id="lightboxClose">✕</button>
+      <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+      <div class="lightbox-caption">
+        <strong id="lightboxName"></strong>
+        <span id="lightboxRole"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo"><img src="img/logominsel.png" alt="Logo" style="width:46px;height:46px;object-fit:contain;"></div>
+        <h3>Desa Kinalawiran</h3>
+        <p>Portal informasi Desa Kinalawiran, Kecamatan Tompasobaru, Kabupaten Minahasa Selatan, Provinsi Sulawesi Utara.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="profil-desa.html">Profil Desa</a></li>
+          <li><a href="pemerintahan.html">Pemerintahan</a></li>
+          <li><a href="potensi-desa.html">Potensi Desa</a></li>
+          <li><a href="galeri.html">Galeri</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontak</h4>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+          <span>Desa Kinalawiran, Kec. Tompasobaru, Kab. Minahasa Selatan, Sulawesi Utara</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <span>Kantor Desa Kinalawiran</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Desa Kinalawiran. KKT 146 All Rights Reserved.</span>
+      <span>Tompasobaru · Minahasa Selatan · Sulawesi Utara</span>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll shadow
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 20); });
+
+    // Mobile toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks  = document.getElementById('navLinks');
+
+    function openMenu() {
+      navToggle.classList.add('open');
+      navLinks.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      navToggle.classList.remove('open');
+      navLinks.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    navToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      navLinks.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('click', function(e) {
+      if (navLinks.classList.contains('open') && !navbar.contains(e.target)) closeMenu();
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // Active tab on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const tabLinks = document.querySelectorAll('.tab-link');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
+      tabLinks.forEach(t => { t.classList.toggle('active', t.getAttribute('href') === '#' + current); });
+    });
+    // ── LIGHTBOX ──
+    const overlay   = document.getElementById('lightboxOverlay');
+    const lbImg     = document.getElementById('lightboxImg');
+    const lbName    = document.getElementById('lightboxName');
+    const lbRole    = document.getElementById('lightboxRole');
+    const lbClose   = document.getElementById('lightboxClose');
+
+    function openLightbox(src, alt, name, role) {
+      lbImg.src = src;
+      lbImg.alt = alt;
+      lbName.textContent = name || alt;
+      lbRole.textContent = role || '';
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Attach click to all photo containers
+    const photoSelectors = [
+      { wrap: '.ht-avatar',       nameEl: '.ht-name',         roleEl: '.ht-role' },
+      { wrap: '.jabatan-photo',   nameEl: '.jabatan-name',    roleEl: '.jabatan-role' },
+      { wrap: '.jaga-photo',      nameEl: '.jaga-name',       roleEl: '.jaga-label' },
+      { wrap: '.bpd-feat-photo',  nameEl: '.bpd-featured-name', roleEl: '.bpd-featured-role' },
+      { wrap: '.lpm-feat-photo',  nameEl: '.lpm-feat-name',   roleEl: '.lpm-feat-role' },
+    ];
+
+    photoSelectors.forEach(({ wrap, nameEl, roleEl }) => {
+      document.querySelectorAll(wrap).forEach(container => {
+        const img = container.querySelector('img');
+        if (!img) return;
+        container.style.cursor = 'zoom-in';
+        container.addEventListener('click', () => {
+          // Walk up to parent card to find name/role
+          const card = container.closest('.ht-card, .jabatan-card, .jaga-card, .bpd-featured, .lpm-featured');
+          const name = card ? (card.querySelector(nameEl)?.textContent || img.alt) : img.alt;
+          const role = card ? (card.querySelector(roleEl)?.textContent || '') : '';
+          openLightbox(img.src, img.alt, name, role);
+        });
+      });
+    });
+
+    lbClose.addEventListener('click', closeLightbox);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+</body>
+</html>

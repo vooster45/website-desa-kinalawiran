@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galeri – Desa Kinalawiran</title>
+  <link rel="icon" type="image/png" href="img/logominsel.png" />
+  <link rel="shortcut icon" type="image/png" href="img/logominsel.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #ab0c0b; --red-dark: #870908; --red-light: #d41312;
+      --white: #ffffff; --off-white: #faf9f8;
+      --gray-50: #f7f6f5; --gray-100: #ede9e6; --gray-300: #b8afa9;
+      --gray-500: #7a716b; --gray-700: #3d3530; --gray-900: #1a1410;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --shadow-sm: 0 1px 4px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 20px rgba(0,0,0,.09);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,.13);
+      --radius: 16px; --transition: .35s cubic-bezier(.4,0,.2,1);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--white); color: var(--gray-700); line-height: 1.65; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 68px;
+      background: rgba(255,255,255,.92); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--gray-100);
+      transition: box-shadow var(--transition); overflow: visible;
+    }
+    .navbar.scrolled { box-shadow: var(--shadow-md); }
+    .nav-brand { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+    .nav-logo { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+    .nav-logo img { width: 36px; height: 36px; object-fit: contain; }
+    .nav-brand-text { line-height: 1.15; min-width: 0; overflow: hidden; }
+    .nav-brand-text strong { display: block; font-family: var(--font-display); font-size: .95rem; color: var(--gray-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .nav-brand-text span { display: block; font-size: .65rem; color: var(--gray-500); font-weight: 500; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; flex-shrink: 0; }
+    .nav-links a { font-size: .875rem; font-weight: 500; color: var(--gray-700); padding: 7px 14px; border-radius: 8px; transition: background var(--transition), color var(--transition); }
+    .nav-links a:hover, .nav-links a.active { background: var(--gray-50); color: var(--red); }
+    .nav-links .nav-cta a { background: var(--red); color: #fff; padding: 7px 18px; }
+    .nav-links .nav-cta a:hover { background: var(--red-dark); color: #fff; }
+    .nav-toggle {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      cursor: pointer; padding: 8px 6px; border: none; background: none;
+      flex-shrink: 0; margin-left: 8px; -webkit-tap-highlight-color: transparent; z-index: 1000;
+    }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--gray-700); border-radius: 2px; transition: transform var(--transition), opacity var(--transition); pointer-events: none; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      position: relative; min-height: 48vh; display: flex; align-items: flex-end;
+      overflow: hidden; background: var(--gray-900);
+      padding-top: 68px; padding-bottom: 60px;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(26,20,16,.88) 0%, rgba(171,12,11,.72) 100%),
+        url('img/banner1.jpeg') center/cover no-repeat;
+      animation: heroZoom 20s ease-in-out infinite alternate;
+    }
+    @k
+    @keyframes heroZoom { from{transform:scale(1)} to{transform:scale(1.06)} }
+    .page-hero-deco { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 400px; height: 400px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.05); pointer-events: none; }
+    .page-hero-content { position: relative; z-index: 2; padding: 0 5%; max-width: 900px; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; }
+    .breadcrumb a { font-size: .78rem; color: rgba(255,255,255,.5); font-weight: 500; transition: color var(--transition); }
+    .breadcrumb a:hover { color: #fff; }
+    .breadcrumb span { color: rgba(255,255,255,.25); font-size: .78rem; }
+    .breadcrumb strong { font-size: .78rem; color: rgba(255,255,255,.8); font-weight: 500; }
+    .page-hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); backdrop-filter: blur(8px);
+      color: #fff; font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      padding: 6px 16px; border-radius: 100px; margin-bottom: 18px; animation: fadeUp .7s .2s both;
+    }
+    .page-hero-badge::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--red-light); box-shadow:0 0 0 3px rgba(212,19,18,.3); animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{box-shadow:0 0 0 3px rgba(212,19,18,.3)} 50%{box-shadow:0 0 0 6px rgba(212,19,18,.1)} }
+    .page-hero h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 800; color: #fff; line-height: 1.08; letter-spacing: -.02em; margin-bottom: 12px; animation: fadeUp .7s .3s both; }
+    .page-hero h1 em { font-style: italic; color: rgba(255,255,255,.5); }
+    .page-hero p { font-size: 1rem; color: rgba(255,255,255,.62); font-weight: 300; max-width: 540px; animation: fadeUp .7s .45s both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── FILTER BAR ── */
+    .filter-bar { position: sticky; top: 68px; z-index: 98; background: var(--white); border-bottom: 1px solid var(--gray-100); box-shadow: var(--shadow-sm); }
+    .filter-inner { max-width: 1280px; margin: 0 auto; padding: 0 5%; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .filter-tabs { display: flex; overflow-x: auto; }
+    .filter-tabs::-webkit-scrollbar { display: none; }
+    .filter-btn { flex-shrink: 0; font-size: .84rem; font-weight: 600; color: var(--gray-500); padding: 16px 20px; border-bottom: 2.5px solid transparent; background: none; border-top: none; border-left: none; border-right: none; cursor: pointer; white-space: nowrap; transition: all var(--transition); font-family: var(--font-body); }
+    .filter-btn:hover { color: var(--red); }
+    .filter-btn.active { color: var(--red); border-bottom-color: var(--red); }
+
+    /* ── GALLERY MAIN ── */
+    .gallery-main { padding: 72px 5%; }
+    .gallery-inner { max-width: 1280px; margin: 0 auto; }
+
+    /* ── CATEGORY BLOCK ── */
+    .cat-block { margin-bottom: 80px; }
+    .cat-block:last-child { margin-bottom: 0; }
+    .cat-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+    .cat-tag { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+    .cat-title { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; color: var(--gray-900); line-height: 1.1; }
+    .cat-count { font-size: .8rem; color: var(--gray-500); font-weight: 500; flex-shrink: 0; }
+
+    /* ── ACTIVITIES GRID ── */
+    .activities-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    /* ── ACTIVITY CARD ── */
+    .activity-card {
+      border-radius: 18px; overflow: hidden; background: var(--white);
+      box-shadow: var(--shadow-md); transition: box-shadow var(--transition), transform var(--transition);
+      position: relative;
+    }
+    .activity-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+
+    /* ── SLIDESHOW ── */
+    .slideshow { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; user-select: none; touch-action: pan-y; }
+    .slides-track { display: flex; height: 100%; transition: transform .5s cubic-bezier(.4,0,.2,1); will-change: transform; }
+    .slide { flex-shrink: 0; width: 100%; height: 100%; }
+    .slide img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; -webkit-user-drag: none; }
+
+    /* Count badge */
+    .slide-count {
+      position: absolute; top: 12px; right: 12px; z-index: 3;
+      background: rgba(0,0,0,.5); backdrop-filter: blur(6px);
+      color: #fff; font-size: .68rem; font-weight: 700; letter-spacing: .04em;
+      padding: 4px 10px; border-radius: 100px;
+    }
+
+    /* Arrows */
+    .slide-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 4;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,.88); backdrop-filter: blur(6px);
+      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity var(--transition), background var(--transition);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .slide-arrow svg { width: 18px; height: 18px; fill: var(--gray-900); pointer-events: none; }
+    .slide-arrow:hover { background: #fff; }
+    .slide-arrow.prev { left: 10px; }
+    .slide-arrow.next { right: 10px; }
+    .activity-card:hover .slide-arrow { opacity: 1; }
+    /* Always show on touch */
+    @media (hover: none) { .slide-arrow { opacity: .8; } }
+
+    /* Dots */
+    .slide-dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; z-index: 3; }
+    .slide-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.45); border: none; cursor: pointer; padding: 0; transition: background var(--transition), transform var(--transition); -webkit-tap-highlight-color: transparent; }
+    .slide-dot.active { background: #fff; transform: scale(1.35); }
+
+    /* Progress bar */
+    .slide-progress { position: absolute; bottom: 0; left: 0; z-index: 3; height: 3px; background: var(--red); width: 0%; }
+    .slide-progress.running { animation: progressBar var(--progress-dur, 4s) linear forwards; }
+    @keyframes progressBar { from{width:0%} to{width:100%} }
+
+    /* Card info */
+    .activity-info { padding: 16px 18px 18px; background: var(--white); }
+    .activity-cat-chip { display: inline-block; font-size: .6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; margin-bottom: 8px; }
+    .chip-lingkungan { background: rgba(34,139,34,.1); color: #1a7a1a; }
+    .chip-pertanian  { background: rgba(180,90,10,.1); color: #a0540a; }
+    .chip-kegiatan   { background: rgba(171,12,11,.1); color: var(--red); }
+    .activity-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; line-height: 1.25; }
+    .activity-desc { font-size: .78rem; color: var(--gray-500); line-height: 1.6; }
+    .activity-photo-count { margin-top: 10px; font-size: .72rem; color: var(--gray-300); display: flex; align-items: center; gap: 5px; }
+    .activity-photo-count svg { width: 13px; height: 13px; fill: var(--gray-300); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--gray-900); color: rgba(255,255,255,.6); padding: 72px 5% 36px; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 48px; max-width: 1200px; margin: 0 auto 56px; }
+    .footer-brand .nav-logo { width: 46px; height: 46px; margin-bottom: 16px; border-radius: 12px; }
+    .footer-brand h3 { font-family: var(--font-display); font-size: 1.1rem; color: #fff; margin-bottom: 10px; }
+    .footer-brand p { font-size: .84rem; line-height: 1.75; max-width: 280px; }
+    .footer-col h4 { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 18px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: .875rem; color: rgba(255,255,255,.55); transition: color var(--transition); }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-contact-item { display: flex; gap: 10px; align-items: flex-start; font-size: .84rem; margin-bottom: 12px; }
+    .footer-contact-item svg { width: 16px; height: 16px; fill: var(--red-light); flex-shrink: 0; margin-top: 3px; }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,.08); padding-top: 28px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; font-size: .8rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        position: fixed; top: 68px; left: 0; right: 0;
+        background: var(--white); border-top: 2px solid var(--red);
+        flex-direction: column; align-items: stretch;
+        gap: 0; padding: 4px 0 16px;
+        transform: translateY(-8px); opacity: 0; pointer-events: none;
+        transition: transform var(--transition), opacity var(--transition);
+        box-shadow: 0 8px 32px rgba(0,0,0,.12); z-index: 998;
+        max-height: calc(100vh - 68px); overflow-y: auto;
+      }
+      .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+      .nav-links li { margin: 0; }
+      .nav-links li + li { border-top: 1px solid var(--gray-50); }
+      .nav-links a { display: block; padding: 15px 6%; border-radius: 0; font-size: .95rem; color: var(--gray-700); font-weight: 500; }
+      .nav-links a:hover, .nav-links a.active { background: var(--gray-50); color: var(--red); }
+      .nav-links .nav-cta { padding: 12px 6% 4px; border-top: none !important; }
+      .nav-links .nav-cta a { background: var(--red); color: #fff !important; border-radius: 10px; text-align: center; padding: 13px 6%; font-weight: 600; }
+      .nav-links .nav-cta a:hover { background: var(--red-dark); }
+      .activities-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-brand { grid-column: span 2; }
+    }
+    @media (max-width: 560px) {
+      .activities-grid { grid-template-columns: 1fr; }
+      .gallery-main { padding: 48px 4%; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: span 1; }
+    }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .07s; }
+    .reveal-delay-2 { transition-delay: .14s; }
+    .reveal-delay-3 { transition-delay: .21s; }
+    .reveal-delay-4 { transition-delay: .28s; }
+    .reveal-delay-5 { transition-delay: .35s; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox-overlay {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,.93); backdrop-filter: blur(10px);
+      align-items: center; justify-content: center;
+    }
+    .lightbox-overlay.active { display: flex; animation: lbFadeIn .22s ease; }
+    @keyframes lbFadeIn { from{opacity:0} to{opacity:1} }
+    .lb-img-wrap {
+      position: relative; display: flex; align-items: center; justify-content: center;
+      max-width: 92vw; max-height: 88vh;
+    }
+    .lb-img-wrap img {
+      max-width: 92vw; max-height: 88vh; border-radius: 12px;
+      box-shadow: 0 28px 90px rgba(0,0,0,.7); object-fit: contain;
+      animation: lbZoomIn .28s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes lbZoomIn { from{transform:scale(.86);opacity:0} to{transform:scale(1);opacity:1} }
+    .lb-close {
+      position: fixed; top: 18px; right: 20px; z-index: 10001;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,.14); border: 1.5px solid rgba(255,255,255,.22);
+      color: #fff; font-size: 1.35rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .25s, transform .25s;
+    }
+    .lb-close:hover { background: rgba(255,255,255,.26); transform: scale(1.1); }
+    .lb-nav {
+      position: fixed; top: 50%; transform: translateY(-50%); z-index: 10001;
+      width: 46px; height: 46px; border-radius: 50%;
+      background: rgba(255,255,255,.14); border: 1.5px solid rgba(255,255,255,.22);
+      color: #fff; font-size: 1.6rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .25s; user-select: none;
+    }
+    .lb-nav:hover { background: rgba(255,255,255,.26); }
+    .lb-nav.prev { left: 14px; }
+    .lb-nav.next { right: 14px; }
+    .lb-caption {
+      position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,.58); backdrop-filter: blur(8px);
+      color: rgba(255,255,255,.88); font-size: .78rem; font-weight: 600;
+      padding: 6px 20px; border-radius: 100px; letter-spacing: .04em;
+      white-space: nowrap; z-index: 10001; max-width: 80vw;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    .lb-counter {
+      position: fixed; top: 20px; left: 20px; z-index: 10001;
+      background: rgba(0,0,0,.5); backdrop-filter: blur(6px);
+      color: rgba(255,255,255,.8); font-size: .72rem; font-weight: 700;
+      padding: 5px 12px; border-radius: 100px; letter-spacing: .04em;
+    }
+    /* Zoom cursor on slideshow area */
+    .slideshow { cursor: zoom-in; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo"><img src="img/logominsel.png" alt="Logo"></div>
+    <div class="nav-brand-text">
+      <strong>Desa Kinalawiran</strong>
+      <span>Tompaso Baru · Minahasa Selatan</span>
+    </div>
+  </a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Beranda</a></li>
+    <li><a href="profil-desa.html">Profil Desa</a></li>
+    <li><a href="pemerintahan.html">Pemerintahan</a></li>
+    <li><a href="potensi-desa.html">Potensi Desa</a></li>
+    <li class="nav-cta"><a href="galeri.html" class="active">Galeri</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-deco"></div>
+  <div class="page-hero-content">
+    <div class="breadcrumb"><a href="index.html">Beranda</a><span>›</span><strong>Galeri</strong></div>
+    <h1>Galeri<br/><em>Desa Kinalawiran</em></h1>
+    <p>Dokumentasi foto berbagai kegiatan dan kondisi lingkungan Desa Kinalawiran.</p>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-cat="semua">Semua</button>
+      <button class="filter-btn" data-cat="lingkungan">Lingkungan</button>
+      <button class="filter-btn" data-cat="kegiatan">Kegiatan</button>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery-main">
+<div class="gallery-inner">
+
+<!-- ════════════════ LINGKUNGAN ════════════════ -->
+<div class="cat-block" data-cat="lingkungan">
+  <div class="cat-header reveal">
+    <div><div class="cat-tag">Kategori</div><div class="cat-title">Lingkungan Desa</div></div>
+    <div class="cat-count">5 kegiatan</div>
+  </div>
+  <div class="activities-grid">
+
+    <div class="activity-card reveal reveal-delay-1" data-cat="lingkungan">
+      <div class="slideshow" data-interval="4000">
+        <div class="slides-track">
+          <div class="slide"><img src="img/jagasatu1.jpeg" alt="Jaga 1 - Foto 1" loading="lazy"></div>
+          <div class="slide"><img src="img/jagasatu2.jpeg" alt="Jaga 1 - Foto 2" loading="lazy"></div>
+          <div class="slide"><img src="img/jagasatu3.jpeg" alt="Jaga 1 - Foto 3" loading="lazy"></div>
+          <div class="slide"><img src="img/jagasatu4.jpeg" alt="Jaga 1 - Foto 4" loading="lazy"></div>
+          <div class="slide"><img src="img/jagasatu5.jpeg" alt="Jaga 1 - Foto 5" loading="lazy"></div>
+          <div class="slide"><img src="img/jagasatu6.jpeg" alt="Jaga 1 - Foto 6" loading="lazy"></div>
+          <div class="slide"><img src="img/jagasatu7.jpeg" alt="Jaga 1 - Foto 7" loading="lazy"></div>
+        </div>
+        <span class="slide-count"></span>
+        <button class="slide-arrow prev"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <button class="slide-arrow next"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+        <div class="slide-dots"></div>
+        <div class="slide-progress"></div>
+      </div>
+      <div class="activity-info">
+        <span class="activity-cat-chip chip-lingkungan">Lingkungan</span>
+        <div class="activity-title">Jaga 1</div>
+        <div class="activity-desc">Dokumentasi lingkungan dan kondisi wilayah Jaga 1 Desa Kinalawiran.</div>
+        <div class="activity-photo-count"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5z"/></svg> 7 foto</div>
+      </div>
+    </div>
+
+    <div class="activity-card reveal reveal-delay-2" data-cat="lingkungan">
+      <div class="slideshow" data-interval="4200">
+        <div class="slides-track">
+          <div class="slide"><img src="img/jagadua1.jpeg" alt="Jaga 2 - Foto 1" loading="lazy"></div>
+          <div class="slide"><img src="img/jagadua2.jpeg" alt="Jaga 2 - Foto 2" loading="lazy"></div>
+          <div class="slide"><img src="img/jagadua3.jpeg" alt="Jaga 2 - Foto 3" loading="lazy"></div>
+          <div class="slide"><img src="img/jagadua4.jpeg" alt="Jaga 2 - Foto 4" loading="lazy"></div>
+        </div>
+        <span class="slide-count"></span>
+        <button class="slide-arrow prev"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <button class="slide-arrow next"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+        <div class="slide-dots"></div>
+        <div class="slide-progress"></div>
+      </div>
+      <div class="activity-info">
+        <span class="activity-cat-chip chip-lingkungan">Lingkungan</span>
+        <div class="activity-title">Jaga 2</div>
+        <div class="activity-desc">Dokumentasi lingkungan dan kondisi wilayah Jaga 2 Desa Kinalawiran.</div>
+        <div class="activity-photo-count"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5z"/></svg> 4 foto</div>
+      </div>
+    </div>
+
+    <div class="activity-card reveal reveal-delay-3" data-cat="lingkungan">
+      <div class="slideshow" data-interval="3800">
+        <div class="slides-track">
+          <div class="slide"><img src="img/jagatiga1.jpeg" alt="Jaga 3 - Foto 1" loading="lazy"></div>
+          <div class="slide"><img src="img/jagatiga2.jpeg" alt="Jaga 3 - Foto 2" loading="lazy"></div>
+          <div class="slide"><img src="img/jagatiga3.jpeg" alt="Jaga 3 - Foto 3" loading="lazy"></div>
+          <div class="slide"><img src="img/jagatiga4.jpeg" alt="Jaga 3 - Foto 4" loading="lazy"></div>
+          <div class="slide"><img src="img/jagatiga5.jpeg" alt="Jaga 3 - Foto 5" loading="lazy"></div>
+        </div>
+        <span class="slide-count"></span>
+        <button class="slide-arrow prev"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <button class="slide-arrow next"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+        <div class="slide-dots"></div>
+        <div class="slide-progress"></div>
+      </div>
+      <div class="activity-info">
+        <span class="activity-cat-chip chip-lingkungan">Lingkungan</span>
+        <div class="activity-title">Jaga 3</div>
+        <div class="activity-desc">Dokumentasi lingkungan dan kondisi wilayah Jaga 3 Desa Kinalawiran.</div>
+        <div class="activity-photo-count"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5z"/></svg> 5 foto</div>
+      </div>
+    </div>
+
+    <div class="activity-card reveal reveal-delay-4" data-cat="lingkungan">
+      <div class="slideshow" data-interval="4500">
+        <div class="slides-track">
+          <div class="slide"><img src="img/jagaempat1.jpeg" alt="Jaga 4 - Foto 1" loading="lazy"></div>
+          <div class="slide"><img src="img/jagaempat2.jpeg" alt="Jaga 4 - Foto 2" loading="lazy"></div>
+          <div class="slide"><img src="img/jagaempat3.jpeg" alt="Jaga 4 - Foto 3" loading="lazy"></div>
+          <div class="slide"><img src="img/jagaempat4.jpeg" alt="Jaga 4 - Foto 4" loading="lazy"></div>
+        </div>
+        <span class="slide-count"></span>
+        <button class="slide-arrow prev"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <button class="slide-arrow next"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+        <div class="slide-dots"></div>
+        <div class="slide-progress"></div>
+      </div>
+      <div class="activity-info">
+        <span class="activity-cat-chip chip-lingkungan">Lingkungan</span>
+        <div class="activity-title">Jaga 4</div>
+        <div class="activity-desc">Dokumentasi lingkungan dan kondisi wilayah Jaga 4 Desa Kinalawiran.</div>
+        <div class="activity-photo-count"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5z"/></svg> 4 foto</div>
+      </div>
+    </div>
+
+    <div class="activity-card reveal reveal-delay-5" data-cat="lingkungan">
+      <div class="slideshow" data-interval="4100">
+        <div class="slides-track">
+          <div class="slide"><img src="img/jagalima1.jpeg" alt="Jaga 5 - Foto 1" loading="lazy"></div>
+          <div class="slide"><img src="img/jagalima2.jpeg" alt="Jaga 5 - Foto 2" loading="lazy"></div>
+          <div class="slide"><img src="img/jagalima3.jpeg" alt="Jaga 5 - Foto 3" loading="lazy"></div>
+          <div class="slide"><img src="img/jagalima4.jpeg" alt="Jaga 5 - Foto 4" loading="lazy"></div>
+          <div class="slide"><img src="img/jagalima5.jpeg" alt="Jaga 5 - Foto 5" loading="lazy"></div>
+          <div class="slide"><img src="img/jagalima6.jpeg" alt="Jaga 5 - Foto 6" loading="lazy"></div>
+        </div>
+        <span class="slide-count"></span>
+        <button class="slide-arrow prev"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <button class="slide-arrow next"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+        <div class="slide-dots"></div>
+        <div class="slide-progress"></div>
+      </div>
+      <div class="activity-info">
+        <span class="activity-cat-chip chip-lingkungan">Lingkungan</span>
+        <div class="activity-title">Jaga 5</div>
+        <div class="activity-desc">Dokumentasi lingkungan dan kondisi wilayah Jaga 5 Desa Kinalawiran.</div>
+        <div class="activity-photo-count"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5z"/></svg> 6 foto</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════ KEGIATAN ════════════════ -->
+<div class="cat-block" data-cat="kegiatan">
+  <div class="cat-header reveal">
+    <div><div class="cat-tag">Kategori</div><div class="cat-title">Kegiatan Desa</div></div>
+    <div class="cat-count">5 kegiatan</div>
+  </div>
+  <div class="activities-grid">
+
+    <!-- KERJA BAKTI -->
+    <div class="activity-card reveal reveal-delay-1" data-cat="kegiatan">
+      <div class="slideshow" data-interval="4000">
+        <div class="slides-track">
+          <div class="slide"><img src="img/kerjabakti/kerjabakti1.jpg" alt="Kerja Bakti 1" loading="lazy"></div>
+          <div class="slide"><img src="img/kerjabakti/kerjabakti2.jpg" alt="Kerja Bakti 2" loading="lazy"></div>
+          <div class="slide"><img src="img/kerjabakti/kerjabakti3.jpg" alt="Kerja Bakti 3" loading="lazy"></div>
+          <div class="slide"><img src="img/kerjabakti/kerjabakti4.jpg" alt="Kerja Bakti 4" loading="lazy"></div>
+          <div class="slide"><img src="img/kerjabakti/kerjabakti5.jpg" alt="Kerja Bakti 5" loading="lazy"></div>
+          <div class="slide"><img src="img/kerjabakti/kerjabakti6.jpg" alt="Kerja Bakti 6" loading="lazy"></div>
+          <div class="slide"><img src="img/kerjabakti/kerjabakti7.jpg" alt="Kerja Bakti 7" loading="lazy"></div>
+        </div>
+        <span class="slide-count"></span>
+        <button class="slide-arrow prev"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <button class="slide-arrow next"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+        <div class="slide-dots"></div>
+        <div class="slide-progress"></div>
+      </div>
+      <div class="activity-info">
+        <span class="activity-cat-chip chip-kegiatan">Kegiatan</span>
+        <div class="activity-title">Kerja Bakti Masyarakat &amp; Perangkat Desa</div>
+        <div class="activity-desc">6 Maret 2026 · Jalan Masuk Desa Kinalawiran, Kegiatan kerja bakti bersama antara masyarakat dan perangkat desa dalam menjaga kebersihan dan keindahan lingkungan desa.</div>
+        <div class="activity-photo-count"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5z"/></svg> 7 foto</div>
+      </div>
+    </div>
+
+    <!-- HOMESCHOOLING -->
+    <div class="activity-card reveal reveal-delay-2" data-cat="kegiatan">
+      <div class="slideshow" data-interval="4300">
+        <div class="slides-track">
+          <div class="slide"><img src="img/homeschooling/homeschooling1.jpg" alt="Homeschooling 1" loading="lazy"></div>
+          <div class="slide"><img src="img/homeschooling/homeschooling2.jpg" alt="Homeschooling 2" loading="lazy"></div>
+          <div class="slide"><img src="img/homeschooling/homeschooling3.jpg" alt="Homeschooling 3" loading="lazy"></div>
+          <div class="slide"><img src="img/homeschooling/homeschooling4.jpg" alt="Homeschooling 4" loading="lazy"></div>
+          <div class="slide"><img src="img/homeschooling/homeschooling5.jpg" alt="Homeschooling 5" loading="lazy"></div>
+          <div class="slide"><img src="img/homeschooling/homeschooling6.jpg" alt="Homeschooling 6" loading="lazy"></div>
+          <div class="slide"><img src="img/homeschooling/homeschooling7.jpg" alt="Homeschooling 7" loading="lazy"></div>
+        </div>
+        <span class="slide-count"></span>
+        <button class="slide-arrow prev"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <button class="slide-arrow next"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+        <div class="slide-dots"></div>
+        <div class="slide-progress"></div>
+      </div>
+      <div class="activity-info">
+        <span class="activity-cat-chip chip-kegiatan">Kegiatan</span>
+        <div class="activity-title">Program Homeschooling KKT 146</div>
+        <div class="activity-desc">11–13 Maret 2026 · Posko KKT 146 UNSRAT Kinalawiran, Program bimbingan belajar dan pendidikan non-formal bagi anak-anak desa yang diselenggarakan oleh mahasiswa KKT 146 UNSRAT.</div>
+        <div class="activity-photo-count"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5z"/></svg> 7 foto</div>
+      </div>
+    </div>
+
+    <!-- SOSIALISASI SD -->
+    <div class="activity-card reveal reveal-delay-3" data-cat="kegiatan">
+      <div class="slideshow" data-interval="3900">
+        <div class="slides-track">
+          <div class="slide"><img src="img/sosialisasi/sosialisasi1.jpg" alt="Sosialisasi 1" loading="lazy"></div>
+          <div class="slide"><img src="img/sosialisasi/sosialisasi2.jpg" alt="Sosialisasi 2" loading="lazy"></div>
+          <div class="slide"><img src="img/sosialisasi/sosialisasi3.jpg" alt="Sosialisasi 3" loading="lazy"></div>
+          <div class="slide"><img src="img/sosialisasi/sosialisasi4.jpg" alt="Sosialisasi 4" loading="lazy"></div>
+          <div class="slide"><img src="img/sosialisasi/sosialisasi5.jpg" alt="Sosialisasi 5" loading="lazy"></div>
+          <div class="slide"><img src="img/sosialisasi/sosialisasi6.jpg" alt="Sosialisasi 6" loading="lazy"></div>
+          <div class="slide"><img src="img/sosialisasi/sosialisasi7.jpg" alt="Sosialisasi 7" loading="lazy"></div>
+          <div class="slide"><img src="img/sosialisasi/sosialisasi8.jpg" alt="Sosialisasi 8" loading="lazy"></div>
+        </div>
+        <span class="slide-count"></span>
+        <button class="slide-arrow prev"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <button class="slide-arrow next"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+        <div class="slide-dots"></div>
+        <div class="slide-progress"></div>
+      </div>
+      <div class="activity-info">
+        <span class="activity-cat-chip chip-kegiatan">Kegiatan</span>
+        <div class="activity-title">Sosialisasi "Pentingnya Menjaga Kebersihan"</div>
+        <div class="activity-desc">13 Maret 2026 · SD GMIM Kinalawiran, Penyuluhan kepada siswa SD tentang pentingnya menjaga kebersihan diri dan lingkungan sebagai bekal hidup sehat sejak dini.</div>
+        <div class="activity-photo-count"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5z"/></svg> 8 foto</div>
+      </div>
+    </div>
+
+    <!-- BIBIT -->
+    <div class="activity-card reveal reveal-delay-4" data-cat="kegiatan">
+      <div class="slideshow" data-interval="4600">
+        <div class="slides-track">
+          <div class="slide"><img src="img/bibit/bibit1.jpg" alt="Bibit 1" loading="lazy"></div>
+          <div class="slide"><img src="img/bibit/bibit2.jpg" alt="Bibit 2" loading="lazy"></div>
+          <div class="slide"><img src="img/bibit/bibit3.jpg" alt="Bibit 3" loading="lazy"></div>
+          <div class="slide"><img src="img/bibit/bibit4.jpg" alt="Bibit 4" loading="lazy"></div>
+          <div class="slide"><img src="img/bibit/bibit5.jpg" alt="Bibit 5" loading="lazy"></div>
+          <div class="slide"><img src="img/bibit/bibit6.jpg" alt="Bibit 6" loading="lazy"></div>
+          <div class="slide"><img src="img/bibit/bibit7.jpg" alt="Bibit 7" loading="lazy"></div>
+        </div>
+        <span class="slide-count"></span>
+        <button class="slide-arrow prev"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <button class="slide-arrow next"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+        <div class="slide-dots"></div>
+        <div class="slide-progress"></div>
+      </div>
+      <div class="activity-info">
+        <span class="activity-cat-chip chip-kegiatan">Kegiatan</span>
+        <div class="activity-title">Penyediaan &amp; Penanaman Bibit</div>
+        <div class="activity-desc">14 Maret 2026 · Desa Kinalawiran, Penyediaan bibit tanaman secara gratis bagi masyarakat sekaligus kegiatan penanaman bersama sebagai wujud kepedulian terhadap penghijauan desa.</div>
+        <div class="activity-photo-count"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5z"/></svg> 7 foto</div>
+      </div>
+    </div>
+
+    <!-- SEPAK BOLA GEREJA -->
+    <div class="activity-card reveal reveal-delay-5" data-cat="kegiatan">
+      <div class="slideshow" data-interval="4200">
+        <div class="slides-track">
+          <div class="slide"><img src="img/sepakbola/sepakbola1.jpg" alt="Sepak Bola 1" loading="lazy"></div>
+          <div class="slide"><img src="img/sepakbola/sepakbola2.jpg" alt="Sepak Bola 2" loading="lazy"></div>
+          <div class="slide"><img src="img/sepakbola/sepakbola3.jpg" alt="Sepak Bola 3" loading="lazy"></div>
+          <div class="slide"><img src="img/sepakbola/sepakbola4.jpg" alt="Sepak Bola 4" loading="lazy"></div>
+          <div class="slide"><img src="img/sepakbola/sepakbola5.jpg" alt="Sepak Bola 5" loading="lazy"></div>
+          <div class="slide"><img src="img/sepakbola/sepakbola6.jpg" alt="Sepak Bola 6" loading="lazy"></div>
+          <div class="slide"><img src="img/sepakbola/sepakbola7.jpg" alt="Sepak Bola 7" loading="lazy"></div>
+        </div>
+        <span class="slide-count"></span>
+        <button class="slide-arrow prev"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <button class="slide-arrow next"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+        <div class="slide-dots"></div>
+        <div class="slide-progress"></div>
+      </div>
+      <div class="activity-info">
+        <span class="activity-cat-chip chip-kegiatan">Kegiatan</span>
+        <div class="activity-title">Lomba Sepak Bola Gereja</div>
+        <div class="activity-desc">22 Maret 2026 · Lapangan Desa Kinalawiran, Turnamen sepak bola gereja yang mempertemukan tim-tim dari berbagai jemaat, mempererat semangat persaudaraan dan sportivitas warga desa.</div>
+        <div class="activity-photo-count"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5z"/></svg> 7 foto</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /gallery-inner -->
+</div><!-- /gallery-main -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo"><img src="img/logominsel.png" alt="Logo" style="width:46px;height:46px;object-fit:contain;"></div>
+      <h3>Desa Kinalawiran</h3>
+      <p>Portal informasi Desa Kinalawiran, Kecamatan Tompaso Baru, Kabupaten Minahasa Selatan, Provinsi Sulawesi Utara.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigasi</h4>
+      <ul>
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="profil-desa.html">Profil Desa</a></li>
+        <li><a href="pemerintahan.html">Pemerintahan</a></li>
+        <li><a href="potensi-desa.html">Potensi Desa</a></li>
+        <li><a href="galeri.html">Galeri</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontak</h4>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+        <span>Desa Kinalawiran, Kec. Tompaso Baru, Kab. Minahasa Selatan, Sulawesi Utara</span>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        <span>Kantor Desa Kinalawiran</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Desa Kinalawiran. KKT 146 All Rights Reserved.</span>
+    <span>Tompaso Baru · Minahasa Selatan · Sulawesi Utara</span>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightboxOverlay" role="dialog" aria-modal="true">
+  <div class="lb-img-wrap">
+    <img src="" alt="" id="lbImg" />
+  </div>
+  <button class="lb-close" id="lbClose" aria-label="Tutup">&#x2715;</button>
+  <button class="lb-nav prev" id="lbPrev" aria-label="Sebelumnya">&#8249;</button>
+  <button class="lb-nav next" id="lbNext" aria-label="Berikutnya">&#8250;</button>
+  <div class="lb-caption" id="lbCaption"></div>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<script>
+/* ── NAVBAR ── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 20); });
+const navToggle = document.getElementById('navToggle');
+const navLinks  = document.getElementById('navLinks');
+function openMenu() { navToggle.classList.add('open'); navLinks.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeMenu() { navToggle.classList.remove('open'); navLinks.classList.remove('open'); document.body.style.overflow = ''; }
+navToggle.addEventListener('click', e => { e.stopPropagation(); navLinks.classList.contains('open') ? closeMenu() : openMenu(); });
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+document.addEventListener('click', e => { if (navLinks.classList.contains('open') && !navbar.contains(e.target)) closeMenu(); });
+
+/* ── FILTER ── */
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    document.querySelectorAll('.cat-block').forEach(block => {
+      block.style.display = (cat === 'semua' || block.dataset.cat === cat) ? '' : 'none';
+    });
+  });
+});
+
+/* ── SLIDESHOW ENGINE ── */
+document.querySelectorAll('.slideshow').forEach(ss => {
+  const track    = ss.querySelector('.slides-track');
+  const slides   = ss.querySelectorAll('.slide');
+  const countEl  = ss.querySelector('.slide-count');
+  const dotsWrap = ss.querySelector('.slide-dots');
+  const progress = ss.querySelector('.slide-progress');
+  const prevBtn  = ss.querySelector('.slide-arrow.prev');
+  const nextBtn  = ss.querySelector('.slide-arrow.next');
+  const total    = slides.length;
+  const dur      = parseInt(ss.dataset.interval) || 4000;
+  let cur = 0, timer = null, txStart = 0, txDelta = 0, dragging = false;
+
+  /* Build dots */
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'slide-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Foto ' + (i+1));
+    d.addEventListener('click', e => { e.stopPropagation(); goTo(i); startAuto(); });
+    dotsWrap.appendChild(d);
+  });
+
+  function ui() {
+    track.style.transform = `translateX(-${cur * 100}%)`;
+    countEl.textContent = (cur+1) + ' / ' + total;
+    dotsWrap.querySelectorAll('.slide-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+  }
+
+  function goTo(n) {
+    cur = ((n % total) + total) % total;
+    track.style.transition = '';
+    ui();
+    runProgress();
+  }
+
+  function runProgress() {
+    progress.style.animation = 'none';
+    progress.getBoundingClientRect(); // reflow
+    progress.style.setProperty('--progress-dur', dur + 'ms');
+    progress.style.animation = '';
+    progress.classList.remove('running');
+    void progress.offsetWidth;
+    progress.classList.add('running');
+  }
+
+  function startAuto() {
+    clearInterval(timer);
+    timer = setInterval(() => goTo(cur + 1), dur);
+    runProgress();
+  }
+
+  function stopAuto() {
+    clearInterval(timer);
+    progress.classList.remove('running');
+    progress.style.animation = 'none';
+  }
+
+  prevBtn.addEventListener('click', e => { e.stopPropagation(); goTo(cur - 1); startAuto(); });
+  nextBtn.addEventListener('click', e => { e.stopPropagation(); goTo(cur + 1); startAuto(); });
+
+  /* Pointer/touch swipe */
+  ss.addEventListener('pointerdown', e => {
+    if (e.button !== 0 && e.pointerType === 'mouse') return;
+    if (e.target.closest('.slide-arrow') || e.target.closest('.slide-dot')) return;
+    txStart = e.clientX; dragging = true; txDelta = 0;
+    stopAuto(); ss.setPointerCapture(e.pointerId);
+  });
+  ss.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    txDelta = e.clientX - txStart;
+    const pct = -(cur * 100) + (txDelta / ss.offsetWidth * 100);
+    track.style.transition = 'none';
+    track.style.transform = `translateX(${pct}%)`;
+  });
+  ss.addEventListener('pointerup', () => {
+    if (!dragging) return; dragging = false;
+    track.style.transition = '';
+    if (Math.abs(txDelta) > 42) goTo(txDelta < 0 ? cur + 1 : cur - 1);
+    else ui();
+    txDelta = 0; startAuto();
+  });
+  ss.addEventListener('pointercancel', () => { dragging = false; txDelta = 0; ui(); startAuto(); });
+
+  /* Pause on mouse hover (desktop) */
+  ss.addEventListener('mouseenter', e => { if (!e.target.closest('.slide-arrow')) stopAuto(); });
+  ss.addEventListener('mouseleave', startAuto);
+
+  ui(); startAuto();
+});
+
+/* ── SCROLL REVEAL ── */
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revObs.unobserve(e.target); }});
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+/* ── LIGHTBOX ── */
+(function () {
+  const overlay  = document.getElementById('lightboxOverlay');
+  const lbImg    = document.getElementById('lbImg');
+  const lbCap    = document.getElementById('lbCaption');
+  const lbCtr    = document.getElementById('lbCounter');
+  const lbClose  = document.getElementById('lbClose');
+  const lbPrev   = document.getElementById('lbPrev');
+  const lbNext   = document.getElementById('lbNext');
+
+  // Build a flat list of all images from every slideshow, in DOM order
+  // Each entry: { src, alt, ssIndex (which slideshow), slideIndex }
+  const allEntries = [];
+  // Also keep a per-slideshow map so clicking a slideshow opens the correct current slide
+  const slideshowCurrentSlide = new Map(); // ss element → cur ref
+
+  document.querySelectorAll('.slideshow').forEach((ss, ssIdx) => {
+    const imgs = ss.querySelectorAll('.slide img');
+    const startIdx = allEntries.length;
+    imgs.forEach((img, i) => {
+      allEntries.push({ src: img.src, alt: img.alt || '' });
+    });
+    slideshowCurrentSlide.set(ss, { startIdx, count: imgs.length });
+  });
+
+  let cur = 0;
+
+  function open(idx) {
+    cur = (idx + allEntries.length) % allEntries.length;
+    lbImg.src = allEntries[cur].src;
+    lbImg.alt = allEntries[cur].alt;
+    lbCap.textContent = allEntries[cur].alt;
+    lbCtr.textContent = (cur + 1) + ' / ' + allEntries.length;
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+
+  // Attach click to each slideshow — opens whichever slide is currently shown
+  // We read the current slide from the transform of slides-track
+  document.querySelectorAll('.slideshow').forEach(ss => {
+    ss.addEventListener('click', e => {
+      // Ignore clicks on arrows and dots
+      if (e.target.closest('.slide-arrow') || e.target.closest('.slide-dot')) return;
+      const info = slideshowCurrentSlide.get(ss);
+      if (!info) return;
+      // Determine currently shown slide index from the track transform
+      const track = ss.querySelector('.slides-track');
+      const tx = track.style.transform; // translateX(-N%)
+      const match = tx.match(/-?([\d.]+)%/);
+      const slideIdx = match ? Math.round(parseFloat(match[1]) / 100) : 0;
+      open(info.startIdx + slideIdx);
+    });
+  });
+
+  lbClose.addEventListener('click', close);
+  overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+  lbPrev.addEventListener('click', e => { e.stopPropagation(); open(cur - 1); });
+  lbNext.addEventListener('click', e => { e.stopPropagation(); open(cur + 1); });
+
+  document.addEventListener('keydown', e => {
+    if (!overlay.classList.contains('active')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') open(cur - 1);
+    if (e.key === 'ArrowRight') open(cur + 1);
+  });
+
+  // Swipe support inside lightbox
+  let txStart = 0;
+  overlay.addEventListener('touchstart', e => { txStart = e.touches[0].clientX; }, { passive: true });
+  overlay.addEventListener('touchend', e => {
+    const diff = txStart - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 45) open(diff > 0 ? cur + 1 : cur - 1);
+  });
+})();
+</script>
+</body>
+</html>

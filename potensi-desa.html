@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Potensi Desa &#8211; Desa Kinalawiran</title>
+  <link rel="icon" type="image/png" href="img/logominsel.png" />
+  <link rel="shortcut icon" type="image/png" href="img/logominsel.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --red:#ab0c0b;--red-dark:#870908;--red-light:#d41312;
+      --white:#ffffff;--off-white:#faf9f8;
+      --gray-50:#f7f6f5;--gray-100:#ede9e6;--gray-300:#b8afa9;
+      --gray-500:#7a716b;--gray-700:#3d3530;--gray-900:#1a1410;
+      --font-display:'Playfair Display',Georgia,serif;
+      --font-body:'Plus Jakarta Sans',sans-serif;
+      --shadow-sm:0 1px 4px rgba(0,0,0,.06);
+      --shadow-md:0 4px 20px rgba(0,0,0,.09);
+      --shadow-lg:0 12px 48px rgba(0,0,0,.13);
+      --radius:16px;--transition:.35s cubic-bezier(.4,0,.2,1);
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-body);background:var(--white);color:var(--gray-700);line-height:1.65;overflow-x:hidden}
+    img{display:block;max-width:100%}
+    a{text-decoration:none;color:inherit}
+
+    /* NAVBAR */
+    .navbar{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:68px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-100);transition:box-shadow var(--transition);overflow:visible}
+    .navbar.scrolled{box-shadow:var(--shadow-md)}
+    .nav-brand{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+    .nav-logo{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+    .nav-logo img{width:36px;height:36px;object-fit:contain}
+    .nav-brand-text{line-height:1.15;min-width:0;overflow:hidden}
+    .nav-brand-text strong{display:block;font-family:var(--font-display);font-size:.95rem;color:var(--gray-900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .nav-brand-text span{display:block;font-size:.65rem;color:var(--gray-500);font-weight:500;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .nav-links{display:flex;align-items:center;gap:4px;list-style:none;flex-shrink:0}
+    .nav-links a{font-size:.875rem;font-weight:500;color:var(--gray-700);padding:7px 14px;border-radius:8px;transition:background var(--transition),color var(--transition)}
+    .nav-links a:hover,.nav-links a.active{background:var(--gray-50);color:var(--red)}
+    .nav-links .nav-cta a{background:var(--red);color:#fff;padding:7px 18px}
+    .nav-links .nav-cta a:hover{background:var(--red-dark);color:#fff}
+    .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:8px 6px;border:none;background:none;flex-shrink:0;margin-left:8px;-webkit-tap-highlight-color:transparent;z-index:1000}
+    .nav-toggle span{display:block;width:22px;height:2px;background:var(--gray-700);border-radius:2px;transition:transform var(--transition),opacity var(--transition);pointer-events:none}
+    .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .nav-toggle.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+    .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+    /* HERO */
+    .page-hero{position:relative;min-height:52vh;display:flex;align-items:flex-end;overflow:hidden;background:var(--gray-900);padding-top:68px;padding-bottom:64px}
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(26,20,16,.88) 0%, rgba(171,12,11,.72) 100%),
+        url('img/banner1.jpeg') center/cover no-repeat;
+      animation: heroZoom 20s ease-in-out infinite alternate;
+    }
+    @keyframes heroZoom{from{transform:scale(1)}to{transform:scale(1.07)}}
+    .page-hero-shape{position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:460px;height:460px;border-radius:50%;border:1.5px solid rgba(255,255,255,.06);pointer-events:none}
+    .page-hero-content{position:relative;z-index:2;padding:0 5%;max-width:900px}
+    .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:20px;animation:fadeUp .7s .1s both}
+    .breadcrumb a{font-size:.78rem;color:rgba(255,255,255,.55);font-weight:500;transition:color var(--transition)}
+    .breadcrumb a:hover{color:#fff}
+    .breadcrumb span{color:rgba(255,255,255,.3);font-size:.78rem}
+    .breadcrumb strong{font-size:.78rem;color:rgba(255,255,255,.85);font-weight:500}
+    .page-hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(8px);color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 16px;border-radius:100px;margin-bottom:20px;animation:fadeUp .7s .2s both}
+    .page-hero-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--red-light);box-shadow:0 0 0 3px rgba(212,19,18,.3);animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(212,19,18,.3)}50%{box-shadow:0 0 0 6px rgba(212,19,18,.1)}}
+    .page-hero h1{font-family:var(--font-display);font-size:clamp(2.4rem,5.5vw,3.9rem);font-weight:800;color:#fff;line-height:1.07;letter-spacing:-.025em;margin-bottom:14px;animation:fadeUp .7s .3s both}
+    .page-hero h1 em{font-style:italic;color:rgba(255,255,255,.45)}
+    .page-hero p{font-size:1rem;color:rgba(255,255,255,.65);font-weight:300;max-width:560px;animation:fadeUp .7s .45s both}
+    .hero-stats-row{display:flex;gap:32px;margin-top:36px;flex-wrap:wrap;animation:fadeUp .7s .55s both}
+    .hero-stat-num{font-family:var(--font-display);font-size:1.75rem;font-weight:700;color:#fff;line-height:1}
+    .hero-stat-num sup{font-size:.9rem}
+    .hero-stat-label{font-size:.7rem;color:rgba(255,255,255,.5);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+    .hero-stat-divider{width:1px;background:rgba(255,255,255,.18);align-self:stretch}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+    /* PAGE TABS */
+    .page-tabs{position:sticky;top:68px;z-index:99;background:var(--white);border-bottom:1px solid var(--gray-100);box-shadow:var(--shadow-sm)}
+    .page-tabs-inner{max-width:1200px;margin:0 auto;padding:0 5%;display:flex;overflow-x:auto}
+    .page-tabs-inner::-webkit-scrollbar{display:none}
+    .tab-link{flex-shrink:0;font-size:.84rem;font-weight:600;color:var(--gray-500);padding:16px 20px;border-bottom:2.5px solid transparent;transition:all var(--transition);white-space:nowrap}
+    .tab-link:hover{color:var(--red)}
+    .tab-link.active{color:var(--red);border-bottom-color:var(--red)}
+
+    /* GENERIC */
+    section{padding:90px 5%}
+    .inner{max-width:1200px;margin:0 auto}
+    .section-tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+    .section-title{font-family:var(--font-display);font-size:clamp(1.7rem,3.5vw,2.6rem);font-weight:700;color:var(--gray-900);line-height:1.15;letter-spacing:-.02em;margin-bottom:16px}
+    .section-desc{font-size:1rem;color:var(--gray-500);line-height:1.8;max-width:660px}
+
+    /* STATS STRIP */
+    .stats-strip{background:var(--red);padding:48px 5%}
+    .stats-strip-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+    .stat-cell{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);padding:28px 24px;text-align:center;transition:background var(--transition)}
+    .stat-cell:first-child{border-radius:14px 0 0 14px}
+    .stat-cell:last-child{border-radius:0 14px 14px 0}
+    .stat-cell:hover{background:rgba(255,255,255,.18)}
+    .stat-num{font-family:var(--font-display);font-size:2.1rem;font-weight:700;color:#fff;line-height:1;margin-bottom:6px}
+    .stat-label{font-size:.72rem;color:rgba(255,255,255,.75);letter-spacing:.06em;text-transform:uppercase}
+
+    /* PERTANIAN */
+    .pertanian{background:var(--off-white)}
+    .pertanian-intro{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;margin-bottom:72px}
+    .pertanian-img-wrap{position:relative}
+    .pertanian-img-main{width:100%;height:380px;object-fit:cover;border-radius:20px;box-shadow:var(--shadow-lg)}
+    .pertanian-img-accent{width:58%;height:210px;object-fit:cover;border-radius:14px;box-shadow:var(--shadow-lg);position:absolute;bottom:-32px;right:-22px;border:4px solid var(--white)}
+    .komoditas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .komoditas-card:first-child{grid-column:span 1;border-color:var(--red)!important}
+    .komoditas-card{background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius);padding:28px 24px;position:relative;overflow:hidden;transition:all var(--transition)}
+    .komoditas-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform var(--transition)}
+    .komoditas-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+    .komoditas-card:hover::before{transform:scaleX(1)}
+    .komoditas-icon{width:48px;height:48px;background:rgba(171,12,11,.08);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:1.5rem}
+    .komoditas-name{font-family:var(--font-display);font-size:1.05rem;font-weight:700;color:var(--gray-900);margin-bottom:6px}
+    .komoditas-detail{font-size:.82rem;color:var(--gray-500);line-height:1.65}
+    .komoditas-badge{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-top:12px}
+    .badge-pangan{background:rgba(34,139,34,.1);color:#1a7a1a}
+    .badge-ekspor{background:rgba(171,12,11,.1);color:var(--red)}
+    .badge-hortikultura{background:rgba(240,140,0,.12);color:#b36200}
+
+    /* SLIDESHOW */
+    .slideshow{position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg);background:var(--gray-100)}
+    .slideshow-track{display:flex;transition:transform .55s cubic-bezier(.4,0,.2,1);will-change:transform}
+    .slideshow-track img{flex-shrink:0;width:100%;height:100%;object-fit:cover;display:block;user-select:none;cursor:zoom-in}
+    .slideshow-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:10;background:rgba(255,255,255,.85);backdrop-filter:blur(6px);border:none;width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md);transition:background var(--transition),transform .2s}
+    .slideshow-btn:hover{background:#fff;transform:translateY(-50%) scale(1.08)}
+    .slideshow-btn svg{width:18px;height:18px;fill:var(--gray-700)}
+    .slideshow-btn.prev{left:12px}
+    .slideshow-btn.next{right:12px}
+    .slideshow-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:10}
+    .slideshow-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.5);border:none;cursor:pointer;padding:0;transition:background .3s,width .3s}
+    .slideshow-dot.active{background:#fff;width:20px;border-radius:4px}
+
+    /* LAHAN */
+    .lahan{background:var(--white)}
+    .lahan-intro{display:grid;grid-template-columns:1fr 1.1fr;gap:72px;align-items:center;margin-bottom:60px}
+    .lahan-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:20px}
+    .lahan-list li{display:flex;align-items:center;gap:12px;font-size:.9rem;color:var(--gray-700);font-weight:500}
+    .lahan-list li::before{content:'';flex-shrink:0;width:8px;height:8px;border-radius:50%;background:var(--red)}
+    .lahan-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .lahan-card{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);transition:box-shadow var(--transition),transform var(--transition)}
+    .lahan-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+    .lahan-card-img{width:100%;height:170px;object-fit:cover;display:block}
+    .lahan-card-body{padding:20px 22px;background:var(--white);border:1px solid var(--gray-100);border-top:none}
+    .lahan-card-title{font-family:var(--font-display);font-size:.98rem;font-weight:700;color:var(--gray-900);margin-bottom:4px}
+    .lahan-card-sub{font-size:.78rem;color:var(--gray-500)}
+    .lahan-card-ha{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--red);margin-top:8px}
+
+    /* PEREKONOMIAN */
+    .perekonomian{background:var(--white)}
+    .perekonomian-intro{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;margin-bottom:64px}
+    .perekonomian-img-wrap{position:relative}
+    .perekonomian-img-main{width:100%;height:380px;object-fit:cover;border-radius:20px;box-shadow:var(--shadow-lg);background:var(--gray-100);display:flex;align-items:center;justify-content:center}
+    .placeholder-img{width:100%;height:380px;border-radius:20px;background:linear-gradient(135deg,var(--gray-100) 0%,var(--gray-50) 100%);border:2px dashed var(--gray-300);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--gray-300)}
+    .placeholder-img svg{width:48px;height:48px;fill:var(--gray-300)}
+    .placeholder-img span{font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+
+    .ekon-foto-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:48px}
+    .ekon-foto-item{border-radius:var(--radius);overflow:hidden;position:relative}
+    .ekon-foto-placeholder{width:100%;height:220px;background:linear-gradient(135deg,var(--gray-100) 0%,var(--gray-50) 100%);border:2px dashed var(--gray-300);border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--gray-300)}
+    .ekon-foto-placeholder svg{width:36px;height:36px;fill:var(--gray-300)}
+    .ekon-foto-placeholder span{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+    @media(max-width:900px){
+      .perekonomian-intro{grid-template-columns:1fr;gap:36px}
+      .ekon-foto-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:560px){
+    }
+
+    /* SDM */
+    .sdm{background:var(--off-white)}
+    .sdm-intro{display:grid;grid-template-columns:1.1fr 1fr;gap:72px;align-items:start;margin-bottom:64px}
+    .sdm-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .sdm-card{background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius);padding:28px 22px;text-align:center;transition:all var(--transition)}
+    .sdm-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+    .sdm-icon{width:56px;height:56px;background:rgba(171,12,11,.08);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;transition:background var(--transition)}
+    .sdm-icon svg{width:26px;height:26px;fill:var(--red);transition:fill var(--transition)}
+    .sdm-card:hover .sdm-icon{background:var(--red)}
+    .sdm-card:hover .sdm-icon svg{fill:#fff}
+    .sdm-num{font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--gray-900);line-height:1;margin-bottom:6px}
+    .sdm-label{font-size:.78rem;color:var(--gray-500);font-weight:500;line-height:1.4}
+    .sdm-highlight{background:var(--white);border:1px solid var(--gray-100);padding:22px 24px;margin-top:24px;border-left:3px solid var(--red);border-radius:0 var(--radius) var(--radius) 0}
+    .sdm-highlight p{font-family:var(--font-display);font-size:.98rem;font-style:italic;color:var(--gray-700);line-height:1.65;margin:0}
+    .sdm-highlight span{display:block;font-family:var(--font-body);font-size:.72rem;color:var(--gray-300);font-style:normal;margin-top:8px;letter-spacing:.04em}
+
+    /* FOOTER */
+    footer{background:var(--gray-900);color:rgba(255,255,255,.6);padding:72px 5% 36px}
+    .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;max-width:1200px;margin:0 auto 56px}
+    .footer-brand .nav-logo{width:46px;height:46px;margin-bottom:16px;border-radius:12px}
+    .footer-brand h3{font-family:var(--font-display);font-size:1.1rem;color:#fff;margin-bottom:10px}
+    .footer-brand p{font-size:.84rem;line-height:1.75;max-width:280px}
+    .footer-col h4{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:18px}
+    .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .footer-col ul li a{font-size:.875rem;color:rgba(255,255,255,.55);transition:color var(--transition)}
+    .footer-col ul li a:hover{color:#fff}
+    .footer-contact-item{display:flex;gap:10px;align-items:flex-start;font-size:.84rem;margin-bottom:12px}
+    .footer-contact-item svg{width:16px;height:16px;fill:var(--red-light);flex-shrink:0;margin-top:3px}
+    .footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:28px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;font-size:.8rem}
+
+    /* RESPONSIVE */
+    @media (max-width:900px){
+      .nav-toggle{display:flex}
+      .nav-links{position:fixed;top:68px;left:0;right:0;background:var(--white);border-top:2px solid var(--red);flex-direction:column;align-items:stretch;gap:0;padding:4px 0 16px;transform:translateY(-8px);opacity:0;pointer-events:none;transition:transform var(--transition),opacity var(--transition);box-shadow:0 8px 32px rgba(0,0,0,.12);z-index:998;max-height:calc(100vh - 68px);overflow-y:auto}
+      .nav-links.open{transform:translateY(0);opacity:1;pointer-events:auto}
+      .nav-links li{margin:0}
+      .nav-links li+li{border-top:1px solid var(--gray-50)}
+      .nav-links a{display:block;padding:15px 6%;border-radius:0;font-size:.95rem;color:var(--gray-700);font-weight:500}
+      .nav-links a:hover,.nav-links a.active{background:var(--gray-50);color:var(--red)}
+      .nav-links .nav-cta{padding:12px 6% 4px;border-top:none!important}
+      .nav-links .nav-cta a{background:var(--red);color:#fff!important;border-radius:10px;text-align:center;padding:13px 6%;font-weight:600}
+      section{padding:64px 5%}
+      .page-hero{padding-bottom:48px}
+      .page-hero h1{font-size:clamp(2rem,8vw,2.8rem)}
+      .hero-stats-row{gap:16px;margin-top:24px}
+      .hero-stat-num{font-size:1.3rem}
+      .hero-stat-divider{display:none}
+      .stats-strip-inner{grid-template-columns:1fr 1fr}
+      .stat-cell:first-child{border-radius:14px 0 0 0}
+      .stat-cell:nth-child(2){border-radius:0 14px 0 0}
+      .stat-cell:nth-child(3){border-radius:0 0 0 14px}
+      .stat-cell:last-child{border-radius:0 0 14px 0}
+      .stat-num{font-size:1.7rem}
+      .pertanian-intro{grid-template-columns:1fr;gap:36px}
+      .pertanian-img-wrap{order:-1}
+      .pertanian-img-main{height:260px}
+      .pertanian-img-accent{display:none}
+      .komoditas-grid{grid-template-columns:1fr 1fr;gap:14px}
+      .lahan-intro{grid-template-columns:1fr;gap:36px}
+      .lahan-cards{grid-template-columns:1fr 1fr;gap:14px}
+      .perkebunan-inner{grid-template-columns:1fr;gap:40px}
+      .perkebunan-photos{height:280px}
+      .perkebunan-photo:first-child{grid-row:span 1}
+      .sdm-intro{grid-template-columns:1fr;gap:36px}
+      .sdm-cards{grid-template-columns:1fr 1fr;gap:14px}
+      .footer-grid{grid-template-columns:1fr 1fr;gap:36px}
+      .footer-brand{grid-column:span 2}
+    }
+    @media (max-width:560px){
+      .komoditas-grid{grid-template-columns:1fr}
+      .lahan-cards{grid-template-columns:1fr}
+      .perkebunan-photos{height:220px}
+      .footer-grid{grid-template-columns:1fr}
+      .footer-brand{grid-column:span 1}
+    }
+
+    /* PETERNAKAN */
+    .peternakan{background:var(--white)}
+    .ternak-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+    .ternak-card{background:var(--off-white);border:1px solid var(--gray-100);border-radius:var(--radius);padding:24px 22px;display:flex;align-items:center;gap:16px;transition:all var(--transition)}
+    .ternak-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);background:var(--white)}
+    .ternak-icon{font-size:2rem;flex-shrink:0;width:54px;height:54px;background:rgba(171,12,11,.08);border-radius:14px;display:flex;align-items:center;justify-content:center}
+    .ternak-info{min-width:0}
+    .ternak-name{font-weight:700;font-size:.92rem;color:var(--gray-900);margin-bottom:4px}
+    .ternak-pop{font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--red);line-height:1}
+    .ternak-owner{font-size:.75rem;color:var(--gray-500);margin-top:2px}
+    .perikanan-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px}
+    .perikanan-card{background:linear-gradient(135deg,var(--gray-900) 0%,#1e2d3d 100%);border-radius:var(--radius);padding:30px 28px;color:#fff}
+    .perikanan-card h4{font-family:var(--font-display);font-size:1.05rem;color:#fff;margin-bottom:8px}
+    .perikanan-card p{font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.7}
+    .perikanan-ha{font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--red-light);margin-top:14px}
+
+    /* WISATA & AIR */
+    .wisata{background:var(--gray-900);padding:90px 5%}
+    .wisata .section-tag{color:rgba(255,255,255,.45)}
+    .wisata .section-title{color:#fff}
+    .wisata .section-desc{color:rgba(255,255,255,.6)}
+    .wisata-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:56px}
+    .wisata-block h3{font-family:var(--font-display);font-size:1.15rem;color:#fff;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.1)}
+    .wisata-item{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.875rem;gap:16px}
+    .wisata-item:last-child{border-bottom:none}
+    .wisata-label{color:rgba(255,255,255,.65);flex:1}
+    .wisata-val{font-weight:700;color:#fff;font-size:.875rem;flex-shrink:0}
+    .wisata-badge{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:100px;background:rgba(212,19,18,.3);color:var(--red-light)}
+    .sungai-status{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;font-weight:600;color:#4ade80;background:rgba(74,222,128,.12);padding:3px 10px;border-radius:100px}
+    .sungai-status::before{content:'';width:6px;height:6px;border-radius:50%;background:#4ade80}
+
+    /* MATA PENCAHARIAN */
+    .matpencaharian{background:var(--off-white)}
+    .matpen-intro{display:grid;grid-template-columns:1.1fr 1fr;gap:72px;align-items:start;margin-bottom:48px}
+    .matpen-tabel{width:100%;border-collapse:collapse;font-size:.85rem}
+    .matpen-tabel th{background:var(--red);color:#fff;padding:10px 14px;text-align:left;font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+    .matpen-tabel th:first-child{border-radius:10px 0 0 0}
+    .matpen-tabel th:last-child{border-radius:0 10px 0 0}
+    .matpen-tabel td{padding:10px 14px;border-bottom:1px solid var(--gray-100);color:var(--gray-700)}
+    .matpen-tabel tr:last-child td{border-bottom:none}
+    .matpen-tabel tr:nth-child(even) td{background:rgba(0,0,0,.02)}
+    .matpen-tabel tr:hover td{background:rgba(171,12,11,.04)}
+    .matpen-total td{font-weight:700;color:var(--gray-900);background:var(--gray-50)!important;border-top:2px solid var(--gray-100)}
+    .agama-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+    .agama-card{background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius);padding:24px 20px;text-align:center;transition:all var(--transition)}
+    .agama-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
+    .agama-icon{font-size:2rem;margin-bottom:10px}
+    .agama-name{font-weight:700;font-size:.9rem;color:var(--gray-900);margin-bottom:8px}
+    .agama-num{font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--red);line-height:1}
+    .agama-sub{font-size:.75rem;color:var(--gray-500);margin-top:4px}
+
+    @media(max-width:900px){
+      .ternak-grid{grid-template-columns:1fr 1fr}
+      .perikanan-wrap{grid-template-columns:1fr}
+      .wisata-grid{grid-template-columns:1fr}
+      .matpen-intro{grid-template-columns:1fr;gap:36px}
+      .agama-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:560px){
+      .ternak-grid{grid-template-columns:1fr}
+      .agama-grid{grid-template-columns:1fr 1fr}
+    }
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-delay-1{transition-delay:.08s}
+    .reveal-delay-2{transition-delay:.16s}
+    .reveal-delay-3{transition-delay:.24s}
+    .reveal-delay-4{transition-delay:.32s}
+    .reveal-delay-5{transition-delay:.40s}
+    .reveal-delay-6{transition-delay:.48s}
+
+    /* LIGHTBOX */
+    .lightbox-overlay{
+      display:none;position:fixed;inset:0;z-index:9999;
+      background:rgba(0,0,0,.92);backdrop-filter:blur(8px);
+      align-items:center;justify-content:center;
+    }
+    .lightbox-overlay.active{display:flex;animation:lbFadeIn .25s ease}
+    @keyframes lbFadeIn{from{opacity:0}to{opacity:1}}
+    .lightbox-img-wrap{
+      position:relative;max-width:92vw;max-height:88vh;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .lightbox-img-wrap img{
+      max-width:92vw;max-height:88vh;
+      border-radius:14px;box-shadow:0 24px 80px rgba(0,0,0,.6);
+      object-fit:contain;
+      animation:lbZoomIn .3s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes lbZoomIn{from{transform:scale(.88);opacity:0}to{transform:scale(1);opacity:1}}
+    .lightbox-close{
+      position:fixed;top:20px;right:24px;
+      width:44px;height:44px;border-radius:50%;
+      background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);
+      color:#fff;font-size:1.4rem;line-height:1;
+      cursor:pointer;display:flex;align-items:center;justify-content:center;
+      transition:background var(--transition),transform var(--transition);z-index:10001;
+    }
+    .lightbox-close:hover{background:rgba(255,255,255,.28);transform:scale(1.1)}
+    .lightbox-nav{
+      position:fixed;top:50%;transform:translateY(-50%);
+      width:44px;height:44px;border-radius:50%;
+      background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);
+      color:#fff;font-size:1.5rem;line-height:1;
+      cursor:pointer;display:flex;align-items:center;justify-content:center;
+      transition:background var(--transition);z-index:10001;user-select:none;
+    }
+    .lightbox-nav:hover{background:rgba(255,255,255,.28)}
+    .lightbox-nav.lb-prev{left:16px}
+    .lightbox-nav.lb-next{right:16px}
+    .lightbox-caption{
+      position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+      background:rgba(0,0,0,.55);backdrop-filter:blur(8px);
+      color:rgba(255,255,255,.85);font-size:.8rem;font-weight:500;
+      padding:7px 20px;border-radius:100px;letter-spacing:.04em;
+      white-space:nowrap;z-index:10001;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo"><img src="img/logominsel.png" alt="Logo"></div>
+    <div class="nav-brand-text">
+      <strong>Desa Kinalawiran</strong>
+      <span>Tompaso Baru &middot; Minahasa Selatan</span>
+    </div>
+  </a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Beranda</a></li>
+    <li><a href="profil-desa.html">Profil Desa</a></li>
+    <li><a href="pemerintahan.html">Pemerintahan</a></li>
+    <li><a href="potensi-desa.html" class="active">Potensi Desa</a></li>
+    <li class="nav-cta"><a href="galeri.html">Galeri</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-shape"></div>
+  <div class="page-hero-content">
+    <div class="breadcrumb"><a href="index.html">Beranda</a><span>&rsaquo;</span><strong>Potensi Desa</strong></div>
+    <h1>Potensi<br/><em>Desa Kinalawiran</em></h1>
+    <p>Dari ladang nilam hingga hutan adat, inilah kekayaan nyata Desa Kinalawiran.</p>
+    <div class="hero-stats-row">
+      <div class="hero-stat">
+        <div class="hero-stat-num">435 <sup>Ha</sup></div>
+        <div class="hero-stat-label">Total Luas Wilayah</div>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">532 <sup>Ha</sup></div>
+        <div class="hero-stat-label">Lahan Perkebunan</div>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">126 <sup>Ha</sup></div>
+        <div class="hero-stat-label">Lahan Sawah</div>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">1.103 <sup>jiwa</sup></div>
+        <div class="hero-stat-label">Jumlah Penduduk</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<nav class="page-tabs" id="pageTabs">
+  <div class="page-tabs-inner">
+    <a class="tab-link active" href="#pertanian">Pertanian</a>
+    <a class="tab-link" href="#lahan">Pemanfaatan Lahan</a>
+    <a class="tab-link" href="#perekonomian">Perekonomian</a>
+    <a class="tab-link" href="#kehutanan">Kehutanan</a>
+    <a class="tab-link" href="#peternakan">Peternakan & Perikanan</a>
+    <a class="tab-link" href="#wisata">Air & Wisata</a>
+    <a class="tab-link" href="#sdm">SDM & Mata Pencaharian</a>
+  </div>
+</nav>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-strip-inner">
+    <div class="stat-cell"><div class="stat-num">435 Ha</div><div class="stat-label">Total Luas Wilayah</div></div>
+    <div class="stat-cell"><div class="stat-num">532 Ha</div><div class="stat-label">Lahan Perkebunan</div></div>
+    <div class="stat-cell"><div class="stat-num">126 Ha</div><div class="stat-label">Lahan Persawahan</div></div>
+    <div class="stat-cell"><div class="stat-num">1.378 Ha</div><div class="stat-label">Kawasan Hutan</div></div>
+  </div>
+</div>
+
+<!-- PERTANIAN -->
+<section class="pertanian" id="pertanian">
+  <div class="inner">
+    <div class="pertanian-intro">
+      <div class="pertanian-img-wrap reveal">
+        <div class="slideshow" style="height:380px;" data-slideshow="pertanian" data-auto="true">
+          <div class="slideshow-track" style="height:380px;">
+            <img src="img/pertanian1.jpeg" alt="Pertanian Desa 1" />
+            <img src="img/pertanian2.jpeg" alt="Pertanian Desa 2" />
+            <img src="img/pertanian3.jpeg" alt="Pertanian Desa 3" />
+            <img src="img/pertanian4.jpeg" alt="Pertanian Desa 4" />
+            <img src="img/pertanian5.jpeg" alt="Pertanian Desa 5" />
+          </div>
+          <button class="slideshow-btn prev" aria-label="Sebelumnya"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+          <button class="slideshow-btn next" aria-label="Berikutnya"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+          <div class="slideshow-dots"></div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <span class="section-tag">Sektor Unggulan</span>
+        <h2 class="section-title">Pertanian Desa</h2>
+        <p class="section-desc">Pertanian adalah tulang punggung Desa Kinalawiran. <strong style="color:var(--red)">Nilam</strong> menjadi bintang utama karena menghasilkan minyak atsiri bernilai ekspor tinggi. Cengkeh (190 Ha, 202 keluarga), kelapa, jagung, dan durian melengkapi kekayaan hasil bumi desa ini.</p>
+      </div>
+    </div>
+    <span class="section-tag reveal">Komoditas Unggulan</span>
+    <h3 class="section-title reveal" style="margin-bottom:32px;">Hasil Bumi Desa</h3>
+    <div class="komoditas-grid">
+      <div class="komoditas-card reveal reveal-delay-1" style="border:2px solid var(--red);position:relative;">
+        <div style="position:absolute;top:14px;right:14px;background:var(--red);color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:100px;">⭐ Unggulan Utama</div>
+        <div class="komoditas-icon">&#x1F33F;</div>
+        <div class="komoditas-name">Nilam</div>
+        <div class="komoditas-detail">Tanaman unggulan Kinalawiran. Daunnya disuling menjadi minyak atsiri berkualitas ekspor. Tumbuh subur di iklim tropis lembab khas Minahasa Selatan.</div>
+        <span class="komoditas-badge badge-ekspor">Ekspor Utama</span>
+      </div>
+      <div class="komoditas-card reveal reveal-delay-2">
+        <div class="komoditas-icon">&#x1F6B1;</div>
+        <div class="komoditas-name">Cengkeh</div>
+        <div class="komoditas-detail">190 Ha milik 202 keluarga petani. Dipasarkan lewat KUD, pengecer, hingga langsung ke konsumen.</div>
+        <span class="komoditas-badge badge-ekspor">Perkebunan</span>
+      </div>
+      <div class="komoditas-card reveal reveal-delay-3">
+        <div class="komoditas-icon">&#x1F965;</div>
+        <div class="komoditas-name">Kelapa</div>
+        <div class="komoditas-detail">Tumbuh subur di seluruh wilayah desa. Hasilnya berupa kopra dan minyak kelapa, menjadi pendapatan stabil bagi banyak keluarga.</div>
+        <span class="komoditas-badge badge-ekspor">Perkebunan</span>
+      </div>
+      <div class="komoditas-card reveal reveal-delay-4">
+        <div class="komoditas-icon">&#x1F33D;</div>
+        <div class="komoditas-name">Jagung</div>
+        <div class="komoditas-detail">Dibudidayakan di lahan tegalan seluas ±180 Ha. Jadi sumber pangan sekaligus pakan ternak warga desa.</div>
+        <span class="komoditas-badge badge-pangan">Pangan</span>
+      </div>
+      <div class="komoditas-card reveal reveal-delay-5">
+        <div class="komoditas-icon">&#x1F340;</div>
+        <div class="komoditas-name">Durian</div>
+        <div class="komoditas-detail">Luas tanam 17 Ha. Durian lokal Kinalawiran diminati pasar regional dan punya potensi besar untuk dikembangkan lebih lanjut.</div>
+        <span class="komoditas-badge badge-hortikultura">Hortikultura</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAHAN -->
+<section class="lahan" id="lahan">
+  <div class="inner">
+    <div class="lahan-intro">
+      <div class="reveal">
+        <span class="section-tag">Tata Guna Lahan</span>
+        <h2 class="section-title">Pemanfaatan Lahan</h2>
+        <p class="section-desc">Lahan desa seluas ±435 Ha dimanfaatkan secara optimal, mulai dari sawah, kebun, permukiman, hingga kawasan hutan yang terjaga luas.</p>
+        <ul class="lahan-list">
+          <li>Permukiman: 12 Ha</li>
+          <li>Persawahan (irigasi &frac12; teknis): 126 Ha</li>
+          <li>Perkebunan perorangan: 532 Ha</li>
+          <li>Tegalan/ladang: 180 Ha</li>
+          <li>Kawasan hutan (produksi &amp; hutan asli): 1.378 Ha</li>
+          <li>Fasilitas umum (sekolah, jalan, kuburan, dll): 11 Ha</li>
+        </ul>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <div class="slideshow" style="height:320px;" data-slideshow="lahan" data-auto="true">
+          <div class="slideshow-track" style="height:320px;">
+            <img src="img/lahan1.jpg" alt="Pemanfaatan Lahan 1" />
+            <img src="img/lahan2.jpeg" alt="Pemanfaatan Lahan 2" />
+          </div>
+          <button class="slideshow-btn prev" aria-label="Sebelumnya"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+          <button class="slideshow-btn next" aria-label="Berikutnya"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+          <div class="slideshow-dots"></div>
+        </div>
+      </div>
+    </div>
+    <div class="lahan-cards">
+      <div class="lahan-card reveal reveal-delay-1">
+        <div class="lahan-card-body" style="border-top:1px solid var(--gray-100);">
+          <div class="lahan-card-title">Lahan Persawahan</div>
+          <div class="lahan-card-sub">Sawah irigasi &frac12; teknis, padi 3 ton/Ha</div>
+          <div class="lahan-card-ha">126 Ha</div>
+        </div>
+      </div>
+      <div class="lahan-card reveal reveal-delay-2">
+        <div class="lahan-card-body" style="border-top:1px solid var(--gray-100);">
+          <div class="lahan-card-title">Lahan Perkebunan</div>
+          <div class="lahan-card-sub">Perkebunan perorangan: nilam, cengkeh, kelapa</div>
+          <div class="lahan-card-ha">532 Ha</div>
+        </div>
+      </div>
+      <div class="lahan-card reveal reveal-delay-3">
+        <div class="lahan-card-body" style="border-top:1px solid var(--gray-100);">
+          <div class="lahan-card-title">Kawasan Hutan</div>
+          <div class="lahan-card-sub">Hutan produksi tetap, terbatas &amp; hutan adat/asli</div>
+          <div class="lahan-card-ha">1.378 Ha</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PEREKONOMIAN -->
+<section class="perekonomian" id="perekonomian">
+  <div class="inner">
+    <div class="perekonomian-intro">
+      <div class="reveal reveal-delay-1">
+        <span class="section-tag">Ekonomi Lokal</span>
+        <h2 class="section-title">Perekonomian Desa</h2>
+        <p class="section-desc">Nilam adalah andalan ekonomi desa. Daunnya disuling secara tradisional menjadi minyak nilam bernilai jual tinggi dan berpotensi ekspor.</p>
+        <p class="section-desc" style="margin-top:14px;font-size:.9rem;">Didukung cengkeh, kelapa, jagung, dan durian, ekonomi Kinalawiran bertumpu kuat pada agro-industri berbasis hasil bumi lokal.</p>
+      </div>
+      <div class="perekonomian-img-wrap reveal">
+        <div class="slideshow" style="height:380px;" data-slideshow="ekonomi" data-auto="true">
+          <div class="slideshow-track" style="height:380px;">
+            <img src="img/ekonomi1.jpeg" alt="Perekonomian Desa 1" />
+            <img src="img/ekonomi2.jpeg" alt="Perekonomian Desa 2" />
+            <img src="img/ekonomi3.jpeg" alt="Perekonomian Desa 3" />
+            <img src="img/ekonomi4.jpeg" alt="Perekonomian Desa 4" />
+            <img src="img/ekonomi5.jpeg" alt="Perekonomian Desa 5" />
+          </div>
+          <button class="slideshow-btn prev" aria-label="Sebelumnya"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+          <button class="slideshow-btn next" aria-label="Berikutnya"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+          <div class="slideshow-dots"></div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- KEHUTANAN -->
+<section class="pertanian" id="kehutanan">
+  <div class="inner">
+    <div class="pertanian-intro">
+      <div class="reveal reveal-delay-1">
+        <span class="section-tag">Potensi Kehutanan</span>
+        <h2 class="section-title">Kawasan Hutan Desa</h2>
+        <p class="section-desc">Kawasan hutan Desa Kinalawiran mencapai ±1.378 Ha, terdiri dari hutan produksi tetap (336 Ha), hutan produksi terbatas (300 Ha), hutan adat (542 Ha), dan hutan asli (200 Ha).</p>
+        <p class="section-desc" style="margin-top:14px;font-size:.9rem;">Desa ini aman dari banjir, gempa, dan tsunami. Namun hutan produksi seluas 336 Ha perlu pemulihan karena kondisinya rusak.</p>
+        <ul class="lahan-list" style="margin-top:20px;">
+          <li>Hutan produksi tetap: 336 Ha</li>
+          <li>Hutan produksi terbatas: 300 Ha</li>
+          <li>Hutan adat: 542 Ha</li>
+          <li>Hutan asli: 200 Ha</li>
+          <li>5 sungai jernih, tidak tercemar, memenuhi baku mutu air</li>
+        </ul>
+      </div>
+      <div class="pertanian-img-wrap reveal">
+        <div class="slideshow" style="height:380px;" data-slideshow="hutan" data-auto="true">
+          <div class="slideshow-track" style="height:380px;">
+            <img src="img/hutan1.jpg" alt="Hutan Desa 1" />
+            <img src="img/hutan2.jpg" alt="Hutan Desa 2" />
+            <img src="img/hutan3.jpg" alt="Hutan Desa 3" />
+          </div>
+          <button class="slideshow-btn prev" aria-label="Sebelumnya"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+          <button class="slideshow-btn next" aria-label="Berikutnya"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+          <div class="slideshow-dots"></div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="lahan-cards">
+      <div class="lahan-card reveal reveal-delay-1">
+        <div class="lahan-card-body" style="border-top:1px solid var(--gray-100);">
+          <div class="lahan-card-title">Hutan Produksi Tetap</div>
+          <div class="lahan-card-sub">Milik masyarakat perorangan, perlu pemulihan</div>
+          <div class="lahan-card-ha">336 Ha</div>
+        </div>
+      </div>
+      <div class="lahan-card reveal reveal-delay-2">
+        <div class="lahan-card-body" style="border-top:1px solid var(--gray-100);">
+          <div class="lahan-card-title">Hutan Produksi Terbatas</div>
+          <div class="lahan-card-sub">Pengelolaan terbatas dengan prinsip berkelanjutan</div>
+          <div class="lahan-card-ha">300 Ha</div>
+        </div>
+      </div>
+      <div class="lahan-card reveal reveal-delay-3">
+        <div class="lahan-card-body" style="border-top:1px solid var(--gray-100);">
+          <div class="lahan-card-title">Hutan Adat &amp; Hutan Asli</div>
+          <div class="lahan-card-sub">Hutan adat 542 Ha dan hutan asli 200 Ha</div>
+          <div class="lahan-card-ha">742 Ha</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PETERNAKAN & PERIKANAN -->
+<section class="peternakan" id="peternakan">
+  <div class="inner">
+    <div class="reveal">
+      <span class="section-tag">Potensi Peternakan</span>
+      <h2 class="section-title">Peternakan &amp; Perikanan</h2>
+      <p class="section-desc">Sebanyak 19 peternak menggeluti sektor ini sebagai mata pencaharian pendukung. Tersedia lahan pemeliharaan umum seluas 24 Ha.</p>
+    </div>
+    <div class="ternak-grid">
+      <div class="ternak-card reveal reveal-delay-1">
+        <div class="ternak-icon">&#x1F413;</div>
+        <div class="ternak-info">
+          <div class="ternak-name">Ayam Kampung</div>
+          <div class="ternak-pop">419 ekor</div>
+          <div class="ternak-owner">197 pemilik</div>
+        </div>
+      </div>
+      <div class="ternak-card reveal reveal-delay-2">
+        <div class="ternak-icon">&#x1F416;</div>
+        <div class="ternak-info">
+          <div class="ternak-name">Babi</div>
+          <div class="ternak-pop">290 ekor</div>
+          <div class="ternak-owner">24 pemilik</div>
+        </div>
+      </div>
+      <div class="ternak-card reveal reveal-delay-3">
+        <div class="ternak-icon">&#x1f986;</div>
+        <div class="ternak-info">
+          <div class="ternak-name">Bebek</div>
+          <div class="ternak-pop">157 ekor</div>
+          <div class="ternak-owner">17 pemilik</div>
+        </div>
+      </div>
+      <div class="ternak-card reveal reveal-delay-4">
+        <div class="ternak-icon">&#x1F404;</div>
+        <div class="ternak-info">
+          <div class="ternak-name">Sapi</div>
+          <div class="ternak-pop">79 ekor</div>
+          <div class="ternak-owner">57 pemilik</div>
+        </div>
+      </div>
+      <div class="ternak-card reveal reveal-delay-5">
+        <div class="ternak-icon">&#x1F436;</div>
+        <div class="ternak-info">
+          <div class="ternak-name">Anjing</div>
+          <div class="ternak-pop">116 ekor</div>
+          <div class="ternak-owner">97 pemilik</div>
+        </div>
+      </div>
+      <div class="ternak-card reveal reveal-delay-6">
+        <div class="ternak-icon">&#x1F431;</div>
+        <div class="ternak-info">
+          <div class="ternak-name">Kucing</div>
+          <div class="ternak-pop">49 ekor</div>
+          <div class="ternak-owner">28 pemilik</div>
+        </div>
+      </div>
+    </div>
+    <div class="perikanan-wrap">
+      <div class="perikanan-card reveal reveal-delay-1">
+        <h4>&#x1F41F; Budidaya Ikan Air Tawar</h4>
+        <p>Kolam ikan dikelola warga sebagai sumber protein lokal dan penghasilan tambahan.</p>
+        <div class="perikanan-ha">17 Ha</div>
+      </div>
+      <div class="perikanan-card reveal reveal-delay-2">
+        <h4>&#x1F33E; Mina Padi (Ikan di Sawah)</h4>
+        <p>Sistem budidaya ikan sekaligus padi di lahan yang sama, hemat lahan dan hasilnya ganda.</p>
+        <div class="perikanan-ha">9 Ha</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AIR & WISATA -->
+<section class="wisata" id="wisata">
+  <div class="inner">
+    <div class="reveal">
+      <span class="section-tag">Alam &amp; Pariwisata</span>
+      <h2 class="section-title">Sumber Daya Air &amp; Potensi Wisata</h2>
+      <p class="section-desc">Lima sungai jernih mengalir di desa ini, air bersih tersedia melimpah, dan tiga destinasi wisata alam menunggu untuk dikembangkan.</p>
+    </div>
+    <div class="wisata-grid">
+      <div class="wisata-block reveal reveal-delay-1">
+        <h3>&#x1F4A7; Sumber Air Bersih</h3>
+        <div class="wisata-item">
+          <span class="wisata-label">Sumur Gali</span>
+          <span class="wisata-val">174 unit (201 KK)</span>
+        </div>
+        <div class="wisata-item">
+          <span class="wisata-label">SPAM (Sistem Perpipaan)</span>
+          <span class="wisata-val">1 unit (107 KK)</span>
+        </div>
+        <div class="wisata-item">
+          <span class="wisata-label">Sungai</span>
+          <span class="wisata-val">1 titik (13 KK)</span>
+        </div>
+        <div class="wisata-item">
+          <span class="wisata-label">Kualitas Air Sumur</span>
+          <span class="wisata-val">Tidak berbau, layak minum</span>
+        </div>
+        <div class="wisata-item">
+          <span class="wisata-label">Jumlah Sungai di Desa</span>
+          <span class="wisata-val">5 buah</span>
+        </div>
+        <div class="wisata-item">
+          <span class="wisata-label">Kondisi Sungai</span>
+          <span class="sungai-status">Jernih &amp; Tidak Tercemar</span>
+        </div>
+        <div class="wisata-item">
+          <span class="wisata-label">Bahan Galian</span>
+          <span class="wisata-val">Batu kali, Sirtu, Pasir urug</span>
+        </div>
+      </div>
+      <div class="wisata-block reveal reveal-delay-2">
+        <h3>&#x1F3D4;&#xFE0F; Potensi Wisata Alam</h3>
+        <div class="wisata-item">
+          <span class="wisata-label">Air Terjun</span>
+          <span class="wisata-badge">Belum Dikelola</span>
+        </div>
+        <div class="wisata-item">
+          <span class="wisata-label">Situs Sejarah</span>
+          <span class="wisata-badge">Aktif</span>
+        </div>
+        <div class="wisata-item">
+          <span class="wisata-label">Batu Binotak</span>
+          <span class="wisata-badge">Belum Dikelola</span>
+        </div>
+        <div class="wisata-item">
+          <span class="wisata-label">Batu Kurung</span>
+          <span class="wisata-badge">Belum Dikelola</span>
+        </div>
+        <div style="margin-top:20px;padding:16px;background:rgba(255,255,255,.06);border-radius:10px;border:1px solid rgba(255,255,255,.1);">
+          <p style="font-size:.82rem;color:rgba(255,255,255,.55);line-height:1.7;">Air Terjun, Batu Binotak, dan Batu Kurung adalah peluang ekowisata yang belum digarap. Potensi besar, tinggal langkah nyata.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MATA PENCAHARIAN & SDM -->
+<section class="matpencaharian" id="sdm">
+  <div class="inner">
+    <div class="matpen-intro">
+      <div class="reveal">
+        <span class="section-tag">Modal Pembangunan</span>
+        <h2 class="section-title">Penduduk &amp; Mata Pencaharian</h2>
+        <p class="section-desc">Kinalawiran dihuni 1.103 jiwa. Petani mendominasi (381 orang), diikuti ibu rumah tangga (213 orang). Desa ini mudah dijangkau: hanya 2 km ke kecamatan dan 75 km ke kabupaten.</p>
+        <div class="sdm-highlight" style="margin-top:24px;">
+          <p>&ldquo;Kinalawiran berarti panjang umur, mencerminkan harapan warga untuk hidup sejahtera, sehat, dan terus berkembang bersama desa.&rdquo;</p>
+          <span>Makna nama Kinalawiran</span>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <div class="slideshow" style="height:300px;" data-slideshow="sdm" data-auto="true">
+          <div class="slideshow-track" style="height:300px;">
+            <img src="img/sdm1.jpeg" alt="SDM Desa 1" />
+            <img src="img/sdm2.jpg" alt="SDM Desa 2" />
+            <img src="img/sdm3.jpeg" alt="SDM Desa 3" />
+            <img src="img/sdm4.jpeg" alt="SDM Desa 4" />            
+            <img src="img/sdm5.jpeg" alt="SDM Desa 5" />
+          </div>
+          <button class="slideshow-btn prev" aria-label="Sebelumnya"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+          <button class="slideshow-btn next" aria-label="Berikutnya"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+          <div class="slideshow-dots"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <span class="section-tag">Rincian Mata Pencaharian</span>
+      <h3 class="section-title" style="margin-bottom:24px;font-size:1.5rem;">Rincian Pekerjaan Warga</h3>
+      <div style="overflow-x:auto;">
+        <table class="matpen-tabel">
+          <thead>
+            <tr>
+              <th>Mata Pencaharian</th>
+              <th>Laki-laki</th>
+              <th>Perempuan</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Petani</td><td>334</td><td>47</td><td>381</td></tr>
+            <tr><td>Ibu Rumah Tangga</td><td>0</td><td>213</td><td>213</td></tr>
+            <tr><td>Pelajar</td><td>61</td><td>48</td><td>109</td></tr>
+            <tr><td>Belum Bekerja</td><td>39</td><td>53</td><td>92</td></tr>
+            <tr><td>Tidak Punya Pekerjaan Tetap</td><td>0</td><td>80</td><td>80</td></tr>
+            <tr><td>Wirausaha</td><td>23</td><td>19</td><td>42</td></tr>
+            <tr><td>Buruh Tani</td><td>20</td><td>0</td><td>20</td></tr>
+            <tr><td>Perangkat Desa</td><td>18</td><td>0</td><td>18</td></tr>
+            <tr><td>Pedagang Barang Kelontong</td><td>0</td><td>27</td><td>27</td></tr>
+            <tr><td>Pengrajin</td><td>0</td><td>17</td><td>17</td></tr>
+            <tr><td>Peternak</td><td>19</td><td>0</td><td>19</td></tr>
+            <tr><td>PNS</td><td>9</td><td>10</td><td>19</td></tr>
+            <tr><td>Purnawirawan/Pensiunan</td><td>3</td><td>7</td><td>10</td></tr>
+            <tr><td>Sopir</td><td>7</td><td>0</td><td>7</td></tr>
+            <tr><td>POLRI</td><td>3</td><td>0</td><td>3</td></tr>
+            <tr><td>Pedagang Keliling</td><td>0</td><td>4</td><td>4</td></tr>
+            <tr><td>Pemuka Agama</td><td>4</td><td>2</td><td>6</td></tr>
+            <tr><td>Guru Swasta</td><td>0</td><td>2</td><td>2</td></tr>
+            <tr><td>Karyawan Honorer</td><td>0</td><td>1</td><td>1</td></tr>
+            <tr class="matpen-total"><td><strong>Total</strong></td><td><strong>540</strong></td><td><strong>563</strong></td><td><strong>1.103</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="sdm-cards" style="margin-top:48px;">
+      <div class="sdm-card reveal reveal-delay-1">
+        <div class="sdm-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg></div>
+        <div class="sdm-num">±2 km</div>
+        <div class="sdm-label">Ke Ibu Kota Kecamatan (10 menit)</div>
+      </div>
+      <div class="sdm-card reveal reveal-delay-2">
+        <div class="sdm-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg></div>
+        <div class="sdm-num">±75 km</div>
+        <div class="sdm-label">Ke Ibu Kota Kabupaten (1,5 jam)</div>
+      </div>
+      <div class="sdm-card reveal reveal-delay-3">
+        <div class="sdm-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg></div>
+        <div class="sdm-num">±235 km</div>
+        <div class="sdm-label">Ke Ibu Kota Provinsi (3 jam)</div>
+      </div>
+      <div class="sdm-card reveal reveal-delay-4">
+        <div class="sdm-icon"><svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg></div>
+        <div class="sdm-num">5 Unit</div>
+        <div class="sdm-label">Kendaraan Umum ke Kabupaten</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo"><img src="img/logominsel.png" alt="Logo" style="width:46px;height:46px;object-fit:contain;"></div>
+      <h3>Desa Kinalawiran</h3>
+      <p>Portal informasi resmi Desa Kinalawiran, Kec. Tompaso Baru, Kab. Minahasa Selatan.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigasi</h4>
+      <ul>
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="profil-desa.html">Profil Desa</a></li>
+        <li><a href="pemerintahan.html">Pemerintahan</a></li>
+        <li><a href="potensi-desa.html">Potensi Desa</a></li>
+        <li><a href="galeri.html">Galeri</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontak</h4>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+        <span>Desa Kinalawiran, Kec. Tompaso Baru, Kab. Minahasa Selatan, Sulawesi Utara</span>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        <span>Kantor Desa Kinalawiran</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Desa Kinalawiran. KKT 146 All Rights Reserved.</span>
+    <span>Tompaso Baru &middot; Minahasa Selatan &middot; Sulawesi Utara</span>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightboxOverlay" role="dialog" aria-modal="true">
+  <div class="lightbox-img-wrap">
+    <img src="" alt="" id="lightboxImg" />
+  </div>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Tutup">&#x2715;</button>
+  <button class="lightbox-nav lb-prev" id="lbPrev" aria-label="Sebelumnya">&#8249;</button>
+  <button class="lightbox-nav lb-next" id="lbNext" aria-label="Berikutnya">&#8250;</button>
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<script>
+  const navbar=document.getElementById('navbar');
+  window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>20)});
+  const navToggle=document.getElementById('navToggle'),navLinks=document.getElementById('navLinks');
+  function openMenu(){navToggle.classList.add('open');navLinks.classList.add('open');document.body.style.overflow='hidden'}
+  function closeMenu(){navToggle.classList.remove('open');navLinks.classList.remove('open');document.body.style.overflow=''}
+  navToggle.addEventListener('click',e=>{e.stopPropagation();navLinks.classList.contains('open')?closeMenu():openMenu()});
+  navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+  document.addEventListener('click',e=>{if(navLinks.classList.contains('open')&&!navbar.contains(e.target))closeMenu()});
+
+  const tabLinks=document.querySelectorAll('.tab-link');
+  const secIds=['pertanian','lahan','perekonomian','kehutanan','peternakan','wisata','sdm'];
+  const secs=secIds.map(id=>document.getElementById(id));
+  const pageTabs=document.getElementById('pageTabs');
+  window.addEventListener('scroll',()=>{
+    const sy=window.scrollY+68+pageTabs.offsetHeight+32;
+    let active=0;
+    secs.forEach((s,i)=>{if(s&&s.offsetTop<=sy)active=i});
+    tabLinks.forEach((t,i)=>t.classList.toggle('active',i===active));
+  });
+  tabLinks.forEach(link=>{
+    link.addEventListener('click',e=>{
+      e.preventDefault();
+      const target=document.querySelector(link.getAttribute('href'));
+      if(target)window.scrollTo({top:target.offsetTop-68-pageTabs.offsetHeight,behavior:'smooth'});
+    });
+  });
+
+  const revObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revObs.unobserve(e.target)}});
+  },{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+  // SLIDESHOW
+  document.querySelectorAll('[data-slideshow]').forEach(slider=>{
+    const track = slider.querySelector('.slideshow-track');
+    const imgs = track.querySelectorAll('img');
+    const dotsWrap = slider.querySelector('.slideshow-dots');
+    const count = imgs.length;
+    let current = 0;
+    let autoTimer = null;
+    let isDragging = false;
+    let startX = 0;
+    let dragDelta = 0;
+
+    // Build dots
+    imgs.forEach((_,i)=>{
+      const d = document.createElement('button');
+      d.className = 'slideshow-dot' + (i===0?' active':'');
+      d.addEventListener('click',()=>goTo(i,true));
+      dotsWrap.appendChild(d);
+    });
+
+    function goTo(idx, resetAuto=false){
+      current = (idx + count) % count;
+      track.style.transform = `translateX(-${current*100}%)`;
+      dotsWrap.querySelectorAll('.slideshow-dot').forEach((d,i)=>d.classList.toggle('active',i===current));
+      if(resetAuto) startAuto();
+    }
+
+    slider.querySelector('.prev').addEventListener('click',()=>goTo(current-1,true));
+    slider.querySelector('.next').addEventListener('click',()=>goTo(current+1,true));
+
+    // Touch / drag support
+    track.addEventListener('pointerdown',e=>{
+      isDragging=true; startX=e.clientX; dragDelta=0;
+      track.style.transition='none';
+      stopAuto();
+    });
+    window.addEventListener('pointermove',e=>{
+      if(!isDragging) return;
+      dragDelta = e.clientX - startX;
+      track.style.transform = `translateX(calc(-${current*100}% + ${dragDelta}px))`;
+    });
+    window.addEventListener('pointerup',()=>{
+      if(!isDragging) return;
+      isDragging=false;
+      track.style.transition='';
+      if(dragDelta < -50) goTo(current+1,true);
+      else if(dragDelta > 50) goTo(current-1,true);
+      else goTo(current,true);
+    });
+
+    function startAuto(){
+      stopAuto();
+      if(slider.dataset.auto==='true'){
+        autoTimer = setInterval(()=>goTo(current+1), 4000);
+      }
+    }
+    function stopAuto(){ clearInterval(autoTimer); }
+
+    // Pause on hover
+    slider.addEventListener('mouseenter', stopAuto);
+    slider.addEventListener('mouseleave', startAuto);
+
+    // Init
+    track.style.transform='translateX(0)';
+    startAuto();
+  });
+
+  // LIGHTBOX
+  (function(){
+    const overlay   = document.getElementById('lightboxOverlay');
+    const lbImg     = document.getElementById('lightboxImg');
+    const lbCaption = document.getElementById('lightboxCaption');
+    const lbClose   = document.getElementById('lightboxClose');
+    const lbPrev    = document.getElementById('lbPrev');
+    const lbNext    = document.getElementById('lbNext');
+
+    // Collect all slideshow images across all slideshows
+    const imgEls = Array.from(document.querySelectorAll('.slideshow-track img'));
+    const allImgs = imgEls.map(el => ({ src: el.src, alt: el.alt }));
+
+    let currentIdx = 0;
+
+    function openLightbox(idx){
+      currentIdx = (idx + allImgs.length) % allImgs.length;
+      lbImg.src = allImgs[currentIdx].src;
+      lbImg.alt = allImgs[currentIdx].alt;
+      lbCaption.textContent = allImgs[currentIdx].alt || '';
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(){
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      lbImg.src = '';
+    }
+
+    imgEls.forEach((el, i) => el.addEventListener('click', e => {
+      e.stopPropagation();
+      openLightbox(i);
+    }));
+
+    lbClose.addEventListener('click', closeLightbox);
+    overlay.addEventListener('click', e => { if(e.target === overlay) closeLightbox(); });
+    lbPrev.addEventListener('click', e => { e.stopPropagation(); openLightbox(currentIdx - 1); });
+    lbNext.addEventListener('click', e => { e.stopPropagation(); openLightbox(currentIdx + 1); });
+
+    document.addEventListener('keydown', e => {
+      if(!overlay.classList.contains('active')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') openLightbox(currentIdx - 1);
+      if(e.key === 'ArrowRight') openLightbox(currentIdx + 1);
+    });
+
+    // Touch swipe
+    let touchStartX = 0;
+    overlay.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
+    overlay.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if(Math.abs(diff) > 40) openLightbox(diff > 0 ? currentIdx + 1 : currentIdx - 1);
+    });
+  })();
+</script>
+</body>
+</html>
