@@ -405,6 +405,70 @@
     .reveal-delay-2 { transition-delay: .2s; }
     .reveal-delay-3 { transition-delay: .3s; }
     .reveal-delay-4 { transition-delay: .4s; }
+
+    /* ── KRONOLOGI HUKUM TUA ── */
+    .kronologi-section { background: var(--white); }
+    .kronologi-table-wrap {
+      overflow-x: auto;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--gray-100);
+    }
+    .kronologi-table {
+      width: 100%; border-collapse: collapse;
+      font-size: .9rem;
+      background: var(--white);
+    }
+    .kronologi-table thead tr {
+      background: var(--red);
+    }
+    .kronologi-table thead th {
+      padding: 14px 18px;
+      text-align: left;
+      font-size: .72rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: #fff; white-space: nowrap;
+    }
+    .kronologi-table thead th:first-child { border-radius: 0; width: 52px; text-align: center; }
+    .kronologi-table tbody tr {
+      border-bottom: 1px solid var(--gray-100);
+      transition: background var(--transition);
+    }
+    .kronologi-table tbody tr:last-child { border-bottom: none; }
+    .kronologi-table tbody tr:hover { background: rgba(171,12,11,.04); }
+    .kronologi-table tbody td {
+      padding: 14px 18px;
+      color: var(--gray-700);
+      vertical-align: middle;
+    }
+    .kronologi-table tbody td:first-child {
+      text-align: center;
+      font-family: var(--font-display);
+      font-weight: 700; font-size: .85rem;
+      color: var(--red);
+      width: 52px;
+    }
+    .kronologi-table tbody td:nth-child(2) {
+      font-weight: 600; color: var(--gray-900);
+    }
+    .kronologi-table tbody td:nth-child(3) {
+      white-space: nowrap;
+      font-size: .85rem; color: var(--gray-500);
+    }
+    .kron-badge {
+      display: inline-block;
+      padding: 3px 10px; border-radius: 100px;
+      font-size: .68rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    .kron-badge.tonaas   { background: rgba(171,12,11,.1);  color: var(--red); }
+    .kron-badge.terpilih { background: rgba(16,122,68,.1);  color: #107a44; }
+    .kron-badge.pejabat  { background: rgba(30,80,160,.1);  color: #1e50a0; }
+    .kron-badge.ditunjuk { background: rgba(120,70,10,.1);  color: #78460a; }
+    @media (max-width: 600px) {
+      .kronologi-table thead th,
+      .kronologi-table tbody td { padding: 11px 12px; }
+    }
   </style>
 </head>
 <body>
@@ -453,6 +517,7 @@
       <a href="#perangkat" class="tab-link active">Perangkat Desa</a>
       <a href="#bpd" class="tab-link">BPD</a>
       <a href="#lpm" class="tab-link">LPM</a>
+      <a href="#kronologi" class="tab-link">Kronologi Hukum Tua</a>
     </div>
   </div>
 
@@ -675,7 +740,7 @@
             </div>
           </div>
           <div class="jabatan-card">
-            <div class="jabatan-photo"><img src="img/perangkatdesa/ronnysumual.jpeg" alt="Ronny Sumual" /></div>
+            <div class="jabatan-photo"><img src="img/perangkatdesa/placeholderprofile.png" alt="Ronny Sumual" /></div>
             <div class="jabatan-info">
               <div class="jabatan-name">Ronny Sumual</div>
               <div class="jabatan-role">Anggota BPD</div>
@@ -764,6 +829,174 @@
             <div class="jabatan-role">Anggota LPM</div>
           </div>
         </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       KRONOLOGI HUKUM TUA
+  ════════════════════════════════════════════ -->
+  <section class="kronologi-section" id="kronologi">
+    <div class="inner">
+
+      <div class="sec-head">
+        <span class="section-tag reveal">Sejarah Kepemimpinan</span>
+        <h2 class="section-title reveal reveal-delay-1">Kronologi<br/>Hukum Tua / Kepala Desa</h2>
+        <p class="section-desc reveal reveal-delay-2">Daftar pemimpin Desa Kinalawiran dari masa ke masa sejak tahun 1927 hingga saat ini.</p>
+      </div>
+
+      <div class="kronologi-table-wrap reveal reveal-delay-3">
+        <table class="kronologi-table">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Nama Hukum Tua / Kepala Desa</th>
+              <th>Periode Jabatan</th>
+              <th>Keterangan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Dewa Eduart Liogu / Tonaas</td>
+              <td>1927 – 1930</td>
+              <td><span class="kron-badge tonaas">Tonaas / Aklamasi</span></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Jan Ratumbisan Liogu</td>
+              <td>1930 – 1950</td>
+              <td><span class="kron-badge ditunjuk">Tonaas / Ditunjuk</span></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Jan L. Walingkas</td>
+              <td>1950 – 1958</td>
+              <td><span class="kron-badge terpilih">Terpilih</span></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Jan Sumanti</td>
+              <td>1959 – 1959</td>
+              <td><span class="kron-badge pejabat">Pejabat</span></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Ferdinant Sambeka</td>
+              <td>1959 – 1963</td>
+              <td><span class="kron-badge pejabat">Pejabat</span></td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Frans H.J. Walingkas</td>
+              <td>1953 – 1969</td>
+              <td><span class="kron-badge terpilih">Terpilih</span></td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>Laurens F. Mamahit</td>
+              <td>1969 – 1970</td>
+              <td><span class="kron-badge pejabat">Pejabat</span></td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>Alex Walingkas</td>
+              <td>1970 – 1976</td>
+              <td><span class="kron-badge terpilih">Terpilih</span></td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>Fredy Adolf Woruntu</td>
+              <td>1976 – 1977</td>
+              <td><span class="kron-badge pejabat">Pejabat</span></td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Jap Mamengko</td>
+              <td>1977 – 1979</td>
+              <td><span class="kron-badge pejabat">Pejabat</span></td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Eduart R. Woruntu</td>
+              <td>1979 – 1988</td>
+              <td><span class="kron-badge terpilih">Terpilih</span></td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>Max Kumayas</td>
+              <td>1988 – 1989</td>
+              <td><span class="kron-badge pejabat">Pejabat</span></td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>Amung Achmat</td>
+              <td>1989 – 1990</td>
+              <td><span class="kron-badge pejabat">Pejabat</span></td>
+            </tr>
+            <tr>
+              <td>14</td>
+              <td>Maxie E. Sumampow</td>
+              <td>1990 – 2002</td>
+              <td><span class="kron-badge terpilih">Terpilih</span></td>
+            </tr>
+            <tr>
+              <td>15</td>
+              <td>Rudy Yerobeam Woruntu</td>
+              <td>2002 – 2007</td>
+              <td><span class="kron-badge terpilih">Terpilih</span></td>
+            </tr>
+            <tr>
+              <td>16</td>
+              <td>Decky Mongkau</td>
+              <td>2007 – 2007</td>
+              <td><span class="kron-badge pejabat">Pelaksana</span></td>
+            </tr>
+            <tr>
+              <td>17</td>
+              <td>Freike R. Woruntu</td>
+              <td>2007 – 2013</td>
+              <td><span class="kron-badge terpilih">Terpilih</span></td>
+            </tr>
+            <tr>
+              <td>18</td>
+              <td>Jerrie S. Kowaas</td>
+              <td>2013 – 2013</td>
+              <td><span class="kron-badge pejabat">Pelaksana</span></td>
+            </tr>
+            <tr>
+              <td>19</td>
+              <td>Weldi M. Walingkas</td>
+              <td>2013 – 2017</td>
+              <td><span class="kron-badge terpilih">Terpilih</span></td>
+            </tr>
+            <tr>
+              <td>20</td>
+              <td>Jerrie Kowaas</td>
+              <td>2017 – 2020</td>
+              <td><span class="kron-badge pejabat">Pejabat</span></td>
+            </tr>
+            <tr>
+              <td>21</td>
+              <td>Romel Walingkas</td>
+              <td>2020 – 2020</td>
+              <td><span class="kron-badge pejabat">Pelaksana</span></td>
+            </tr>
+            <tr>
+              <td>22</td>
+              <td>Jerrie Kowaas</td>
+              <td>2020 – 2021</td>
+              <td><span class="kron-badge pejabat">Pejabat</span></td>
+            </tr>
+            <tr>
+              <td>23</td>
+              <td>Romel Walingkas</td>
+              <td>2021 – Sekarang</td>
+              <td><span class="kron-badge terpilih">Terpilih</span></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
     </div>
