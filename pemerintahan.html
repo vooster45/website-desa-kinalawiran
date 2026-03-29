@@ -229,6 +229,36 @@
     .lpm-feat-role { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 5px; }
     .lpm-feat-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: #fff; }
 
+    /* ── PKK ── */
+    .pkk-section { background: var(--white); }
+    .pkk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+
+    /* PKK Ketua featured */
+    .pkk-featured {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, #6b1a5e 0%, #3d0e38 100%);
+      border-radius: 16px; padding: 28px 32px;
+      display: flex; align-items: center; gap: 24px;
+      margin-bottom: 4px;
+      position: relative; overflow: hidden;
+    }
+    .pkk-featured::before { content:''; position:absolute; right:-40px; top:-40px; width:200px; height:200px; border-radius:50%; background:rgba(171,12,11,.15); pointer-events:none; }
+    .pkk-feat-photo {
+      width: 72px; height: 72px; flex-shrink: 0;
+      border-radius: 16px; overflow: hidden;
+      border: 2px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pkk-feat-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .pkk-feat-role { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 5px; }
+    .pkk-feat-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: #fff; }
+
+    @media (max-width: 480px) {
+      .pkk-grid { grid-template-columns: 1fr; }
+      .pkk-featured { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+
     /* ── STATS STRIP ── */
     .stats-strip { background: var(--red); padding: 44px 5%; }
     .stats-strip-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
@@ -507,7 +537,7 @@
         <strong>Pemerintahan</strong>
       </div>
       <h1>Pemerintahan<br/><em>Desa Kinalawiran</em></h1>
-      <p>Susunan perangkat desa, Badan Permusyawaratan Desa (BPD), dan Lembaga Pemberdayaan Masyarakat (LPM) Desa Kinalawiran.</p>
+      <p>Susunan perangkat desa, Badan Permusyawaratan Desa (BPD), Lembaga Pemberdayaan Masyarakat (LPM), dan PKK Desa Kinalawiran.</p>
     </div>
   </div>
 
@@ -517,6 +547,7 @@
       <a href="#perangkat" class="tab-link active">Perangkat Desa</a>
       <a href="#bpd" class="tab-link">BPD</a>
       <a href="#lpm" class="tab-link">LPM</a>
+      <a href="#pkk" class="tab-link">PKK</a>
       <a href="#kronologi" class="tab-link">Kronologi Hukum Tua</a>
     </div>
   </div>
@@ -835,6 +866,31 @@
   </section>
 
   <!-- ═══════════════════════════════════════════
+       PKK
+  ════════════════════════════════════════════ -->
+  <section class="pkk-section" id="pkk">
+    <div class="inner">
+
+      <div class="sec-head">
+        <span class="section-tag reveal">Lembaga Kemasyarakatan</span>
+        <h2 class="section-title reveal reveal-delay-1">Pemberdayaan &amp; Kesejahteraan<br/>Keluarga (PKK)</h2>
+        <p class="section-desc reveal reveal-delay-2">PKK berperan aktif dalam meningkatkan kesejahteraan keluarga melalui program-program pemberdayaan perempuan dan pengembangan masyarakat desa.</p>
+      </div>
+
+      <div class="pkk-grid reveal reveal-delay-1">
+        <div class="pkk-featured">
+          <div class="pkk-feat-photo"><img src="img/perangkatdesa/placeholderprofile.png" alt="Yachika Claudia Tumangken" /></div>
+          <div>
+            <div class="pkk-feat-role">Ketua PKK</div>
+            <div class="pkk-feat-name">Yachika Claudia Tumangken, S.Keb</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
        KRONOLOGI HUKUM TUA
   ════════════════════════════════════════════ -->
   <section class="kronologi-section" id="kronologi">
@@ -1121,6 +1177,7 @@
       { wrap: '.jaga-photo',      nameEl: '.jaga-name',       roleEl: '.jaga-label' },
       { wrap: '.bpd-feat-photo',  nameEl: '.bpd-featured-name', roleEl: '.bpd-featured-role' },
       { wrap: '.lpm-feat-photo',  nameEl: '.lpm-feat-name',   roleEl: '.lpm-feat-role' },
+      { wrap: '.pkk-feat-photo',  nameEl: '.pkk-feat-name',   roleEl: '.pkk-feat-role' },
     ];
 
     photoSelectors.forEach(({ wrap, nameEl, roleEl }) => {
@@ -1130,7 +1187,7 @@
         container.style.cursor = 'zoom-in';
         container.addEventListener('click', () => {
           // Walk up to parent card to find name/role
-          const card = container.closest('.ht-card, .jabatan-card, .jaga-card, .bpd-featured, .lpm-featured');
+          const card = container.closest('.ht-card, .jabatan-card, .jaga-card, .bpd-featured, .lpm-featured, .pkk-featured');
           const name = card ? (card.querySelector(nameEl)?.textContent || img.alt) : img.alt;
           const role = card ? (card.querySelector(roleEl)?.textContent || '') : '';
           openLightbox(img.src, img.alt, name, role);
